@@ -6,12 +6,6 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-    meta: { layout: "main" },
-  },
-  {
     path: "/banners",
     name: "Banners",
     meta: { layout: "main" },
@@ -65,6 +59,12 @@ const routes = [
     meta: { layout: "main" },
     component: () =>
       import(/*webpackChunkName: "mailing" */ "../views/Mailing.vue"),
+  },
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+    meta: { layout: "main" },
   },
   {
     path: "*",

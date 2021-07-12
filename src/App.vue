@@ -1,18 +1,49 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link>
-            <router-link to="/news">News</router-link>
+        <div class="wrapper">
+            <!-- Preloader -->
+            <div
+                class="
+                    preloader
+                    flex-column
+                    justify-content-center
+                    align-items-center
+                "
+            >
+                <i class="fas fa-film"></i>
+                <p>KinoCMS</p>
+            </div>
+            <KinoSidebar />
+            <KinoNavbar />
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <transition mode="out-in" name="fade">
+                            <router-view />
+                        </transition>
+                    </div>
+                </div>
+            </div>
         </div>
-        <transition name="fade"> <router-view /> </transition>>
     </div>
 </template>
+
+<script>
+import KinoSidebar from "@/components/KinoSidebar.vue";
+import KinoNavbar from "@/components/KinoNavbar.vue";
+
+export default {
+    components: {
+        KinoSidebar,
+        KinoNavbar,
+    },
+};
+</script>
 
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 1s;
+    transition: opacity 0.8s;
 }
 .fade-enter,
 .fade-leave-to {
