@@ -19,14 +19,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item mt-3">
-            <router-link href="#" to="/stats" class="nav-link">
+            <router-link to="/stats" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>Статистика</p>
             </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link href="#" to="/banners" class="nav-link">
+            <router-link to="/banners" class="nav-link">
               <i class="nav-icon fas fa-window-maximize"></i>
               <p>
                 Баннеры
@@ -36,7 +36,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/films" href="#" class="nav-link">
+            <router-link to="/films" class="nav-link">
               <i class="nav-icon fas fa-film"></i>
               <p>
                 Фильмы
@@ -45,18 +45,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item ml-4">
-                <router-link
-                  to="/films:id"
-                  href="pages/UI/general.html"
-                  class="nav-link"
-                >
+                <router-link to="/films:id" class="nav-link">
                   <p>Страница фильма</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/cinemas" href="#" class="nav-link">
+            <router-link to="/cinemas" class="nav-link">
               <i class="nav-icon fas fa-video"></i>
               <p>
                 Кинотеатры
@@ -65,18 +61,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item ml-4">
-                <router-link
-                  to="/cinemas:id"
-                  href="pages/UI/general.html"
-                  class="nav-link"
-                >
+                <router-link to="/cinemas:id" class="nav-link">
                   <p>Страница кинотеатра</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/news" href="#" class="nav-link">
+            <router-link to="/news" class="nav-link">
               <i class="nav-icon fas fa-exclamation"></i>
               <p>
                 Новости
@@ -85,18 +77,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item ml-4">
-                <router-link
-                  to="/news:id"
-                  href="pages/UI/general.html"
-                  class="nav-link"
-                >
+                <router-link to="/news:id" class="nav-link">
                   <p>Страница новости</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/actions" href="#" class="nav-link">
+            <router-link to="/actions" class="nav-link">
               <i class="nav-icon fab fa-adversal"></i>
               <p>
                 Акции
@@ -105,18 +93,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item ml-4">
-                <router-link
-                  to="/films:id"
-                  href="pages/UI/general.html"
-                  class="nav-link"
-                >
+                <router-link to="/films:id" class="nav-link">
                   <p>Страница акции</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/pages" href="#" class="nav-link">
+            <router-link to="/pages" class="nav-link">
               <i class="nav-icon far fa-file"></i>
               <p>
                 Страницы
@@ -125,18 +109,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link
-                  to="/pages:id"
-                  href="pages/UI/general.html"
-                  class="nav-link ml-4"
-                >
+                <router-link to="/pages:id" class="nav-link ml-4">
                   <p>Страница страницы :)</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/users" href="#" class="nav-link">
+            <router-link to="/users" class="nav-link">
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Пользователи
@@ -145,18 +125,14 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link
-                  to="/films:id"
-                  href="pages/UI/general.html"
-                  class="nav-link ml-4"
-                >
+                <router-link to="/films:id" class="nav-link ml-4">
                   <p>Редактировать</p>
                 </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <router-link to="/mailing" href="#" class="nav-link">
+            <router-link to="/mailing" class="nav-link">
               <i class="nav-icon fas fa-mail-bulk"></i>
               <p>
                 Рассылка
@@ -165,18 +141,12 @@
             </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link
-                  to="/films:id"
-                  href="pages/UI/general.html"
-                  class="nav-link ml-4"
-                >
+                <router-link to="/films:id" class="nav-link ml-4">
                   <p>Выбор пользователей</p>
                 </router-link>
               </li>
             </ul>
           </li>
-
-          <!-- <li class="nav-header">EXAMPLES</li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

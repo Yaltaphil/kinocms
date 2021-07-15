@@ -28,6 +28,10 @@ export default {
     KinoSidebar,
     KinoNavbar,
   },
+  mounted: async function () {
+    await this.$store.dispatch("login", {});
+  },
+  methods: {},
 };
 </script>
 
