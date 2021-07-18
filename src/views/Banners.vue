@@ -22,7 +22,7 @@
           :banner="banner"
           @remove-card="removeBanner"
         />
-        <button class="btn btn-warning" @click="addBanner">
+        <button class="btn btn-success" @click="addBanner">
           Добавить баннер
         </button>
       </div>
@@ -47,8 +47,12 @@
           </div>
         </div>
         <div class="col-md-6">
-          <button type="button" class="btn btn-primary text-center">
-            Сохранить
+          <button
+            type="button"
+            class="btn btn-primary text-center"
+            @click="saveBanners"
+          >
+            Сохранить в БД
           </button>
         </div>
       </div>
@@ -84,9 +88,9 @@ export default {
       return;
     },
   },
-  //   mounted: {
-  // async fetchBanners() {}
-  //    },
+  mounted () {
+    this.fetchBanners ()
+  },
   methods: {
     addBanner: function () {
       const banner = {
@@ -98,6 +102,13 @@ export default {
     },
     removeBanner: function (target) {
       this.banners = this.banners.filter((element) => element != target);
+    },
+    saveBanners: function () {
+      localStorage.setItem("kinoCMSbanners", JSON.stringify(this.banners));
+    },
+    fetchBanners: function () {
+      const local = JSON.parse(localStorage.getItem("kinoCMSbanners"));
+      if (local) this.banners = local;
     },
   },
 };

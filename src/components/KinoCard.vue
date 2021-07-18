@@ -32,7 +32,11 @@
 export default {
   name: "KinoCard",
   props: {
-    banner: Object,
+    banner: {
+      type: Object,
+      default: () => ({}),
+      required: true,
+    },
   },
 };
 </script>
