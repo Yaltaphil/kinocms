@@ -4,25 +4,36 @@
       type="button"
       class="close card-header text-right"
       aria-label="Close"
+      @click="$emit('remove-card', banner)"
     >
       <span aria-hidden="true">&times;</span>
     </button>
     <img
       class="card-img-top"
-      src="@/assets/300x450.jpeg"
+      :src="this.banner.bannerURL"
       alt="Card image cap"
     />
     <div class="card-body">
       <a href="#" class="btn btn-secondary w-100">Добавить</a>
-      <input class="mt-3 w-100" placeholder="url" />
-      <input class="mt-3 w-100" placeholder="описание" />
+      <input
+        v-model="this.banner.bannerURL"
+        class="mt-3 w-100"
+        placeholder="url"
+      />
+      <input
+        v-model="this.banner.bannerText"
+        class="mt-3 w-100"
+        placeholder="описание"
+      />
     </div>
   </div>
 </template>
-<button type="button" class="btn btn-primary">Primary</button>
 <script>
 export default {
   name: "KinoCard",
+  props: {
+    banner: Object,
+  },
 };
 </script>
 
@@ -32,6 +43,5 @@ export default {
   & .card-img-top {
     height: 100px;
   }
-
 }
 </style>

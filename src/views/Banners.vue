@@ -16,10 +16,15 @@
       </div>
 
       <div class="card-group p-3">
-        <KinoCard />
-        <KinoCard />
-        <KinoCard />
-        <KinoCard />
+        <KinoCard
+          v-for="banner in banners"
+          :key="banner.bannerId"
+          :banner="banner"
+          @remove-card="removeBanner"
+        />
+        <button class="btn btn-warning" @click="addBanner">
+          Добавить баннер
+        </button>
       </div>
 
       <div class="row p-3">
@@ -61,9 +66,16 @@ export default {
   },
   data: function () {
     return {
+      banners: [
+        {
+          bannerId: 1,
+          bannerURL:
+            "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+          bannerText: "some text",
+        },
+      ],
       mainTopIsOn: true,
       mainTopRotationSpeed: 5,
-      banners: [],
     };
   },
   watch: {
@@ -72,8 +84,21 @@ export default {
       return;
     },
   },
-  mounted: {
-    // async fetchBanners() {}
+  //   mounted: {
+  // async fetchBanners() {}
+  //    },
+  methods: {
+    addBanner: function () {
+      const banner = {
+        bannerId: new Date() * Math.random(),
+        bannerUrl: "testurl",
+        bannerText: "sometext",
+      };
+      this.banners.push(banner);
+    },
+    removeBanner: function (target) {
+      this.banners = this.banners.filter((element) => element != target);
+    },
   },
 };
 </script>
