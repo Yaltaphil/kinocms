@@ -30,21 +30,8 @@
       <div class="row p-3">
         <div class="col-md-6">
           Скорость вращения
-          <input v-model="mainTopRotationSpeed" type="text" class="w-25" />
-          <button
-            class="btn btn-outline-secondary dropdown-toggle"
-            type="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            сек
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">5</a>
-            <a class="dropdown-item" href="#">10</a>
-            <a class="dropdown-item" href="#">15</a>
-          </div>
+          <input v-model="mainTopRotationSpeed" type="text" class="w-25" id="dropdown" />
+          
         </div>
         <div class="col-md-6">
           <button
