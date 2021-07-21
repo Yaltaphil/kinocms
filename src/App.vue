@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <Preloader />
+      <!-- <Preloader /> -->
       <KinoNavbar />
       <KinoSidebar />
       <div class="content-wrapper">
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import Preloader from "@/components/Preloader.vue";
+// import Preloader from "@/components/Preloader.vue";
 import KinoSidebar from "@/components/KinoSidebar.vue";
 import KinoNavbar from "@/components/KinoNavbar.vue";
 
 export default {
   components: {
-    Preloader,
+    // Preloader,
     KinoSidebar,
     KinoNavbar,
   },
