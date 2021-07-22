@@ -21,8 +21,9 @@
                     :key="banner.id"
                     :card="banner"
                     @remove-card="removeBanner"
-                    @change-url="changeURL"
-                />
+                    @change-card="changeBanner"
+                ></KinoCard>
+
                 <button class="btn btn-outline-success" @click="addBanner">
                     Добавить баннер
                 </button>
@@ -62,36 +63,37 @@ export default {
     },
     data: function () {
         return {
-            banners: [
-                {
-                    id: 1,
-                    URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-                    text: "some text",
-                },
-            ],
+            banners: [],
             mainTopIsOn: true,
             mainTopRotationSpeed: 5,
         };
     },
-   
+
     mounted() {
         this.fetchBanners();
     },
     methods: {
+
         addBanner: function () {
             const banner = {
-                id: new Date() * Math.random(),
+                id: Math.round(1000000*Math.random()),
                 URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 text: "sometext",
             };
             this.banners.push(banner);
         },
+
         removeBanner: function (target) {
             this.banners = this.banners.filter((element) => element != target);
         },
-        changeURL: function (card, newURL) {
-            this.card.URL = newURL;
+
+        changeBanner: function (card) {
+            const index = this.banners.findIndex( item => item.id == card.id)
+            console.log(index)
+            if (index!=-1) this.banners[index].URL = card.URL;
+            console.log(this.banners)
         },
+
         saveBanners: function () {
             localStorage.setItem(
                 "kinoCMSbanners",
