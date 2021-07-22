@@ -1,5 +1,5 @@
 <template>
-    <section>
+
         <div class="card text-center border-primary p-2">
             <button
                 type="button"
@@ -19,7 +19,7 @@
             </div>
 
             <div class="card-body">
-                <small>Banner id: {{ localCard.id }}</small>
+                <small> id: {{ localCard.id }}</small>
 
                 <input
                     id="file"
@@ -43,11 +43,11 @@
                     />
                 </div>
 
-                <div class="input-group mt-3">
+                <div class="input-group mt-3" v-if="localCard.text">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Текст</span>
                     </div>
-                    <input
+                    <input v-if="localCard.text"
                         class="form-control"
                         type="text"
                         v-model="localCard.text"
@@ -58,11 +58,6 @@
             </div>
         </div>
 
-        <!-- second -->
-        <div class="card text-center border-primary p-2">222</div>
-        <!-- second -->
-        <div class="card text-center border-primary p-2">333</div>
-    </section>
 </template>
 
 <script>
@@ -76,11 +71,12 @@ export default {
             type: Object,
             required: true,
         },
+        
     },
 
     data: function () {
         return {
-            localCard: this.card,
+            localCard: this.card,            
         };
     },
 

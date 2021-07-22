@@ -1,6 +1,7 @@
 <template>
+    <!-- first block -->
     <div class="about">
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-header text-center font-weight-bold">
                 На главной верх
             </div>
@@ -50,6 +51,113 @@
                 </div>
             </div>
         </div>
+
+        <!-- second block -->
+        <div class="card mt-3">
+            <div class="card-header text-center font-weight-bold">
+                Сквозной баннер на заднем фоне
+            </div>
+            <div class="row p-3">
+                <div class="col-md-6 text-muted">Pазмер 2000x3000</div>
+            </div>
+
+            <div class="row p-3">
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios1"
+                            value="option1"
+                            checked
+                        />
+                        <label class="form-check-label" for="exampleRadios1">
+                            Фото на фоне
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="exampleRadios"
+                            id="exampleRadios2"
+                            value="option2"
+                        />
+                        <label class="form-check-label" for="exampleRadios2">
+                            Просто фон
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <KinoCard
+                        :card="bigBackgroundBanner"
+                      
+                    />
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary text-center">
+                        Добавить
+                    </button>
+                    <button type="button" class="btn btn-danger text-center">
+                        Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- third block -->
+        <div class="card mt-3">
+            <div class="card-header text-center font-weight-bold">
+                На главной новости и акции
+            </div>
+            <div class="row p-3">
+                <div class="col-md-6 text-muted">Pазмер 1000x190</div>
+                <div class="col-md-6 text-right">
+                    <input
+                        v-model="actionsIsOn"
+                        type="checkbox"
+                        aria-label="Checkbox for on/off"
+                    />
+                </div>
+            </div>
+
+            <div class="card-group p-3">
+                <KinoCard
+                    v-for="action in actions"
+                    :key="action.id"
+                    :card="action"
+                    @remove-card="removeAction"
+                />
+
+                <button class="btn btn-outline-success" @click="addAction">
+                    Добавить
+                </button>
+            </div>
+
+            <div class="row p-3">
+                <div class="col-md-6">
+                    Скорость вращения
+                    <input
+                        v-model="actionsRotationSpeed"
+                        type="text"
+                        class="w-25"
+                        id="dropdown"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <button
+                        type="button"
+                        class="btn btn-primary text-center"
+                        @click="saveBanners"
+                    >
+                        Сохранить в БД
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -66,6 +174,20 @@ export default {
             banners: [],
             mainTopIsOn: true,
             mainTopRotationSpeed: 5,
+
+            bigBackgroundBanner: {
+                id: 1212,
+                URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            },
+
+            actions: [
+                {
+                    id: 1212,
+                    URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                },
+            ],
+            actionsIsOn: true,
+            actionsRotationSpeed: 15,
         };
     },
 
@@ -73,10 +195,10 @@ export default {
         this.fetchBanners();
     },
     methods: {
-
+        //banner methods
         addBanner: function () {
             const banner = {
-                id: Math.round(10000000*Math.random()),
+                id: Math.round(10000000 * Math.random()),
                 URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 text: "sometext",
             };
@@ -88,10 +210,10 @@ export default {
         },
 
         changeBanner: function (card) {
-            const index = this.banners.findIndex( item => item.id == card.id)
-            console.log(index)
-            if (index!=-1) this.banners[index] = card;
-            console.log(this.banners)
+            const index = this.banners.findIndex((item) => item.id == card.id);
+            console.log(index);
+            if (index != -1) this.banners[index] = card;
+            console.log(this.banners);
         },
 
         saveBanners: function () {
@@ -103,6 +225,21 @@ export default {
         fetchBanners: function () {
             const local = JSON.parse(localStorage.getItem("kinoCMSbanners"));
             if (local) this.banners = local;
+        },
+
+//background banner
+
+
+        //actions methods
+        addAction: function () {
+            const action = {
+                id: Math.round(10000000 * Math.random()),
+                URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            };
+            this.actions.push(action);
+        },
+        removeAction: function (target) {
+            this.actions = this.actions.filter((element) => element != target);
         },
     },
 };
