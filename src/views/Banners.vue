@@ -22,7 +22,7 @@
                     :card="banner"
                     @remove-card="removeBanner"
                     @change-card="changeBanner"
-                ></KinoCard>
+                />
 
                 <button class="btn btn-outline-success" @click="addBanner">
                     Добавить баннер
@@ -76,7 +76,7 @@ export default {
 
         addBanner: function () {
             const banner = {
-                id: Math.round(1000000*Math.random()),
+                id: Math.round(10000000*Math.random()),
                 URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 text: "sometext",
             };
@@ -90,7 +90,7 @@ export default {
         changeBanner: function (card) {
             const index = this.banners.findIndex( item => item.id == card.id)
             console.log(index)
-            if (index!=-1) this.banners[index].URL = card.URL;
+            if (index!=-1) this.banners[index] = card;
             console.log(this.banners)
         },
 
