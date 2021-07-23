@@ -144,7 +144,6 @@
                         v-model="actionsRotationSpeed"
                         type="text"
                         class="w-25"
-                        id="dropdown"
                     />
                 </div>
                 <div class="col-md-6">
@@ -182,7 +181,7 @@ export default {
 
             actions: [
                 {
-                    id: 1212,
+                    id: 121654652,
                     URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 },
             ],
