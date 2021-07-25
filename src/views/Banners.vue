@@ -64,11 +64,11 @@
                 Сквозной баннер на заднем фоне
             </div>
             <div class="row p-3">
-                <small class="col-md-6 text-muted">Pазмер 2000x3000</small>
+                <small class="col-6 text-muted">Pазмер 2000x3000</small>
             </div>
 
             <div class="row py-5 px-3">
-                <div class="col-md-2">
+                <div class="col-3">
                     <div class="form-group">
                         <div class="form-check m-3">
                             <label class="form-check-label"
@@ -96,17 +96,12 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <KinoCard :card="bigBackgroundBanner" />
-                </div>
-
-                <div class="col-md-4">
-                    <base-button class="mr-5" @click="addBigBackgroundBanner">
-                        Добавить
-                    </base-button>
-                    <base-button @click="removeBigBackgroundBanner">
-                        Удалить
-                    </base-button>
+                <div class="col-9">
+                    <PictureCard
+                        :card="bigBackgroundBanner"
+                        @remove-banner="removeBigBackgroundBanner"
+                        @change-card="changeBigBackgroundBanner"
+                    />
                 </div>
             </div>
         </div>
@@ -159,6 +154,7 @@ import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
 import Switches from "vue-switches";
+import PictureCard from "@/components/PictureCard.vue";
 
 export default {
     name: "Banners",
@@ -167,6 +163,7 @@ export default {
         BaseButton,
         BaseSpeedSelect,
         Switches,
+        PictureCard,
     },
     data: function () {
         return {
@@ -176,8 +173,7 @@ export default {
             mainTopRotationSpeed: 5,
             //bg
             bigBackgroundBanner: {
-                id: 1212,
-                URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                URL: "/img/uploadPicture.jpg",
                 bannerType: "Фото на фоне",
             },
             //actions
@@ -233,8 +229,11 @@ export default {
         },
 
         //background banner methods
-         addBigBackgroundBanner: function () {},
-         removeBigBackgroundBanner: function () {},
+        changeBigBackgroundBanner: function () {},
+        removeBigBackgroundBanner: function () {
+            this.bigBackgroundBanner.URL = "/img/uploadPicture.jpg";
+            this.bigBackgroundBanner.bannerType = "Просто фон";
+        },
 
         //actions methods
         addAction: function () {

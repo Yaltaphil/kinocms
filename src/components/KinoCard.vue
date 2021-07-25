@@ -111,14 +111,14 @@ export default {
         //     reader.readAsDataURL(file);
         // },
 
-        uploadImage: async function (event) {
+        uploadImage: async function (event, path = "images/") {
             event.stopPropagation();
             event.preventDefault();
             const file = event.target.files[0];
             if (!file) return false;
             const storageRef = firebase.storage().ref();
             this.localCard.URL = await storageRef
-                .child("images/" + Math.random() + file.name)
+                .child(path + Math.random() + file.name)
                 .put(file)
                 .then(async function (snapshot) {
                     console.log("Uploaded", snapshot.totalBytes, "bytes.");
