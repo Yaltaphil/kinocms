@@ -11,20 +11,45 @@
 
         <div class="card-img-top">
             <img
-                class="card-img-top"
                 :src="localCard.URL"
-                alt="Загрузите файл"
+                class="card-img-top img-responsive img-thumbnail mx-auto"
+                alt=""
             />
         </div>
 
         <div class="card-body">
-            <input
-                id="file"
-                type="file"
-                accept="image/*"
-                @change="uploadImage"
-            />
-            <div class="input-group w-100 mt-3">
+            <label class="btn btn-outline-secondary px-5">
+                <!-- <i class="fa fa-upload" aria-hidden="true"></i> -->
+                Загрузить
+                <i class="fas fa-file ml-1"></i>
+                <input
+                    type="file"
+                    class="custom-file-input"
+                    accept="image/*"
+                    @change="uploadImage"
+                    hidden
+                />
+            </label>
+            <!--
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"
+                        ><i class="fa fa-upload" aria-hidden="true"></i
+                    ></span>
+                </div>
+                <div class="custom-file">
+                    <input
+                        id="file"
+                        type="file"
+                        class="custom-file-input"
+                        accept="image/*"
+                        @change="uploadImage"
+                    />
+                    <div class="custom-file-label">Загрузить</div>
+                </div>
+            </div> -->
+
+            <div class="input-group input-group-sm mt-5">
                 <div class="input-group-prepend">
                     <span class="input-group-text">URL</span>
                 </div>
@@ -36,7 +61,7 @@
                 />
             </div>
 
-            <div class="input-group mt-3" v-if="localCard.text">
+            <div class="input-group input-group-sm mt-2" v-if="localCard.text">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Текст</span>
                 </div>
@@ -51,7 +76,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <!-- <small class="text-muted"> Banner id: {{ localCard.id }}</small> -->
+            <!-- <small class="text-muted">--dev: id: {{ localCard.id }}</small> -->
         </div>
     </div>
 </template>
@@ -115,15 +140,7 @@ export default {
     max-width: 260px;
     min-width: 260px;
     & .card-img-top {
-        height: 120px;
-    }
-
-    .card-body {
-        & label {
-            border: solid 1px;
-            padding: 0.5rem 1rem;
-            cursor: cell;
-        }
+        height: 150px;
     }
 }
 </style>

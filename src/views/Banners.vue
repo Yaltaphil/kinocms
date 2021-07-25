@@ -6,7 +6,7 @@
                 На главной верх
             </div>
             <div class="row p-3">
-                <div class="col-md-6 text-muted">Pазмер 1000x190</div>
+                <small class="col-md-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-md-6 text-right">
                     <Switches
                         v-model="bannersSwitch"
@@ -38,7 +38,7 @@
                     "
                 >
                     <button
-                        class="btn-lg btn-outline-success h-100 shadow"
+                        class="btn-lg btn-outline-info h-100 shadow"
                         @click="addBanner"
                     >
                         Добавить баннер
@@ -64,10 +64,10 @@
                 Сквозной баннер на заднем фоне
             </div>
             <div class="row p-3">
-                <div class="col-md-6 text-muted">Pазмер 2000x3000</div>
+                <small class="col-md-6 text-muted">Pазмер 2000x3000</small>
             </div>
 
-            <div class="row p-3">
+            <div class="row py-5 px-3">
                 <div class="col-md-2">
                     <div class="form-group">
                         <div class="form-check m-3">
@@ -101,12 +101,12 @@
                 </div>
 
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary text-center">
+                    <base-button class="mr-5" @click="addBigBackgroundBanner">
                         Добавить
-                    </button>
-                    <button type="button" class="btn btn-danger text-center">
+                    </base-button>
+                    <base-button @click="removeBigBackgroundBanner">
                         Удалить
-                    </button>
+                    </base-button>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                 На главной новости и акции
             </div>
             <div class="row p-3">
-                <div class="col-md-6 text-muted">Pазмер 1000x190</div>
+                <small class="col-md-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-md-6 text-right">
                     <Switches
                         v-model="actionsSwitch"
@@ -157,16 +157,16 @@
 <script>
 import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
-import Switches from "vue-switches";
 import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
+import Switches from "vue-switches";
 
 export default {
     name: "Banners",
     components: {
         KinoCard,
         BaseButton,
-        Switches,
         BaseSpeedSelect,
+        Switches,
     },
     data: function () {
         return {
@@ -204,8 +204,8 @@ export default {
         addBanner: function () {
             const banner = {
                 id: Math.round(10000000 * Math.random()),
-                URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-                text: "sometext",
+                URL: "/img/uploadPicture.jpg",
+                text: "описание",
             };
             this.banners.push(banner);
         },
@@ -232,7 +232,9 @@ export default {
             if (local) this.banners = local;
         },
 
-        //background banner
+        //background banner methods
+         addBigBackgroundBanner: function () {},
+         removeBigBackgroundBanner: function () {},
 
         //actions methods
         addAction: function () {
