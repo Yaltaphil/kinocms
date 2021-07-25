@@ -1,9 +1,9 @@
 <template>
     <div class="form-group d-flex align-items-start px-3">
-        <span>
+        <div class="col-5">
             <slot />
-        </span>
-        <div class="col-2">
+        </div>
+        <div class="col-3">
             <select
                 class="form-control shadow"
                 v-model="selected"

@@ -6,8 +6,8 @@
                 На главной верх
             </div>
             <div class="row p-3">
-                <small class="col-md-6 text-muted">Pазмер 1000x190</small>
-                <div class="col-md-6 text-right">
+                <small class="col-6 text-muted">Pазмер 1000x190</small>
+                <div class="col-6 text-right">
                     <Switches
                         v-model="bannersSwitch"
                         theme="bootstrap"
@@ -47,7 +47,7 @@
             </div>
 
             <div class="row my-5 p-3">
-                <div class="col-6">
+                <div class="col">
                     <base-speed-select v-model="mainTopRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
@@ -111,9 +111,10 @@
             <div class="card-header text-center font-weight-bold">
                 На главной новости и акции
             </div>
+
             <div class="row p-3">
-                <small class="col-md-6 text-muted">Pазмер 1000x190</small>
-                <div class="col-md-6 text-right">
+                <small class="col-6 text-muted">Pазмер 1000x190</small>
+                <div class="col-6 text-right">
                     <Switches
                         v-model="actionsSwitch"
                         theme="bootstrap"
@@ -122,27 +123,44 @@
                 </div>
             </div>
 
-            <div class="card-group p-3">
-                <KinoCard
-                    v-for="action in actions"
-                    :key="action.id"
-                    :card="action"
-                    @remove-card="removeAction"
-                />
-
-                <button class="btn btn-outline-success" @click="addAction">
-                    Добавить фото
-                </button>
+            <div class="row pl-3">
+                <div class="col-10">
+                    <div class="card-group p-3">
+                        <KinoCard
+                            v-for="action in actions"
+                            :key="action.id"
+                            :card="action"
+                            @remove-card="removeAction"
+                        />
+                    </div>
+                </div>
+                <div
+                    class="
+                        col-2
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                        my-3
+                        p-1
+                    "
+                >
+                    <button
+                        class="btn-lg btn-outline-info h-100 shadow"
+                        @click="addAction"
+                    >
+                        Добавить фото
+                    </button>
+                </div>
             </div>
 
             <div class="row p-3">
-                <div class="col-md-6">
+                <div class="col-7">
                     <base-speed-select v-model="actionsRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
                 </div>
-                <div class="col-md-6">
-                    <base-button @click="saveBanners"> Сохранить </base-button>
+                <div class="col-5">
+                    <base-button @click="saveActions"> Сохранить </base-button>
                 </div>
             </div>
         </div>
@@ -177,12 +195,7 @@ export default {
                 bannerType: "Фото на фоне",
             },
             //actions
-            actions: [
-                {
-                    id: 121654652,
-                    URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-                },
-            ],
+            actions: [],
             actionsSwitch: true,
             actionsRotationSpeed: 5,
         };
@@ -194,6 +207,7 @@ export default {
     },
     mounted() {
         this.fetchBanners();
+        this.fetchActions();
     },
     methods: {
         //banner methods
@@ -239,12 +253,24 @@ export default {
         addAction: function () {
             const action = {
                 id: Math.round(10000000 * Math.random()),
-                URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                URL: "/img/uploadPicture.jpg",
             };
             this.actions.push(action);
+            console.log(this.actions);
         },
         removeAction: function (target) {
             this.actions = this.actions.filter((element) => element != target);
+        },
+
+        saveActions: function () {
+            localStorage.setItem(
+                "kinoCMSactions",
+                JSON.stringify(this.actions)
+            );
+        },
+        fetchActions: function () {
+            const local = JSON.parse(localStorage.getItem("kinoCMSactions"));
+            if (local) this.actions = local;
         },
     },
 };
