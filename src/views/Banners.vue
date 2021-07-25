@@ -8,11 +8,12 @@
             <div class="row p-3">
                 <div class="col-md-6 text-muted">Pазмер 1000x190</div>
                 <div class="col-md-6 text-right">
-                    <input
-                        v-model="mainTopIsOn"
-                        type="checkbox"
-                        aria-label="Checkbox for on/off"
-                    />
+                    <Switches
+                        v-model="bannersSwitch"
+                        theme="bootstrap"
+                        color="success"
+                    ></Switches>
+
                 </div>
             </div>
 
@@ -41,13 +42,7 @@
                     />
                 </div>
                 <div class="col-md-6">
-                    <button
-                        type="button"
-                        class="btn btn-primary text-center"
-                        @click="saveBanners"
-                    >
-                        Сохранить в БД
-                    </button>
+                    <base-button @click="saveBanners"> Сохранить </base-button>
                 </div>
             </div>
         </div>
@@ -91,10 +86,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <KinoCard
-                        :card="bigBackgroundBanner"
-                      
-                    />
+                    <KinoCard :card="bigBackgroundBanner" />
                 </div>
 
                 <div class="col-md-4">
@@ -116,11 +108,11 @@
             <div class="row p-3">
                 <div class="col-md-6 text-muted">Pазмер 1000x190</div>
                 <div class="col-md-6 text-right">
-                    <input
-                        v-model="actionsIsOn"
-                        type="checkbox"
-                        aria-label="Checkbox for on/off"
-                    />
+                     <Switches
+                        v-model="actionsSwitch"
+                        theme="bootstrap"
+                        color="success"
+                    ></Switches>
                 </div>
             </div>
 
@@ -133,7 +125,7 @@
                 />
 
                 <button class="btn btn-outline-success" @click="addAction">
-                    Добавить
+                    Добавить фото
                 </button>
             </div>
 
@@ -154,6 +146,7 @@
                     >
                         Сохранить в БД
                     </button>
+                    <base-button @click="saveBanners"> Сохранить </base-button>
                 </div>
             </div>
         </div>
@@ -162,16 +155,20 @@
 
 <script>
 import KinoCard from "@/components/KinoCard.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
+import Switches from "vue-switches";
 
 export default {
     name: "Banners",
     components: {
         KinoCard,
+        BaseButton,
+        Switches,
     },
     data: function () {
         return {
             banners: [],
-            mainTopIsOn: true,
+            bannersSwitch: true,
             mainTopRotationSpeed: 5,
 
             bigBackgroundBanner: {
@@ -185,7 +182,7 @@ export default {
                     URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 },
             ],
-            actionsIsOn: true,
+            actionsSwitch: true,
             actionsRotationSpeed: 15,
         };
     },
@@ -226,8 +223,7 @@ export default {
             if (local) this.banners = local;
         },
 
-//background banner
-
+        //background banner
 
         //actions methods
         addAction: function () {

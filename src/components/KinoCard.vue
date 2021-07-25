@@ -121,9 +121,7 @@ export default {
     & .card-img-top {
         height: 120px;
     }
-    #file {
-        // display: none;
-    }
+   
     .card-body {
         & label {
             border: solid 1px;
