@@ -1,6 +1,6 @@
 <template>
-    <!-- first block -->
-    <div class="about">
+    <div>
+        <!-- first block -->
         <div class="card mt-3">
             <div class="card-header text-center font-weight-bold">
                 На главной верх
@@ -15,32 +15,44 @@
                     ></Switches>
                 </div>
             </div>
-
-            <div class="card-group p-3">
-                <KinoCard
-                    v-for="banner in banners"
-                    :key="banner.id"
-                    :card="banner"
-                    @remove-card="removeBanner"
-                    @change-card="changeBanner"
-                />
-
-                <button class="btn btn-outline-success" @click="addBanner">
-                    Добавить баннер
-                </button>
+            <div class="row pl-3">
+                <div class="col-10">
+                    <div class="card-group">
+                        <KinoCard
+                            v-for="banner in banners"
+                            :key="banner.id"
+                            :card="banner"
+                            @remove-card="removeBanner"
+                            @change-card="changeBanner"
+                        />
+                    </div>
+                </div>
+                <div
+                    class="
+                        col-2
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                        my-3
+                        p-1
+                    "
+                >
+                    <button
+                        class="btn-lg btn-outline-success h-100 shadow"
+                        @click="addBanner"
+                    >
+                        Добавить баннер
+                    </button>
+                </div>
             </div>
 
-            <div class="row p-3">
-                <div class="col-md-6">
-                    Скорость вращения
-                    <input
-                        v-model="mainTopRotationSpeed"
-                        type="text"
-                        class="w-25"
-                        id="dropdown"
-                    />
+            <div class="row my-5 p-3">
+                <div class="col-6">
+                    <base-speed-select v-model="mainTopRotationSpeed">
+                        Скорость вращения:
+                    </base-speed-select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <base-button @click="saveBanners"> Сохранить </base-button>
                 </div>
             </div>
@@ -130,21 +142,11 @@
 
             <div class="row p-3">
                 <div class="col-md-6">
-                    Скорость вращения
-                    <input
-                        v-model="actionsRotationSpeed"
-                        type="text"
-                        class="w-25"
-                    />
+                    <base-speed-select v-model="actionsRotationSpeed">
+                        Скорость вращения:
+                    </base-speed-select>
                 </div>
                 <div class="col-md-6">
-                    <button
-                        type="button"
-                        class="btn btn-primary text-center"
-                        @click="saveBanners"
-                    >
-                        Сохранить в БД
-                    </button>
                     <base-button @click="saveBanners"> Сохранить </base-button>
                 </div>
             </div>
@@ -156,6 +158,7 @@
 import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import Switches from "vue-switches";
+import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
 
 export default {
     name: "Banners",
@@ -163,6 +166,7 @@ export default {
         KinoCard,
         BaseButton,
         Switches,
+        BaseSpeedSelect,
     },
     data: function () {
         return {
@@ -185,7 +189,11 @@ export default {
             actionsRotationSpeed: 15,
         };
     },
-
+    computed: {
+        getBannerQuantity() {
+            return this.banners.length;
+        },
+    },
     mounted() {
         this.fetchBanners();
     },

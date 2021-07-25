@@ -1,63 +1,59 @@
 <template>
+    <div class="card text-center border-primary m-2 p-2 shadow">
+        <button
+            type="button"
+            class="close card-header text-right p-1"
+            aria-label="Close"
+            @click="$emit('remove-card', localCard)"
+        >
+            <span aria-hidden="true">&times;</span>
+        </button>
 
-        <div class="card text-center border-primary p-2">
-            <button
-                type="button"
-                class="close card-header text-right p-1"
-                aria-label="Close"
-                @click="$emit('remove-card', localCard)"
-            >
-                <span aria-hidden="true">&times;</span>
-            </button>
-
-            <div class="card-img-top">
-                <img
-                    class="card-img-top"
-                    :src="localCard.URL"
-                    alt="Загрузите файл"
-                />
-            </div>
-
-            <div class="card-body">
-                <small> id: {{ localCard.id }}</small>
-
-                <input
-                    id="file"
-                    type="file"
-                    accept="image/*"
-                    @change="uploadImage"
-                />
-
-                <!-- <label for="file">    Добавить
-                 </label> -->
-
-                <div class="input-group mt-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">URL</span>
-                    </div>
-                    <input
-                        class="form-control"
-                        type="text"
-                        :value="localCard.URL"
-                        aria-label="Current URL"
-                    />
-                </div>
-
-                <div class="input-group mt-3" v-if="localCard.text">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Текст</span>
-                    </div>
-                    <input v-if="localCard.text"
-                        class="form-control"
-                        type="text"
-                        v-model="localCard.text"
-                        @change="$emit('change-card', localCard)"
-                        placeholder="описание"
-                    />
-                </div>
-            </div>
+        <div class="card-img-top">
+            <img
+                class="card-img-top"
+                :src="localCard.URL"
+                alt="Загрузите файл"
+            />
         </div>
 
+        <div class="card-body">
+            <input
+                id="file"
+                type="file"
+                accept="image/*"
+                @change="uploadImage"
+            />
+            <div class="input-group w-100 mt-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">URL</span>
+                </div>
+                <input
+                    class="form-control"
+                    type="text"
+                    :value="localCard.URL"
+                    aria-label="Current URL"
+                />
+            </div>
+
+            <div class="input-group mt-3" v-if="localCard.text">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Текст</span>
+                </div>
+                <input
+                    v-if="localCard.text"
+                    class="form-control"
+                    type="text"
+                    v-model="localCard.text"
+                    @change="$emit('change-card', localCard)"
+                    placeholder="описание"
+                />
+            </div>
+        </div>
+        <div class="card-footer">
+            <!-- <small class="text-muted"> Banner id: {{ localCard.id }}</small> -->
+        </div>
+    </div>
 </template>
 
 <script>
@@ -71,12 +67,11 @@ export default {
             type: Object,
             required: true,
         },
-        
     },
 
     data: function () {
         return {
-            localCard: this.card,            
+            localCard: this.card,
         };
     },
 
@@ -117,11 +112,12 @@ export default {
 
 <style scoped lang="scss">
 .card {
-    max-width: 270px;
+    max-width: 260px;
+    min-width: 260px;
     & .card-img-top {
         height: 120px;
     }
-   
+
     .card-body {
         & label {
             border: solid 1px;

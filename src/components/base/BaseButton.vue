@@ -1,7 +1,7 @@
 <template>
     <button
         type="button"
-        class="btn bg-gradient-info"
+        class="btn bg-info shadow px-5"
         v-bind="$attrs"
         v-on="$listeners"
     >

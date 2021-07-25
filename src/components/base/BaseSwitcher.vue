@@ -1,30 +1,15 @@
 /** Bootstrap switch component for Vue2 - yaltaphil */
 <template>
-    <button class="custom-control custom-switch" v-bind="$attrs">
+    <div class="custom-control custom-switch custom-switch-on-success">
         <input
             type="checkbox"
-            id="customSwitch"
-            :checked="checked"
-            v-bind="$attrs"
-            v-on="$listeners"
-            class="custom-control-input bg-info"
-            @change="$emit('change', $event.target.checked)"
-        />
-        <slot />
-    </button>
-
-    <!-- <div class="custom-control custom-switch">
-        <input
-            type="checkbox"
-            class="custom-control-input bg-info"
+            class="custom-control-input"
             id="customSwitch"
             :checked="checked"
             @change="$emit('change', $event.target.checked)"
         />
-        <label class="custom-control-label" for="customSwitch">
-            <slot />
-        </label>
-    </div> -->
+        <label class="custom-control-label" for="customSwitch"> <slot /></label>
+    </div>
 </template>
 
 
