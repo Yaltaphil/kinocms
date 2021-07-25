@@ -13,7 +13,6 @@
                         theme="bootstrap"
                         color="success"
                     ></Switches>
-
                 </div>
             </div>
 
@@ -108,7 +107,7 @@
             <div class="row p-3">
                 <div class="col-md-6 text-muted">Pазмер 1000x190</div>
                 <div class="col-md-6 text-right">
-                     <Switches
+                    <Switches
                         v-model="actionsSwitch"
                         theme="bootstrap"
                         color="success"
