@@ -69,30 +69,30 @@
 
             <div class="row p-3">
                 <div class="col-md-2">
-                    <div class="form-check">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="exampleRadios"
-                            id="exampleRadios1"
-                            value="option1"
-                            checked
-                        />
-                        <label class="form-check-label" for="exampleRadios1">
-                            Фото на фоне
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="exampleRadios"
-                            id="exampleRadios2"
-                            value="option2"
-                        />
-                        <label class="form-check-label" for="exampleRadios2">
-                            Просто фон
-                        </label>
+                    <div class="form-group">
+                        <div class="form-check m-3">
+                            <label class="form-check-label"
+                                ><input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="radio1"
+                                    value="Фото на фоне"
+                                    v-model="bigBackgroundBanner.bannerType"
+                                />Фото на фоне</label
+                            >
+                        </div>
+                        <div class="form-check m-3">
+                            <label class="form-check-label"
+                                ><input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="radio1"
+                                    value="Просто фон"
+                                    v-model="bigBackgroundBanner.bannerType"
+                                />
+                                Просто фон</label
+                            >
+                        </div>
                     </div>
                 </div>
 
@@ -170,15 +170,17 @@ export default {
     },
     data: function () {
         return {
+            //banners
             banners: [],
             bannersSwitch: true,
             mainTopRotationSpeed: 5,
-
+            //bg
             bigBackgroundBanner: {
                 id: 1212,
                 URL: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmlsbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                bannerType: "Фото на фоне",
             },
-
+            //actions
             actions: [
                 {
                     id: 121654652,
@@ -186,11 +188,11 @@ export default {
                 },
             ],
             actionsSwitch: true,
-            actionsRotationSpeed: 15,
+            actionsRotationSpeed: 5,
         };
     },
     computed: {
-        getBannerQuantity() {
+        getBannersQuantity() {
             return this.banners.length;
         },
     },
