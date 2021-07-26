@@ -41,7 +41,7 @@
                         class="btn-lg btn-outline-info h-100 shadow"
                         @click="addBanner"
                     >
-                        Добавить баннер
+                        Добавить
                     </button>
                 </div>
             </div>
@@ -51,7 +51,6 @@
                     <base-speed-select v-model="mainTopRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
-                    {{ mainTopRotationSpeed }}
                 </div>
                 <div class="col-6">
                     <base-button @click="saveBanners"> Сохранить </base-button>
@@ -149,7 +148,7 @@
                         class="btn-lg btn-outline-info h-100 shadow"
                         @click="addAction"
                     >
-                        Добавить фото
+                        Добавить
                     </button>
                 </div>
             </div>
@@ -221,8 +220,10 @@ export default {
             this.banners.push(banner);
         },
 
-        removeBanner: function (target) {
+        removeBanner: async function (target) {
             this.banners = this.banners.filter((element) => element != target);
+            if (target.URL == "/img/uploadPicture.jpg") return;
+            await this.$store.dispatch("removeFromStorage", target.URL);
         },
 
         changeBanner: function (card) {
@@ -257,8 +258,10 @@ export default {
             this.actions.push(action);
             console.log(this.actions);
         },
-        removeAction: function (target) {
+        removeAction: async function (target) {
             this.actions = this.actions.filter((element) => element != target);
+            if (target.URL == "/img/uploadPicture.jpg") return;
+            await this.$store.dispatch("removeFromStorage", target.URL);
         },
 
         saveActions: function () {
@@ -277,6 +280,6 @@ export default {
 
 <style lang="scss" scoped>
 .card-group {
-    gap: 1rem;
+    gap: 0.5rem;
 }
 </style>

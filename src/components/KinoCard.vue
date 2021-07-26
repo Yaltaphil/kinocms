@@ -12,13 +12,13 @@
         <div class="card-img-top">
             <img
                 :src="localCard.URL"
-                class="card-img-top img-responsive img-thumbnail mx-auto"
+                class="card-img-top img-thumbnail"
                 alt=""
             />
         </div>
 
         <div class="card-body">
-            <label class="btn btn-outline-secondary px-5">
+            <label class="btn btn-secondary px-5">
                 Загрузить
                 <i class="fas fa-file ml-1"></i>
                 <input
@@ -30,7 +30,7 @@
                 />
             </label>
 
-            <div class="input-group input-group-sm mt-5">
+            <div class="input-group input-group-sm mt-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text">URL</span>
                 </div>
@@ -47,7 +47,6 @@
                     <span class="input-group-text">Текст</span>
                 </div>
                 <input
-                    v-if="localCard.text"
                     class="form-control"
                     type="text"
                     v-model="localCard.text"
@@ -94,10 +93,10 @@ export default {
 
 <style scoped lang="scss">
 .card {
-    max-width: 260px;
-    min-width: 260px;
+    max-width: 250px;
+    min-width: 250px;
     & .card-img-top {
-        height: 150px;
+        height: 140px;
     }
 }
 </style>
