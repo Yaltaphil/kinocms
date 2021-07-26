@@ -28,3 +28,7 @@ export default new Vuex.Store({
         Auth,
     },
 });
+
+    // removeFromStorage: async function (_state, { url }) {
+        //     return await firebase.storage().refFromURL(url).delete();
+        // },
