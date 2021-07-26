@@ -226,9 +226,7 @@ export default {
 
         changeBanner: function (card) {
             const index = this.banners.findIndex((item) => item.id == card.id);
-            console.log(index);
             if (index != -1) this.banners[index] = card;
-            console.log(this.banners);
         },
 
         saveBanners: function () {
