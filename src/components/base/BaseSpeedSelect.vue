@@ -4,11 +4,7 @@
             <slot />
         </div>
         <div class="col-3">
-            <select
-                class="form-control shadow"
-                v-model="selected"
-                @change="$emit('change', $event.target.value)"
-            >
+            <select class="form-control shadow" v-model="choice">
                 <option value="1" label="1 сек"></option>
                 <option value="3" label="3 сек"></option>
                 <option value="5" label="5 сек"></option>
@@ -28,7 +24,17 @@ export default {
         event: "change",
     },
     props: {
-        selected: { type: Number, default: 5 },
+        selected: { type: String, default: "5" },
+    },
+    computed: {
+        choice: {
+            get: function () {
+                return this.selected;
+            },
+            set: function (value) {
+                this.$emit("change", value);
+            },
+        },
     },
 };
 </script>
