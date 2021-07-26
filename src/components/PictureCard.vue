@@ -25,7 +25,7 @@
                     <div class="col">
                         <button
                             class="btn btn-danger px-5"
-                            @click="$emit('remove-banner')"
+                            @click="removeImage"
                         >
                             Удалить
                         </button>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+// import firebase from "firebase";
 
 export default {
     name: "PictureCard",
@@ -60,20 +60,20 @@ export default {
             event.preventDefault();
             const file = event.target.files[0];
             if (!file) return false;
-            const storageRef = firebase.storage().ref();
-            this.localCard.URL = await storageRef
-                .child(path + Math.random() + file.name)
-                .put(file)
-                .then(async function (snapshot) {
-                    console.log("Uploaded", snapshot.totalBytes, "bytes.");
-                    console.log("File metadata:", snapshot.metadata);
-                    return await snapshot.ref.getDownloadURL();
-                })
-                .catch(function (error) {
-                    console.error("Upload failed:", error);
-                });
-            console.log(this.localCard);
+            this.localCard.URL = await this.$store.dispatch("uploadToStorage", {
+                file,
+                path,
+            });
             this.$emit("change-card", this.localCard);
+        },
+
+        removeImage: async function () {
+            if (this.localCard.URL == "/img/uploadPicture.jpg") return;
+            await this.$store.dispatch(
+                "removeFromStorage",
+                this.localCard.URL
+            );
+            this.$emit("remove-banner");
         },
     },
 };
