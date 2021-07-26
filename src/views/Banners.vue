@@ -51,6 +51,7 @@
                     <base-speed-select v-model="mainTopRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
+                    {{ mainTopRotationSpeed }}
                 </div>
                 <div class="col-6">
                     <base-button @click="saveBanners"> Сохранить </base-button>
@@ -188,7 +189,7 @@ export default {
             //banners
             banners: [],
             bannersSwitch: true,
-            mainTopRotationSpeed: 5,
+            mainTopRotationSpeed: "5",
             //bg
             bigBackgroundBanner: {
                 URL: "/img/uploadPicture.jpg",
@@ -197,7 +198,7 @@ export default {
             //actions
             actions: [],
             actionsSwitch: true,
-            actionsRotationSpeed: 5,
+            actionsRotationSpeed: "5",
         };
     },
     computed: {

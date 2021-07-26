@@ -4,7 +4,11 @@
             <slot />
         </div>
         <div class="col-3">
-            <select class="form-control shadow" v-model="choice">
+            <select
+                class="form-control shadow"
+                v-model="selected"
+                @change="$emit(`change`, $event.target.value)"
+            >
                 <option value="1" label="1 сек"></option>
                 <option value="3" label="3 сек"></option>
                 <option value="5" label="5 сек"></option>
@@ -18,7 +22,6 @@
 <script>
 export default {
     name: "BaseSpeedSelect",
-
     model: {
         prop: "value",
         event: "change",
@@ -26,15 +29,15 @@ export default {
     props: {
         selected: { type: String, default: "5" },
     },
-    computed: {
-        choice: {
-            get: function () {
-                return this.selected;
-            },
-            set: function (value) {
-                this.$emit("change", value);
-            },
-        },
-    },
+    // computed: {
+    //     choice: {
+    //         get: function () {
+    //             return this.selected;
+    //         },
+    //         set: function (v) {
+    //             this.$emit("change", v);
+    //         },
+    //     },
+    // },
 };
 </script>
