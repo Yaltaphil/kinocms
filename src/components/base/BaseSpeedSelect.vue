@@ -6,7 +6,7 @@
         <div class="col-3">
             <select
                 class="form-control shadow"
-                v-model="selected"
+                v-model="choice"
                 @change="$emit(`change`, $event.target.value)"
             >
                 <option value="1" label="1 сек"></option>
@@ -29,15 +29,10 @@ export default {
     props: {
         selected: { type: String, default: "5" },
     },
-    // computed: {
-    //     choice: {
-    //         get: function () {
-    //             return this.selected;
-    //         },
-    //         set: function (v) {
-    //             this.$emit("change", v);
-    //         },
-    //     },
-    // },
+    data() {
+        return {
+            choice: this.selected,
+        };
+    },
 };
 </script>
