@@ -27,5 +27,32 @@ export default {
                 .then(() => console.log(`File ${url} deleted from storage`))
                 .catch(() => console.log(`Problem to delete file`));
         },
+
+        async writeToDatabase(_state, { payload, path }) {
+            try {
+                const result = await firebase
+                    .database()
+                    .ref(path)
+                    .push(payload);
+                console.log(result);
+            } catch (error) {
+                console.log(`Error writing to database: ${error}`);
+                throw error;
+            }
+        },
+
+        async readFromDatabase(_state, path) {
+            try {
+                const result =
+                    (await firebase.database().ref(path).once('value')).val() ||
+                    {};
+                console.log(path, result, Object.keys(result));
+                return result[Object.keys(result)[0]];
+
+            } catch (error) {
+                console.log(`Error reading from database: ${error}`);
+                throw error;
+            }
+        },
     },
 };
