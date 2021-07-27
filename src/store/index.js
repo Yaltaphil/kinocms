@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Auth from './auth';
-import FirebaseManagement from './firebaseManagement';
+import auth from './auth';
+import dbOperations from './dbOperations';
 
 Vue.use(Vuex);
 
@@ -10,7 +10,7 @@ export default new Vuex.Store({
     mutations: {},
     actions: {},
     modules: {
-        Auth,
-        FirebaseManagement,
+        auth,
+        dbOperations,
     },
 });

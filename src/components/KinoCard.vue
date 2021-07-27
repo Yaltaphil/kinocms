@@ -42,7 +42,7 @@
                 />
             </div>
 
-            <div class="input-group input-group-sm mt-2" v-if="localCard.text">
+            <div class="input-group input-group-sm mt-2" v-if="showText">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Текст</span>
                 </div>
@@ -67,6 +67,7 @@ export default {
             type: Object,
             required: true,
         },
+        showText: { type: Boolean, default: true, required: false },
     },
 
     data: function () {

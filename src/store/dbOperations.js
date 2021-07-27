@@ -15,7 +15,8 @@ export default {
                     return await snapshot.ref.getDownloadURL();
                 })
                 .catch((error) => {
-                    console.error('Upload failed:', error);
+                    console.error(`Upload failed:, ${error}`);
+                    throw error;
                 });
         },
 
@@ -25,16 +26,15 @@ export default {
                 .refFromURL(url)
                 .delete()
                 .then(() => console.log(`File ${url} deleted from storage`))
-                .catch(() => console.log(`Problem to delete file`));
+                .catch((error) => {
+                    console.log(`Problem to delete file  ${error}`);
+                    throw error;
+                });
         },
 
         async writeToDatabase(_state, { payload, path }) {
             try {
-                const result = await firebase
-                    .database()
-                    .ref(path)
-                    .push(payload);
-                console.log(result);
+                return await firebase.database().ref(path).set(payload);
             } catch (error) {
                 console.log(`Error writing to database: ${error}`);
                 throw error;
@@ -43,12 +43,10 @@ export default {
 
         async readFromDatabase(_state, path) {
             try {
-                const result =
+                return (
                     (await firebase.database().ref(path).once('value')).val() ||
-                    {};
-                console.log(path, result, Object.keys(result));
-                return result[Object.keys(result)[0]];
-
+                    {}
+                );
             } catch (error) {
                 console.log(`Error reading from database: ${error}`);
                 throw error;

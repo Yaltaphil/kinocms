@@ -232,20 +232,19 @@ export default {
         },
 
         saveBanners: function () {
-            localStorage.setItem(
-                "kinoCMSbanners",
-                JSON.stringify(this.banners)
-            );
             const payload = this.banners;
             const path = "/banners";
             this.$store.dispatch("writeToDatabase", { payload, path });
+            console.log("saved");
         },
         fetchBanners: async function () {
-            const local = JSON.parse(localStorage.getItem("kinoCMSbanners"));
-            if (local) this.banners = local;
-            this.banners = await this.$store.dispatch("readFromDatabase", "/banners");
-            console.log(this.banners)
-
+            console.log(
+                "loaded",
+                (this.banners = await this.$store.dispatch(
+                    "readFromDatabase",
+                    "/banners"
+                ))
+            );
         },
 
         //background banner methods
@@ -271,17 +270,19 @@ export default {
         },
 
         saveActions: function () {
-            localStorage.setItem(
-                "kinoCMSactions",
-                JSON.stringify(this.actions)
-            );
             const payload = this.actions;
             const path = "/actions";
             this.$store.dispatch("writeToDatabase", { payload, path });
+            console.log("saved");
         },
-        fetchActions: function () {
-            const local = JSON.parse(localStorage.getItem("kinoCMSactions"));
-            if (local) this.actions = local;
+        fetchActions: async function () {
+            console.log(
+                "loaded",
+                (this.actions = await this.$store.dispatch(
+                    "readFromDatabase",
+                    "/actions"
+                ))
+            );
         },
     },
 };
