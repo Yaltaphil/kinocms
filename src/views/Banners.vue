@@ -48,7 +48,7 @@
 
             <div class="row my-5 p-3">
                 <div class="col">
-                    <base-speed-select v-model="mainTopRotationSpeed">
+                    <base-speed-select v-model="bannersRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
                 </div>
@@ -77,7 +77,7 @@
                                     type="radio"
                                     name="radio1"
                                     value="Фото на фоне"
-                                    v-model="bigBackgroundBanner.bannerType"
+                                    v-model="bigBanner.bannerType"
                                 />Фото на фоне</label
                             >
                         </div>
@@ -88,7 +88,7 @@
                                     type="radio"
                                     name="radio1"
                                     value="Просто фон"
-                                    v-model="bigBackgroundBanner.bannerType"
+                                    v-model="bigBanner.bannerType"
                                 />
                                 Просто фон</label
                             >
@@ -98,9 +98,9 @@
 
                 <div class="col-9">
                     <PictureCard
-                        :card="bigBackgroundBanner"
-                        @remove-banner="removeBigBackgroundBanner"
-                        @change-card="changeBigBackgroundBanner"
+                        :card="bigBanner"
+                        @remove-banner="removeBigBanner"
+                        @change-card="changeBigBanner"
                     />
                 </div>
             </div>
@@ -188,9 +188,9 @@ export default {
             //banners
             banners: [],
             bannersSwitch: true,
-            mainTopRotationSpeed: "5",
+            bannersRotationSpeed: "5",
             //bg
-            bigBackgroundBanner: {
+            bigBanner: {
                 URL: "/img/uploadPicture.jpg",
                 bannerType: "Фото на фоне",
             },
@@ -200,24 +200,20 @@ export default {
             actionsRotationSpeed: "5",
         };
     },
-    computed: {
-        getBannersQuantity() {
-            return this.banners.length;
-        },
-    },
+
     mounted() {
         this.fetchBanners();
         this.fetchActions();
+        this.fetchBigBanner();
     },
     methods: {
         //banner methods
         addBanner: function () {
-            const banner = {
+            this.banners.push({
                 id: Math.round(10000000 * Math.random()),
                 URL: "/img/uploadPicture.jpg",
                 text: "описание",
-            };
-            this.banners.push(banner);
+            });
         },
 
         removeBanner: async function (target) {
@@ -235,23 +231,37 @@ export default {
             const payload = this.banners;
             const path = "/banners";
             this.$store.dispatch("writeToDatabase", { payload, path });
-            console.log("saved");
+            console.log("banners saved");
         },
         fetchBanners: async function () {
-            console.log(
-                "loaded",
-                (this.banners = await this.$store.dispatch(
-                    "readFromDatabase",
-                    "/banners"
-                ))
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/banners"
             );
+            if (result) this.banners = result;
+            console.log("banners loaded", result);
         },
 
         //background banner methods
-        changeBigBackgroundBanner: function () {},
-        removeBigBackgroundBanner: function () {
-            this.bigBackgroundBanner.URL = "/img/uploadPicture.jpg";
-            this.bigBackgroundBanner.bannerType = "Просто фон";
+        changeBigBanner: async function () {
+            const path = "/bigban"
+            const payload = this.bigBanner;
+            await this.$store.dispatch("writeToDatabase", { payload, path});
+            console.log("saved");
+        },
+        removeBigBanner: async function () {
+            this.bigBanner.URL = "/img/uploadPicture.jpg";
+            this.bigBanner.bannerType = "Просто фон";
+        },
+        fetchBigBanner: async function () {
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/bigban"
+            );
+            if (result) {
+                this.bigBanner.URL = result.URL;
+                this.bigBanner.bannerType = result.bannerType;}
+            console.log("Big banner loaded", result);
         },
 
         //actions methods
@@ -276,13 +286,13 @@ export default {
             console.log("saved");
         },
         fetchActions: async function () {
-            console.log(
-                "loaded",
-                (this.actions = await this.$store.dispatch(
-                    "readFromDatabase",
-                    "/actions"
-                ))
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/actions"
             );
+            if (result) this.actions = result;
+
+            console.log("actions loaded", result);
         },
     },
 };

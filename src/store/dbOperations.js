@@ -34,6 +34,7 @@ export default {
 
         async writeToDatabase(_state, { payload, path }) {
             try {
+                console.log(`path ${path}`);
                 return await firebase.database().ref(path).set(payload);
             } catch (error) {
                 console.log(`Error writing to database: ${error}`);
@@ -44,9 +45,8 @@ export default {
         async readFromDatabase(_state, path) {
             try {
                 return (
-                    (await firebase.database().ref(path).once('value')).val() ||
-                    {}
-                );
+                    await firebase.database().ref(path).once('value')
+                ).val();
             } catch (error) {
                 console.log(`Error reading from database: ${error}`);
                 throw error;
