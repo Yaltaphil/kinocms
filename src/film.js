@@ -1,21 +1,18 @@
-export default class Film {
-    id: String;
-    lang: String;
-    title: {
-        ru: String;
-        ua: String;
-    };
-    description: {
-        ru: String;
-        ua: String;
-    };
-    mainPic: String;
-    pics: [String];
-    trailerLink: String;
-    filmType: [];
-    SEO: {
-        url: String;
-        title: String;
-        description: String;
-    }
-};
+// export default class Film {
+//     id: String;
+//     title:
+//     titleUA: String;
+//     description: {
+//     descriptionUA: {
+//     mainPic: {
+//             URL: "/img/uploadPicture.jpg",
+//             },
+//     pics: [String];
+//     trailerLink: String;
+//     filmType: [];
+//     SEO: {
+//         url: String;
+//         title: String;
+//         description: String;
+//     }
+// };

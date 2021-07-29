@@ -1,16 +1,16 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import auth from './auth';
-import dbOperations from './dbOperations';
+import Vue from "vue";
+import Vuex from "vuex";
+import auth from "./auth";
+import dbOperations from "./dbOperations";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
-    actions: {},
-    modules: {
-        auth,
-        dbOperations,
-    },
+  state: {},
+  mutations: {},
+  actions: {},
+  modules: {
+    auth,
+    dbOperations,
+  },
 });
