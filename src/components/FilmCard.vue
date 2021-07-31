@@ -1,10 +1,14 @@
 <template>
     <div class="card border shadow m-3" @click="$emit('film-clicked', film)">
-        <img class="card-img-top" src="/img/uploadPicture.jpg" alt="" />
+        <img
+            class="card-img-top img-responsive"
+            :src="film.mainPic.URL"
+            alt=""
+        />
 
-        <div class="card-footer text-center">
+        <h5 class="card-footer text-center">
             {{ film.title }}
-        </div>
+        </h5>
     </div>
 </template>
 
@@ -24,7 +28,10 @@ export default {
 .card {
     min-width: 200px;
     max-width: 200px;
-    height: 250px;
+    height: 300px;
     cursor: pointer;
+    & img {
+        height: 80%;
+    }
 }
 </style>

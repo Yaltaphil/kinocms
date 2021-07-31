@@ -22,6 +22,7 @@ const routes = [
     {
         path: "/films",
         name: "Films",
+        props: true,
         meta: { layout: "main" },
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/Films.vue"),

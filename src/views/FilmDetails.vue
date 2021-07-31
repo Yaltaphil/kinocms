@@ -1,8 +1,10 @@
 <template>
-    <form @submit.prevent="saveFilm">
+    <form @submit.prevent="submitFilmDetails()">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">{{ currentFilm }}</h3>
+                <h3 class="card-title">
+                    Карточка фильма "{{ currentFilm.title }}"
+                </h3>
             </div>
 
             <div class="card-body">
@@ -245,6 +247,7 @@
                     <button
                         type="button"
                         class="btn btn-outline-warning col-4 offset-2"
+                        @click="resetCurrentFilm"
                     >
                         Вернуть базовую версию
                     </button>
@@ -257,6 +260,8 @@
 <script>
 import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
+import { eventBus } from "../main.js";
+import lodash from "lodash";
 
 export default {
     components: { PictureCard, KinoCard },
@@ -274,12 +279,18 @@ export default {
     data() {
         return {
             currentFilm: this.film,
+            filmDefaultState: this.film,
         };
     },
-
+    created() {
+        this.filmDefaultState = lodash.cloneDeep(this.film);
+    },
     methods: {
-        saveFilm() {
-            // TODO add film saving
+        submitFilmDetails() {
+            eventBus.$emit("film-submitted", this.currentFilm);
+            this.$router.push({
+                name: "Films",
+            });
         },
         removeAction() {},
         mainPictureChanged(target) {
@@ -290,10 +301,19 @@ export default {
                 return;
             await this.$store.dispatch(
                 "removeFromStorage",
-                this.currentFilm.mainPic.URL,
+                this.currentFilm.mainPic.URL
             );
             this.currentFilm.mainPic.URL = "/img/uploadPicture.jpg";
         },
+
+        // TODO make reset
+        resetCurrentFilm() {
+            this.currentFilm = lodash.cloneDeep(this.filmDefaultState);
+        },
+
+        // TODO film type
+
+        // TODO add pic button
     },
 };
 </script>

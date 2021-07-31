@@ -18,6 +18,9 @@ import "firebase/database";
 
 Vue.config.productionTip = false;
 
+// Event bus
+export const eventBus = new Vue();
+
 const firebaseConfig = {
     apiKey: "AIzaSyDu-sDXoABOEFYqz7BEX9eEYf111IP3zVg",
     authDomain: "kinocms-vue2.firebaseapp.com",

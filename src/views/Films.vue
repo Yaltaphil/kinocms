@@ -11,7 +11,6 @@
                     :key="film.id"
                     :film="film"
                     @film-clicked="editFilm"
-                    @film-submitted="saveFilm"
                 />
             </div>
             <button
@@ -45,6 +44,7 @@
 </template>
 <script>
 import FilmCard from "@/components/FilmCard.vue";
+import { eventBus } from "../main.js";
 
 export default {
     name: "Films",
@@ -53,74 +53,82 @@ export default {
     },
     data() {
         return {
-            films: [
-                {
-                    id: "111111111111",
-                    title: "nbnek",
-                    titleUA: "sdf gsdf gsdf gsd",
-                    description: "sdghsdfh",
-                    descriptionUA: " sdfg sdfg sdfgs dfg",
-                    mainPic: {
-                        URL: "/img/uploadPicture.jpg",
-                    },
-                    pics: [
-                        {
-                            id: 1231234123,
-                            URL: "/img/uploadPicture.jpg",
-                        },
-                        {
-                            id: 432432432324,
-                            URL: "/img/uploadPicture.jpg",
-                        },
-                        {
-                            id: 4323432432324,
-                            URL: "/img/uploadPicture.jpg",
-                        },
-                        {
-                            id: 43243245423432324,
-                            URL: "/img/uploadPicture.jpg",
-                        },
-                        {
-                            id: 4324323242432324,
-                            URL: "/img/uploadPicture.jpg",
-                        },
-                    ],
-                    trailerLink: "http://youtube",
-                    filmType: [],
-                    SEO: {
-                        url: "/img/uploadPicture.jpg",
-                        title: "/img/uploadPicture.jpg",
-                        keywords: "key words here",
-                        description: "/img/uploadPicture.jpg",
-                    },
-                },
-            ],
-            filmsComingSoon: [
-                {
-                    id: "1656146",
-                    language: "ru-RU",
-                    title: "терминатор 3",
-                },
-            ],
-
+            films: [],
+            filmsComingSoon: [],
             loading: true,
         };
     },
-    mounted() {},
+    created() {
+        eventBus.$on("film-submitted", (data) => this.filmSubmitted(data));
+    },
+    mounted() {
+        this.loadFilmsFromDatabase();
+    },
     methods: {
         addFilm() {
             const newFilm = {
                 id: Date.now().toString(),
+                title: "новый фильм",
+                titleUA: "новый фильм",
+                description: "",
+                descriptionUA: "",
+                mainPic: {
+                    URL: "/img/uploadPicture.jpg",
+                },
+                pics: [
+                    {
+                        id: 1231234123,
+                        URL: "/img/uploadPicture.jpg",
+                    },
+                    {
+                        id: 432432432324,
+                        URL: "/img/uploadPicture.jpg",
+                    },
+
+                    {
+                        id: 4324323242432324,
+                        URL: "/img/uploadPicture.jpg",
+                    },
+                ],
+                trailerLink: "http://youtube",
+                filmType: [],
+                SEO: {
+                    url: "/img/uploadPicture.jpg",
+                    title: "/img/uploadPicture.jpg",
+                    keywords: "key words here",
+                    description: "/img/uploadPicture.jpg",
+                },
             };
             this.films.push(newFilm);
         },
+
         editFilm(target) {
             this.$router.push({
                 name: "FilmDetails",
                 params: { filmId: target.id, film: target },
             });
         },
-        saveFilm() {},
+
+        filmSubmitted(film) {
+            const index = this.films.findIndex((item) => item.id === film.id);
+            this.films[index] = film;
+            this.saveFilmsToDatabase();
+        },
+
+        async saveFilmsToDatabase() {
+            const payload = this.films;
+            const path = "/films";
+            await this.$store.dispatch("writeToDatabase", { payload, path });
+        },
+
+        async loadFilmsFromDatabase() {
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/films"
+            );
+            if (result) this.films = result;
+            console.log("films loaded", result);
+        },
     },
 };
 </script>
