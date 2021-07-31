@@ -16,3 +16,4 @@
 //         description: String;
 //     }
 // };
+document.getElementsByName;

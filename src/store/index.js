@@ -6,11 +6,11 @@ import dbOperations from "./dbOperations";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {
-    auth,
-    dbOperations,
-  },
+    state: {},
+    mutations: {},
+    actions: {},
+    modules: {
+        auth,
+        dbOperations,
+    },
 });
