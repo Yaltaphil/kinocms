@@ -236,7 +236,7 @@ export default {
         fetchBanners: async function () {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
-                "/banners",
+                "/banners"
             );
             if (result) this.banners = result;
             console.log("banners loaded", result);
@@ -256,7 +256,7 @@ export default {
         fetchBigBanner: async function () {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
-                "/bigban",
+                "/bigban"
             );
             if (result) {
                 this.bigBanner.URL = result.URL;
@@ -289,7 +289,7 @@ export default {
         fetchActions: async function () {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
-                "/actions",
+                "/actions"
             );
             if (result) this.actions = result;
 

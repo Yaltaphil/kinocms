@@ -306,9 +306,9 @@ export default {
             this.currentFilm.mainPic.URL = "/img/uploadPicture.jpg";
         },
 
-        // TODO make reset
         resetCurrentFilm() {
             this.currentFilm = lodash.cloneDeep(this.filmDefaultState);
+            this.$successMessage("Базовая версия восстановлена!");
         },
 
         // TODO film type
