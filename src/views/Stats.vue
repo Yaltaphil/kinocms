@@ -26,8 +26,8 @@ export default {
     name: "Stats",
     methods: {
         act() {
-            this.$successMessage("Hello")
-            this.$errorMessage("Hello")
+            this.$successMessage("Hello");
+            this.$errorMessage("Hello");
         },
     },
 };

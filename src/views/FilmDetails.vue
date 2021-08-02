@@ -157,13 +157,18 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header">Тип кино</div>
+                    <div class="card-header">
+                        Тип кино {{ currentFilm.filmType }}
+                    </div>
                     <div class="card-body">
                         <div class="col-sm-6">
                             <!-- checkbox -->
                             <div class="form-group d-flex">
                                 <div class="form-check mx-3">
                                     <input
+                                        id="3D"
+                                        v-model="currentFilm.filmType"
+                                        value="3D"
                                         class="form-check-input"
                                         type="checkbox"
                                     />
@@ -171,6 +176,9 @@
                                 </div>
                                 <div class="form-check mx-3">
                                     <input
+                                        id="2D"
+                                        v-model="currentFilm.filmType"
+                                        value="2D"
                                         class="form-check-input"
                                         type="checkbox"
                                         checked
@@ -179,6 +187,9 @@
                                 </div>
                                 <div class="form-check mx-3">
                                     <input
+                                        id="IMAX"
+                                        v-model="currentFilm.filmType"
+                                        value="IMAX"
                                         class="form-check-input"
                                         type="checkbox"
                                     />
@@ -288,6 +299,7 @@ export default {
     methods: {
         submitFilmDetails() {
             eventBus.$emit("film-submitted", this.currentFilm);
+            this.$successMessage("Данные фильма сохранены");
             this.$router.push({
                 name: "Films",
             });
@@ -308,7 +320,7 @@ export default {
 
         resetCurrentFilm() {
             this.currentFilm = lodash.cloneDeep(this.filmDefaultState);
-            this.$successMessage("Базовая версия восстановлена!");
+            this.$successMessage("Базовая версия восстановлена");
         },
 
         // TODO film type

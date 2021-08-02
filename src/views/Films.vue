@@ -91,7 +91,7 @@ export default {
                     },
                 ],
                 trailerLink: "http://youtube",
-                filmType: [],
+                filmType: ["2D"],
                 SEO: {
                     url: "/img/uploadPicture.jpg",
                     title: "/img/uploadPicture.jpg",

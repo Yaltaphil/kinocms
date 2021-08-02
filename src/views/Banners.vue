@@ -231,7 +231,7 @@ export default {
             const payload = this.banners;
             const path = "/banners";
             this.$store.dispatch("writeToDatabase", { payload, path });
-            console.log("banners saved");
+            this.$successMessage("Данные сохранены");
         },
         fetchBanners: async function () {
             const result = await this.$store.dispatch(
