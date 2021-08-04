@@ -335,6 +335,15 @@ export default {
         },
     },
 
+    // beforeRouteLeave(to, from, next) {
+    //     const answer = window.confirm("Выйти? Есть несохраненные данные.");
+    //     if (answer) {
+    //         next();
+    //     } else {
+    //         next(false);
+    //     }
+    // },
+
     methods: {
         submitFilmDetails() {
             if (this.hasFormError) return;

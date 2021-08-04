@@ -7,7 +7,7 @@
 
             <div class="card-body card-group">
                 <FilmCard
-                    v-for="film in films"
+                    v-for="film in filmsNow"
                     :key="film.id"
                     :film="film"
                     @film-clicked="editFilm"
@@ -17,7 +17,7 @@
             <button
                 type="button"
                 class="btn btn-info btn-lg btn-block"
-                @click="addFilm"
+                @click="addFilm(true)"
             >
                 Добавить фильм
             </button>
@@ -28,15 +28,17 @@
             </div>
             <div class="card-body card-group">
                 <FilmCard
-                    v-for="film in filmsComingSoon"
+                    v-for="film in filmsAhead"
                     :key="film.id"
                     :film="film"
+                    @film-clicked="editFilm"
+                    @remove-film="removeFilm"
                 />
             </div>
             <button
                 type="button"
                 class="btn btn-info btn-lg btn-block"
-                @click="addFilm"
+                @click="addFilm(false)"
             >
                 Добавить фильм
             </button>
@@ -57,9 +59,18 @@ export default {
     data() {
         return {
             films: [],
-            filmsComingSoon: [],
             loading: true,
         };
+    },
+
+    computed: {
+        filmsNow() {
+            return this.films.filter((item) => item.inShowcaseNow);
+        },
+
+        filmsAhead() {
+            return this.films.filter((item) => !item.inShowcaseNow);
+        },
     },
 
     created() {
@@ -73,9 +84,10 @@ export default {
     },
 
     methods: {
-        addFilm() {
+        addFilm(inShowcase) {
             const newFilm = {
                 id: Date.now().toString(),
+                inShowcaseNow: inShowcase,
                 title: "новый фильм",
                 titleUA: "новый фильм",
                 description: "",
