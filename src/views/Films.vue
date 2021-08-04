@@ -80,15 +80,6 @@ export default {
                         id: 1231234123,
                         URL: "/img/uploadPicture.jpg",
                     },
-                    {
-                        id: 432432432324,
-                        URL: "/img/uploadPicture.jpg",
-                    },
-
-                    {
-                        id: 4324323242432324,
-                        URL: "/img/uploadPicture.jpg",
-                    },
                 ],
                 trailerLink: "http://youtube",
                 filmType: ["2D"],
@@ -129,6 +120,10 @@ export default {
             if (result) this.films = result;
             console.log("films loaded", result);
         },
+
+        // TODO add remove film button and method
     },
 };
 </script>
+
+// TODO move fetching to router hook

@@ -16,8 +16,6 @@
                     role="menu"
                     data-accordion="false"
                 >
-                    <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
                     <li class="nav-item mt-3">
                         <router-link to="/stats" class="nav-link">
                             <i class="nav-icon fas fa-chart-bar"></i>
@@ -28,28 +26,15 @@
                     <li class="nav-item">
                         <router-link to="/banners" class="nav-link">
                             <i class="nav-icon fas fa-window-maximize"></i>
-                            <p>
-                                Баннеры
-                                <span class="badge badge-info right"></span>
-                            </p>
+                            <p>Баннеры</p>
                         </router-link>
                     </li>
 
                     <li class="nav-item">
                         <router-link to="/films" class="nav-link">
                             <i class="nav-icon fas fa-film"></i>
-                            <p>
-                                Фильмы
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
+                            <p>Фильмы</p>
                         </router-link>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-4">
-                                <router-link to="/films:id" class="nav-link">
-                                    <p>Страница фильма</p>
-                                </router-link>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <router-link to="/cinemas" class="nav-link">

@@ -1,10 +1,11 @@
 <template>
-    <form @submit.prevent="submitFilmDetails()">
+    <form ref="form" @submit.prevent="submitFilmDetails()">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">
                     Карточка фильма "{{ currentFilm.title }}"
                 </h3>
+                <p>{{ this.$v.currentFilm.title }}</p>
             </div>
 
             <div class="card-body">
@@ -62,8 +63,21 @@
                                         v-model="currentFilm.title"
                                         type="text"
                                         class="form-control"
+                                        :class="{
+                                            'is-invalid':
+                                                this.$v.currentFilm.title
+                                                    .$invalid,
+                                        }"
                                         placeholder="название фильма"
                                     />
+                                    <small
+                                        v-if="
+                                            !this.$v.currentFilm.title.$required
+                                        "
+                                        class="invalid-feedback"
+                                        >Поле некорректно, исправьте,
+                                        пожалуйста.
+                                    </small>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
@@ -135,9 +149,15 @@
                                 v-for="pic in currentFilm.pics"
                                 :key="pic.id"
                                 :card="pic"
-                                @remove-card="removeAction"
+                                @remove-card="removeFilmPicture"
                             />
                         </div>
+                        <button
+                            class="btn btn-outline-info btn-block my-2"
+                            @click.prevent="addFilmPicture"
+                        >
+                            Добавить картинку
+                        </button>
                     </div>
                 </div>
                 <div class="card">
@@ -157,9 +177,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header">
-                        Тип кино {{ currentFilm.filmType }}
-                    </div>
+                    <div class="card-header">Тип кино</div>
                     <div class="card-body">
                         <div class="col-sm-6">
                             <!-- checkbox -->
@@ -252,7 +270,11 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info col-4 offset-1">
+                    <button
+                        type="submit"
+                        class="btn btn-info col-4 offset-1"
+                        :disabled="hasFormError"
+                    >
                         Сохранить
                     </button>
                     <button
@@ -273,9 +295,11 @@ import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
 import { eventBus } from "../main.js";
 import lodash from "lodash";
+import { required } from "vuelidate/lib/validators";
 
 export default {
     components: { PictureCard, KinoCard },
+
     props: {
         film: {
             type: Object,
@@ -287,27 +311,45 @@ export default {
             required: true,
         },
     },
+
     data() {
         return {
             currentFilm: this.film,
             filmDefaultState: this.film,
+            val: true,
         };
     },
+
+    computed: {
+        hasFormError() {
+            return this.$v.currentFilm.$invalid;
+        },
+    },
+
     created() {
         this.filmDefaultState = lodash.cloneDeep(this.film);
     },
+
+    validations: {
+        currentFilm: {
+            title: { required},
+        },
+    },
+
     methods: {
         submitFilmDetails() {
+            if (this.hasFormError) return;
             eventBus.$emit("film-submitted", this.currentFilm);
             this.$successMessage("Данные фильма сохранены");
             this.$router.push({
                 name: "Films",
             });
         },
-        removeAction() {},
+
         mainPictureChanged(target) {
             this.currentFilm.mainPic.URL = target.URL;
         },
+
         removeMainPic: async function () {
             if (this.currentFilm.mainPic.URL == "/img/uploadPicture.jpg")
                 return;
@@ -323,11 +365,20 @@ export default {
             this.$successMessage("Базовая версия восстановлена");
         },
 
-        // TODO film type
+        addFilmPicture() {
+            this.currentFilm.pics.push({
+                id: `${Date.now()}${Math.random()}`,
+                URL: "/img/uploadPicture.jpg",
+            });
+        },
 
-        // TODO add pic button
+        removeFilmPicture: async function (target) {
+            this.currentFilm.pics = this.currentFilm.pics.filter(
+                (element) => element != target
+            );
+            if (target.URL == "/img/uploadPicture.jpg") return;
+            await this.$store.dispatch("removeFromStorage", target.URL);
+        },
     },
 };
 </script>
-
-<style lang="scss" scoped></style>

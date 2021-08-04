@@ -59,6 +59,7 @@
 </template>
 
 <script>
+// TODO change card loading procedure input-> preview-> save all to db
 export default {
     name: "KinoCard",
 
