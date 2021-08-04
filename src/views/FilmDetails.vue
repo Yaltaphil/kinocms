@@ -1,11 +1,11 @@
 <template>
-    <form ref="form" @submit.prevent="submitFilmDetails()">
+    <form ref="form" @submit.prevent.stop="submitFilmDetails()">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">
                     Карточка фильма "{{ currentFilm.title }}"
                 </h3>
-                <p>{{ this.$v.currentFilm.title }}</p>
+                <p class="card-title">валидация:{{ $v.currentFilm.title }}</p>
             </div>
 
             <div class="card-body">
@@ -316,7 +316,6 @@ export default {
         return {
             currentFilm: this.film,
             filmDefaultState: this.film,
-            val: true,
         };
     },
 
@@ -332,7 +331,7 @@ export default {
 
     validations: {
         currentFilm: {
-            title: { required},
+            title: { required },
         },
     },
 
@@ -340,7 +339,6 @@ export default {
         submitFilmDetails() {
             if (this.hasFormError) return;
             eventBus.$emit("film-submitted", this.currentFilm);
-            this.$successMessage("Данные фильма сохранены");
             this.$router.push({
                 name: "Films",
             });

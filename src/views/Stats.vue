@@ -24,7 +24,6 @@
         {{ sw2 }}
         <BaseSwitcher v-model="sw3"> Переключатель </BaseSwitcher>
         {{ sw3 }}
-
     </div>
 </template>
 

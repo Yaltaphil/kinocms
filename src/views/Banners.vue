@@ -164,7 +164,7 @@ import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
 import PictureCard from "@/components/PictureCard.vue";
-import BaseSwitcher from '@/components/base/BaseSwitcher.vue';
+import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
 
 export default {
     name: "Banners",

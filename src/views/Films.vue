@@ -11,6 +11,7 @@
                     :key="film.id"
                     :film="film"
                     @film-clicked="editFilm"
+                    @remove-film="removeFilm"
                 />
             </div>
             <button
@@ -48,9 +49,11 @@ import { eventBus } from "../main.js";
 
 export default {
     name: "Films",
+
     components: {
         FilmCard,
     },
+
     data() {
         return {
             films: [],
@@ -58,12 +61,17 @@ export default {
             loading: true,
         };
     },
+
     created() {
         eventBus.$on("film-submitted", (data) => this.filmSubmitted(data));
     },
-    mounted() {
-        this.loadFilmsFromDatabase();
+
+    mounted() {},
+
+    beforeRouteEnter(to, from, next) {
+        next((vm) => vm.loadFilmsFromDatabase());
     },
+
     methods: {
         addFilm() {
             const newFilm = {
@@ -100,16 +108,28 @@ export default {
             });
         },
 
-        filmSubmitted(film) {
+        async filmSubmitted(film) {
             const index = this.films.findIndex((item) => item.id === film.id);
             this.films[index] = film;
-            this.saveFilmsToDatabase();
+            this.saveFilmsToDatabase().then(() =>
+                this.$successMessage("Фильм успешно записан")
+            );
+        },
+
+        async removeFilm(film) {
+            this.films = this.films.filter((item) => item != film);
+            this.saveFilmsToDatabase().then(() =>
+                this.$successMessage("Фильм успешно удален")
+            );
         },
 
         async saveFilmsToDatabase() {
             const payload = this.films;
             const path = "/films";
-            await this.$store.dispatch("writeToDatabase", { payload, path });
+            return await this.$store.dispatch("writeToDatabase", {
+                payload,
+                path,
+            });
         },
 
         async loadFilmsFromDatabase() {
@@ -120,10 +140,6 @@ export default {
             if (result) this.films = result;
             console.log("films loaded", result);
         },
-
-        // TODO add remove film button and method
     },
 };
 </script>
-
-// TODO move fetching to router hook

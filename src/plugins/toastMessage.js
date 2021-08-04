@@ -19,7 +19,7 @@ export default {
                 message: `Ошибка: ${message}`,
                 type: "error",
                 position: "bottom-right",
-                duration: 7000,
+                duration: 5000,
             });
         };
     },
