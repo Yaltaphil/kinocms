@@ -8,11 +8,7 @@
             <div class="row p-3">
                 <small class="col-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-6 text-right">
-                    <Switches
-                        v-model="bannersSwitch"
-                        theme="bootstrap"
-                        color="success"
-                    ></Switches>
+                    <BaseSwitcher v-model="bannersSwitch"></BaseSwitcher>
                 </div>
             </div>
             <div class="row pl-3">
@@ -115,11 +111,7 @@
             <div class="row p-3">
                 <small class="col-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-6 text-right">
-                    <Switches
-                        v-model="actionsSwitch"
-                        theme="bootstrap"
-                        color="success"
-                    ></Switches>
+                    <BaseSwitcher v-model="actionsSwitch"></BaseSwitcher>
                 </div>
             </div>
 
@@ -171,8 +163,8 @@
 import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
-import Switches from "vue-switches";
 import PictureCard from "@/components/PictureCard.vue";
+import BaseSwitcher from '@/components/base/BaseSwitcher.vue';
 
 export default {
     name: "Banners",
@@ -180,8 +172,8 @@ export default {
         KinoCard,
         BaseButton,
         BaseSpeedSelect,
-        Switches,
         PictureCard,
+        BaseSwitcher,
     },
     data: function () {
         return {

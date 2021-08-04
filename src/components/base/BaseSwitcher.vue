@@ -1,24 +1,31 @@
-/** Bootstrap switch component for Vue2 - yaltaphil */
+/** only single booleans no arrays */
 <template>
-    <div class="custom-control custom-switch custom-switch-on-success">
-        <input
-            id="customSwitch"
-            type="checkbox"
-            class="custom-control-input"
-            :checked="checked"
-            @change="$emit('change', $event.target.checked)"
-        />
-        <label class="custom-control-label" for="customSwitch"> <slot /></label>
+    <div class="form-group">
+        <div
+            class="
+                custom-control
+                custom-switch
+                custom-switch-off-danger
+                custom-switch-on-success
+            "
+        >
+            <input
+                :id="_uid"
+                :checked="checked"
+                type="checkbox"
+                class="custom-control-input"
+                @change="$emit('change', $event.target.checked)"
+            />
+            <label class="custom-control-label" :for="_uid"><slot /> </label>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "BaseSwitcher",
-
-    // vue2 v-model binding
     model: {
-        prop: "value",
+        prop: "checked",
         event: "change",
     },
     props: {

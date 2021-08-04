@@ -18,12 +18,28 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
+        <BaseSwitcher v-model="sw1"> Переключатель </BaseSwitcher>
+        {{ sw1 }}
+        <BaseSwitcher v-model="sw2"> Переключатель </BaseSwitcher>
+        {{ sw2 }}
+        <BaseSwitcher v-model="sw3"> Переключатель </BaseSwitcher>
+        {{ sw3 }}
+
     </div>
 </template>
 
 <script>
+import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
 export default {
     name: "Stats",
+    components: { BaseSwitcher },
+    data() {
+        return {
+            sw1: true,
+            sw2: false,
+            sw3: true,
+        };
+    },
     methods: {
         act() {
             this.$successMessage("Hello");
