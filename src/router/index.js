@@ -34,16 +34,6 @@ const routes = [
         meta: { layout: "main" },
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/FilmDetails.vue"),
-        // beforeEnter: (to, from, next) => {
-        //     const exists = this.films.find(
-        //         (film) => film.id === to.params.filmId
-        //     );
-        //     if (exists) {
-        //         next();
-        //     } else {
-        //         next({ name: 'notFound' });
-        //     }
-        // },
     },
 
     {
@@ -59,6 +49,15 @@ const routes = [
         meta: { layout: "main" },
         component: () =>
             import(/*webpackChunkName: "news" */ "../views/News.vue"),
+    },
+
+    {
+        path: "/news/:newsId",
+        name: "NewsDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(/*webpackChunkName: "films" */ "../views/NewsDetails.vue"),
     },
     {
         path: "/actions",
