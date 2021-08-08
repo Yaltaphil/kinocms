@@ -55,34 +55,14 @@
                     <li class="nav-item">
                         <router-link to="/news" class="nav-link">
                             <i class="nav-icon fas fa-exclamation"></i>
-                            <p>
-                                Новости
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
+                            <p>Новости</p>
                         </router-link>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-4">
-                                <router-link to="/news:id" class="nav-link">
-                                    <p>Страница новости</p>
-                                </router-link>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <router-link to="/actions" class="nav-link">
                             <i class="nav-icon fab fa-adversal"></i>
-                            <p>
-                                Акции
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
+                            <p>Акции</p>
                         </router-link>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-4">
-                                <router-link to="/films:id" class="nav-link">
-                                    <p>Страница акции</p>
-                                </router-link>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <router-link to="/pages" class="nav-link">

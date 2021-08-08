@@ -11,7 +11,7 @@
         </button>
         <img
             class="card-img-top img-responsive"
-            :src="film.mainPic.URL"
+            :src="film.mainPic.url"
             alt=""
             @click="$emit('film-clicked', film)"
         />
@@ -41,7 +41,7 @@ export default {
     props: {
         film: {
             type: Object,
-            default: () => {},
+            default: null,
         },
     },
 };

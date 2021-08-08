@@ -11,7 +11,7 @@
 
         <div class="card-img-top">
             <img
-                :src="localCard.URL"
+                :src="localCard.url"
                 class="card-img-top img-thumbnail"
                 alt=""
             />
@@ -37,7 +37,7 @@
                 <input
                     class="form-control"
                     type="text"
-                    :value="localCard.URL"
+                    :value="localCard.url"
                     aria-label="Current URL"
                 />
             </div>
@@ -83,7 +83,7 @@ export default {
             event.preventDefault();
             const file = event.target.files[0];
             if (!file) return false;
-            this.localCard.URL = await this.$store.dispatch("uploadToStorage", {
+            this.localCard.url = await this.$store.dispatch("uploadToStorage", {
                 file,
                 path,
             });

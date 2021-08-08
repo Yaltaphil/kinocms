@@ -2,10 +2,7 @@
     <form ref="form">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">
-                    Карточка новости "{{ currentNews.title }}"
-                </h3>
-                {{ currentNews }}
+                <h3 class="card-title">Карточка новости</h3>
             </div>
 
             <div class="card-body">
@@ -17,12 +14,7 @@
 
                 <div class="form-group col-4">
                     <div class="input-group date">Дата</div>
-
-                    <DatePicker
-                        v-model="currentNews.date"
-                        name="uniquename"
-                        :language="ru"
-                    />
+                    <InputDate v-model="thisDate" />
                 </div>
 
                 <div
@@ -108,7 +100,155 @@
                                         placeholder="описание"
                                     ></textarea>
                                 </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Главная картинка
+                                    </div>
+                                    <div class="card-body">
+                                        <PictureCard
+                                            :card="currentNews.mainPic"
+                                            @change-card="mainPictureChanged"
+                                            @remove-banner="removeMainPic"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Галерея картинок
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-group">
+                                            <KinoCard
+                                                v-for="pic in currentNews.pics"
+                                                :key="pic.id"
+                                                :card="pic"
+                                                @remove-card="removePicture"
+                                            />
+                                        </div>
+                                        <button
+                                            class="
+                                                btn btn-outline-info btn-block
+                                                my-2
+                                            "
+                                            @click.prevent="addPicture"
+                                        >
+                                            Добавить картинку
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Ссылка на трейлер
+                                    </div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >url</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentNews.trailerLink
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">SEO</div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >url</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentNews.SEO.url"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Title</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentNews.SEO.title"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="title"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Keywords</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentNews.SEO.keywords
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="keywords"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-3
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Description</span
+                                                >
+                                            </div>
+                                            <textarea
+                                                v-model="
+                                                    currentNews.SEO.description
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="описание"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div
                                 id="custom-tabs-two-ua"
                                 class="tab-pane fade"
@@ -140,109 +280,160 @@
                                         placeholder="опис"
                                     ></textarea>
                                 </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Главная картинка
+                                    </div>
+                                    <div class="card-body">
+                                        <PictureCard
+                                            :card="currentNews.mainPicUA"
+                                            @change-card="mainPictureChanged"
+                                            @remove-banner="removeMainPic"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Галерея картинок
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-group">
+                                            <KinoCard
+                                                v-for="pic in currentNews.picsUA"
+                                                :key="pic.id"
+                                                :card="pic"
+                                                @remove-card="removePicture"
+                                            />
+                                        </div>
+                                        <button
+                                            class="
+                                                btn btn-outline-info btn-block
+                                                my-2
+                                            "
+                                            @click.prevent="addPicture"
+                                        >
+                                            Добавить картинку
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Ссылка на трейлер
+                                    </div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >url</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentNews.trailerLink
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">SEO</div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >url</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentNews.SEO.urlUA"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Title</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentNews.SEO.titleUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="title"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Keywords</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentNews.SEO.keywordsUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="keywords"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-3
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Description</span
+                                                >
+                                            </div>
+                                            <textarea
+                                                v-model="
+                                                    currentNews.SEO
+                                                        .descriptionUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="описание"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- /.card -->
-                </div>
-
-                <div class="card">
-                    <div class="card-header">Главная картинка</div>
-                    <div class="card-body">
-                        <PictureCard
-                            :card="currentNews.mainPic"
-                            @change-card="mainPictureChanged"
-                            @remove-banner="removeMainPic"
-                        />
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">Галерея картинок</div>
-                    <div class="card-body">
-                        <div class="card-group">
-                            <KinoCard
-                                v-for="pic in currentNews.pics"
-                                :key="pic.id"
-                                :card="pic"
-                                @remove-card="removePicture"
-                            />
-                        </div>
-                        <button
-                            class="btn btn-outline-info btn-block my-2"
-                            @click.prevent="addPicture"
-                        >
-                            Добавить картинку
-                        </button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">Ссылка на трейлер</div>
-                    <div class="card-body">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">URL</span>
-                            </div>
-                            <input
-                                v-model="currentNews.trailerLink"
-                                type="text"
-                                class="form-control"
-                                placeholder="url"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">SEO</div>
-                    <div class="card-body">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">URL</span>
-                            </div>
-                            <input
-                                v-model="currentNews.SEO.url"
-                                type="text"
-                                class="form-control"
-                                placeholder="url"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Title</span>
-                            </div>
-                            <input
-                                v-model="currentNews.SEO.title"
-                                type="text"
-                                class="form-control"
-                                placeholder="title"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Keywords</span>
-                            </div>
-                            <input
-                                v-model="currentNews.SEO.keywords"
-                                type="text"
-                                class="form-control"
-                                placeholder="keywords"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"
-                                    >Description</span
-                                >
-                            </div>
-                            <textarea
-                                v-model="currentNews.SEO.description"
-                                type="text"
-                                class="form-control"
-                                placeholder="описание"
-                            ></textarea>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="card-footer">
@@ -260,16 +451,15 @@
 </template>
 
 <script>
+import CONFIG from "@/config.js";
 import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
-import { eventBus } from "../main.js";
 import { required } from "vuelidate/lib/validators";
 import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
-import DatePicker from "vuejs-datepicker";
-import { ru } from "vuejs-datepicker/dist/locale";
+import InputDate from "@/components/base/InputDate.vue";
 
 export default {
-    components: { PictureCard, KinoCard, BaseSwitcher, DatePicker },
+    components: { PictureCard, KinoCard, BaseSwitcher, InputDate },
 
     props: {
         news: {
@@ -286,8 +476,18 @@ export default {
     data() {
         return {
             currentNews: this.news,
-            ru: ru,
         };
+    },
+
+    computed: {
+        thisDate: {
+            get: function () {
+                return new Date(this.currentNews.date);
+            },
+            set: function (d) {
+                this.currentNews.date = Date.parse(d);
+            },
+        },
     },
 
     validations: {
@@ -300,30 +500,29 @@ export default {
 
     methods: {
         submitNewsDetails() {
-            eventBus.$emit("news-submitted", this.currentNews);
+            this.$root.$emit("news-submitted", this.currentNews);
             this.$router.push({
                 name: "News",
             });
         },
 
         mainPictureChanged(target) {
-            this.currentNews.mainPic.URL = target.URL;
+            this.currentNews.mainPic.url = target.url;
         },
 
         removeMainPic: async function () {
-            if (this.currentNews.mainPic.URL == "/img/uploadPicture.jpg")
-                return;
+            if (this.currentNews.mainPic.url == CONFIG.PICTURE_PLUG_URL) return;
             await this.$store.dispatch(
                 "removeFromStorage",
-                this.currentNews.mainPic.URL
+                this.currentNews.mainPic.url
             );
-            this.currentNews.mainPic.URL = "/img/uploadPicture.jpg";
+            this.currentNews.mainPic.url = CONFIG.PICTURE_PLUG_URL;
         },
 
         addPicture() {
             this.currentNews.pics.push({
                 id: `${Date.now()}${Math.random()}`,
-                URL: "/img/uploadPicture.jpg",
+                url: CONFIG.PICTURE_PLUG_URL,
             });
         },
 
@@ -331,8 +530,8 @@ export default {
             this.currentNews.pics = this.currentNews.pics.filter(
                 (element) => element != target
             );
-            if (target.URL == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", target.URL);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
         },
     },
 };

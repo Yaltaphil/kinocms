@@ -1,19 +1,20 @@
 <template>
     <div class="border-primary p-2 my-3" style="max-width: 740px">
         <div class="row">
-            <div class="col">
+            <div class="col-7">
                 <img
-                    :src="localCard.URL"
+                    :src="localCard.url"
                     class="card-img img-thumbnail"
                     alt=""
                 />
             </div>
             <div class="col">
-                <div class="row pt-3">
+                <div class="row ml-3">
                     <div class="col">
-                        <label class="btn btn-info px-5">
+                        <label id="_uid" class="btn btn-info px-4">
                             Добавить
                             <input
+                                id="_uid"
                                 type="file"
                                 class="custom-file-input"
                                 accept="image/*"
@@ -24,7 +25,7 @@
                     </div>
                     <div class="col">
                         <button
-                            class="btn btn-danger px-5"
+                            class="btn btn-outline-danger px-4"
                             @click="removeImage"
                         >
                             Удалить
@@ -37,14 +38,13 @@
 </template>
 
 <script>
-// import firebase from "firebase";
-
 export default {
     name: "PictureCard",
     props: {
         card: {
             type: Object,
             required: true,
+            default: null,
         },
     },
 
@@ -60,7 +60,7 @@ export default {
             event.preventDefault();
             const file = event.target.files[0];
             if (!file) return false;
-            this.localCard.URL = await this.$store.dispatch("uploadToStorage", {
+            this.localCard.url = await this.$store.dispatch("uploadToStorage", {
                 file,
                 path,
             });
@@ -68,8 +68,8 @@ export default {
         },
 
         removeImage: async function () {
-            if (this.localCard.URL == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", this.localCard.URL);
+            if (this.localCard.url == "/img/uploadPicture.jpg") return;
+            await this.$store.dispatch("removeFromStorage", this.localCard.url);
             this.$emit("remove-banner");
         },
     },
@@ -78,7 +78,7 @@ export default {
 
 <style scoped lang="scss">
 .card img {
-    max-width: 300px;
-    height: 200px;
+    max-width: 450px;
+    height: 300px;
 }
 </style>

@@ -3,8 +3,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Список новостей</h3>
-
+                    <h2 class="card-title">
+                        Всего новостей: {{ news.length }}
+                    </h2>
                     <div class="card-tools">
                         <button class="btn btn-lg btn-info" @click="addItem">
                             <i class="fas fa-plus"></i>
@@ -12,7 +13,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table text-nowrap">
                         <thead>
@@ -26,12 +26,17 @@
                         <tbody>
                             <tr v-for="story in news" :key="story.id">
                                 <td>{{ story.title }}</td>
-                                <td>{{ story.date }}</td>
+                                <td>
+                                    {{
+                                        new Date(
+                                            story.date
+                                        ).toLocaleDateString()
+                                    }}
+                                </td>
                                 <td>
                                     <span v-if="story.status">Включена</span>
                                     <span v-else>Выключена</span>
                                 </td>
-
                                 <td>
                                     <button
                                         class="btn btn-info mx-3"
@@ -50,14 +55,12 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
     </div>
 </template>
 <script>
-import { eventBus } from "../main.js";
+import CONFIG from "@/config.js";
 
 export default {
     name: "News",
@@ -73,20 +76,8 @@ export default {
         next((vm) => vm.loadNewsFromDatabase());
     },
 
-    computed: {
-        newsDate: () => {
-            return this.story.date.toDateString();
-        },
-    },
-
-    watch: {
-        news() {
-            this.saveNewsToDatabase();
-        },
-    },
-
     created() {
-        eventBus.$on("news-submitted", (data) => this.newsSubmitted(data));
+        this.$root.$on("news-submitted", (data) => this.newsSubmitted(data));
     },
 
     methods: {
@@ -110,7 +101,9 @@ export default {
 
         removeItem(target) {
             this.news = this.news.filter((item) => item != target);
-            this.$successMessage("Новость удалена");
+            this.saveNewsToDatabase().then(() =>
+                this.$successMessage("Новость удалена")
+            );
         },
 
         editItem(target) {
@@ -120,9 +113,9 @@ export default {
             });
         },
 
-        async newsSubmitted(news) {
-            const index = this.news.findIndex((item) => item.id === news.id);
-            this.news[index] = news;
+        async newsSubmitted(story) {
+            const index = this.news.findIndex((item) => item.id === story.id);
+            this.news[index] = story;
             this.saveNewsToDatabase().then(() =>
                 this.$successMessage("Новость успешно записана")
             );
@@ -130,23 +123,26 @@ export default {
 
         addItem() {
             this.news.push({
-                id: Date.now().toString(),
-                date: new Date(),
+                id: `${Date.now()}${Math.random()}`,
+                date: Date.now(),
                 status: true,
                 title: "Новая новость новейшая новость новая",
                 titleUA: "новый фильм",
                 description: "",
                 descriptionUA: "",
                 mainPic: {
-                    URL: "/img/uploadPicture.jpg",
+                    url: CONFIG.PICTURE_PLUG_URL,
+                },
+                mainPicUA: {
+                    url: CONFIG.PICTURE_PLUG_URL,
                 },
                 pics: [
                     {
-                        id: 12312234123,
-                        URL: "/img/uploadPicture.jpg",
+                        id: `${Date.now()}${Math.random()}`,
+                        url: CONFIG.PICTURE_PLUG_URL,
                     },
                 ],
-                trailerLink: "http://youtube",
+                trailerLink: "http://youtube.com",
                 SEO: {
                     url: "/img/uploadPicture.jpg",
                     title: "/img/uploadPicture.jpg",
