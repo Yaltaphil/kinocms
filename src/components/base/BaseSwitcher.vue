@@ -16,7 +16,7 @@
                 class="custom-control-input"
                 @change="$emit('change', $event.target.checked)"
             />
-            <label class="custom-control-label" :for="_uid"><slot /> </label>
+            <label class="custom-control-label" :for="_uid"><slot /></label>
         </div>
     </div>
 </template>
