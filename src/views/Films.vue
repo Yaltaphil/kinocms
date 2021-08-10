@@ -45,7 +45,9 @@
         </div>
     </section>
 </template>
+
 <script>
+import CONFIG from "@/config.js";
 import FilmCard from "@/components/FilmCard.vue";
 import { eventBus } from "../main.js";
 
@@ -86,28 +88,43 @@ export default {
     methods: {
         addFilm(inShowcase) {
             const newFilm = {
-                id: Date.now().toString(),
-                inShowcaseNow: inShowcase,
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
+                inShowcaseNow: inShowcase, //сейчас в показе
                 title: "новый фильм",
                 titleUA: "новый фильм",
                 description: "",
                 descriptionUA: "",
                 mainPic: {
-                    URL: "/img/uploadPicture.jpg",
+                    url: CONFIG.PICTURE_PLUG_URL,
+                },
+                mainPicUA: {
+                    url: CONFIG.PICTURE_PLUG_URL,
                 },
                 pics: [
                     {
-                        id: 1231234123,
-                        URL: "/img/uploadPicture.jpg",
+                        id: `${Date.now()}${Math.random()}`,
+                        url: CONFIG.PICTURE_PLUG_URL,
+                    },
+                ],
+                picsUA: [
+                    {
+                        id: `${Date.now()}${Math.random()}`,
+                        url: CONFIG.PICTURE_PLUG_URL,
                     },
                 ],
                 trailerLink: "http://youtube",
+                trailerLinkUA: "http://youtube",
                 filmType: ["2D"],
                 SEO: {
                     url: "/img/uploadPicture.jpg",
+                    urlUA: "/img/uploadPicture.jpg",
                     title: "/img/uploadPicture.jpg",
+                    titleUA: "/img/uploadPicture.jpg",
                     keywords: "key words here",
+                    keywordsUA: "key words here",
                     description: "/img/uploadPicture.jpg",
+                    descriptionUA: "/img/uploadPicture.jpg",
                 },
             };
             this.films.push(newFilm);
@@ -122,10 +139,12 @@ export default {
 
         async filmSubmitted(film) {
             const index = this.films.findIndex((item) => item.id === film.id);
-            this.films[index] = film;
-            this.saveFilmsToDatabase().then(() =>
-                this.$successMessage("Фильм успешно записан")
-            );
+            if (index != -1) {
+                this.films[index] = film;
+                this.saveFilmsToDatabase().then(() =>
+                    this.$successMessage("Фильм успешно записан")
+                );
+            }
         },
 
         async removeFilm(film) {
@@ -150,7 +169,6 @@ export default {
                 "/films"
             );
             if (result) this.films = result;
-            console.log("films loaded", result);
         },
     },
 };

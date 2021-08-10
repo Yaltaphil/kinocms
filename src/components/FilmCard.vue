@@ -1,13 +1,7 @@
 <template>
     <div class="card border shadow m-3">
-        <button
-            type="button"
-            class="close card-header text-right pr-1"
-            aria-label="Close"
-        >
-            <span aria-hidden="true" @click="$emit('remove-film', film)"
-                >&times;</span
-            >
+        <button type="button" class="close card-header text-right pr-1">
+            <span @click="$emit('remove-film', film)">&times;</span>
         </button>
         <img
             class="card-img-top img-responsive"
@@ -51,7 +45,7 @@ export default {
 .card {
     min-width: 200px;
     max-width: 200px;
-    height: 320px;
+    height: 322px;
     cursor: pointer;
     & img {
         height: 75%;

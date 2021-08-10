@@ -1,11 +1,8 @@
 <template>
-    <form ref="form" @submit.prevent.stop="submitFilmDetails()">
+    <div ref="form">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">
-                    Карточка фильма "{{ currentFilm.title }}"
-                </h3>
-                <p class="card-title">валидация:{{ $v.currentFilm.title }}</p>
+                <h3 class="card-title">Карточка фильма</h3>
             </div>
 
             <div class="card-body">
@@ -271,9 +268,10 @@
 
                 <div class="card-footer">
                     <button
-                        type="submit"
+                        type="button"
                         class="btn btn-info col-4 offset-1"
                         :disabled="hasFormError"
+                        @click="submitFilmDetails"
                     >
                         Сохранить
                     </button>
@@ -287,10 +285,11 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </template>
 
 <script>
+import CONFIG from "@/config.js";
 import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
 import { eventBus } from "../main.js";
@@ -316,6 +315,8 @@ export default {
         return {
             currentFilm: this.film,
             filmDefaultState: this.film,
+            dirty: false,
+            loading: true,
         };
     },
 
@@ -354,17 +355,11 @@ export default {
         },
 
         mainPictureChanged(target) {
-            this.currentFilm.mainPic.URL = target.URL;
+            this.currentFilm.mainPic.url = target.url;
         },
 
         removeMainPic: async function () {
-            if (this.currentFilm.mainPic.URL == "/img/uploadPicture.jpg")
-                return;
-            await this.$store.dispatch(
-                "removeFromStorage",
-                this.currentFilm.mainPic.URL
-            );
-            this.currentFilm.mainPic.URL = "/img/uploadPicture.jpg";
+            this.currentFilm.mainPic.url = CONFIG.PICTURE_PLUG_URL;
         },
 
         resetCurrentFilm() {
@@ -375,7 +370,7 @@ export default {
         addFilmPicture() {
             this.currentFilm.pics.push({
                 id: `${Date.now()}${Math.random()}`,
-                URL: "/img/uploadPicture.jpg",
+                url: CONFIG.PICTURE_PLUG_URL,
             });
         },
 
@@ -383,9 +378,10 @@ export default {
             this.currentFilm.pics = this.currentFilm.pics.filter(
                 (element) => element != target
             );
-            if (target.URL == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", target.URL);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
         },
     },
 };
 </script>
+// TODO RU UA versions
