@@ -1,12 +1,16 @@
 <template>
     <div class="border-primary p-2 my-3" style="max-width: 740px">
         <div class="row">
-            <div class="col-7">
+            <div class="col-7 d-flex justify-content-center">
                 <img
+                    v-if="! loading"
                     :src="localCard.url"
                     class="card-img img-thumbnail"
                     alt=""
                 />
+                <div v-else class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
             </div>
             <div class="col">
                 <div class="row ml-3">
@@ -53,6 +57,7 @@ export default {
     data: function () {
         return {
             localCard: this.card,
+            loading: false,
         };
     },
 
@@ -60,11 +65,13 @@ export default {
         uploadImage: async function (event, path = "images/") {
             const file = event.target.files[0];
             if (!file) return false;
+            this.loading = true;
             this.localCard.url = await this.$store.dispatch("uploadToStorage", {
                 file,
                 path,
             });
             this.$emit("change-card", this.localCard);
+            this.loading = false;
         },
 
         removeImage: async function () {
