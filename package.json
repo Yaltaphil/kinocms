@@ -74,6 +74,7 @@
         }
     },
     "jest": {
+        "verbose": true,
         "testEnvironment": "jsdom",
         "moduleFileExtensions": [
             "js",

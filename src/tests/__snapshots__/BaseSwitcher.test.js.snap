@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing BaseSwitcher Component Switcher matches snapshot: 1`] = `
+<div
+  class="form-group"
+>
+  <div
+    class="
+            custom-control
+            custom-switch
+            custom-switch-off-danger
+            custom-switch-on-success
+        "
+  >
+    <input
+      class="custom-control-input"
+      id="1"
+      type="checkbox"
+    />
+     
+    <label
+      class="custom-control-label"
+      for="1"
+    >
+      lorem10
+    </label>
+  </div>
+</div>
+`;

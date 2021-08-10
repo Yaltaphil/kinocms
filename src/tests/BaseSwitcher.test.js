@@ -32,4 +32,8 @@ describe("Testing BaseSwitcher Component", () => {
         wrapper.find("input").trigger("change");
         expect(wrapper.emitted("change")).toBeTruthy();
     });
+
+    test("Switcher matches snapshot:", () => {
+        expect(wrapper.element).toMatchSnapshot();
+    });
 });

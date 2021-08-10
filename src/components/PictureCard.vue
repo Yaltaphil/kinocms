@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-7 d-flex justify-content-center">
                 <img
-                    v-if="! loading"
+                    v-if="!loading"
                     :src="localCard.url"
                     class="card-img img-thumbnail"
                     alt=""
