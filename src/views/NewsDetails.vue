@@ -1,5 +1,5 @@
 <template>
-    <form ref="form">
+    <div ref="form">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Карточка новости</h3>
@@ -132,7 +132,7 @@
                                                 btn btn-outline-info btn-block
                                                 my-2
                                             "
-                                            @click.prevent="addPicture"
+                                            @click="addPicture"
                                         >
                                             Добавить картинку
                                         </button>
@@ -288,8 +288,8 @@
                                     <div class="card-body">
                                         <PictureCard
                                             :card="currentNews.mainPicUA"
-                                            @change-card="mainPictureChanged"
-                                            @remove-banner="removeMainPic"
+                                            @change-card="mainPictureChangedUA"
+                                            @remove-banner="removeMainPicUA"
                                         />
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@
                                                 v-for="pic in currentNews.picsUA"
                                                 :key="pic.id"
                                                 :card="pic"
-                                                @remove-card="removePicture"
+                                                @remove-card="removePictureUA"
                                             />
                                         </div>
                                         <button
@@ -312,7 +312,7 @@
                                                 btn btn-outline-info btn-block
                                                 my-2
                                             "
-                                            @click.prevent="addPicture"
+                                            @click="addPictureUA"
                                         >
                                             Добавить картинку
                                         </button>
@@ -336,7 +336,7 @@
                                             </div>
                                             <input
                                                 v-model="
-                                                    currentNews.trailerLink
+                                                    currentNews.trailerLinkUA
                                                 "
                                                 type="text"
                                                 class="form-control"
@@ -438,7 +438,6 @@
 
                 <div class="card-footer">
                     <button
-                        type="submit"
                         class="btn btn-info btn-block"
                         @click="submitNewsDetails()"
                     >
@@ -447,7 +446,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -476,6 +475,8 @@ export default {
     data() {
         return {
             currentNews: this.news,
+            dirty: false,
+            loading: true,
         };
     },
 
@@ -496,8 +497,6 @@ export default {
         },
     },
 
-    mounted() {},
-
     methods: {
         submitNewsDetails() {
             this.$root.$emit("news-submitted", this.currentNews);
@@ -509,24 +508,52 @@ export default {
         mainPictureChanged(target) {
             this.currentNews.mainPic.url = target.url;
         },
+        mainPictureChangedUA(target) {
+            this.currentNews.mainPicUA.url = target.url;
+        },
 
-        removeMainPic: async function () {
+        removeMainPic: function () {
             if (this.currentNews.mainPic.url == CONFIG.PICTURE_PLUG_URL) return;
-            await this.$store.dispatch(
+            this.$store.dispatch(
                 "removeFromStorage",
                 this.currentNews.mainPic.url
             );
             this.currentNews.mainPic.url = CONFIG.PICTURE_PLUG_URL;
         },
+        removeMainPicUA: async function () {
+            if (this.currentNews.mainPicUA.url == CONFIG.PICTURE_PLUG_URL)
+                return;
+            this.$store.dispatch(
+                "removeFromStorage",
+                this.currentNews.mainPicUA.url
+            );
+            this.currentNews.mainPicUA.url = CONFIG.PICTURE_PLUG_URL;
+        },
 
         addPicture() {
+            if (!this.currentNews.pics) {
+                this.currentNews.pics = [];
+            }
             this.currentNews.pics.push({
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
+            });
+        },
+        addPictureUA() {
+            this.currentNews.picsUA.push({
                 id: `${Date.now()}${Math.random()}`,
                 url: CONFIG.PICTURE_PLUG_URL,
             });
         },
 
         removePicture: async function (target) {
+            this.currentNews.pics = this.currentNews.pics.filter(
+                (element) => element != target
+            );
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
+        },
+        removePictureUA: async function (target) {
             this.currentNews.pics = this.currentNews.pics.filter(
                 (element) => element != target
             );

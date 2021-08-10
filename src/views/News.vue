@@ -142,12 +142,23 @@ export default {
                         url: CONFIG.PICTURE_PLUG_URL,
                     },
                 ],
+                picsUA: [
+                    {
+                        id: `${Date.now()}${Math.random()}`,
+                        url: CONFIG.PICTURE_PLUG_URL,
+                    },
+                ],
                 trailerLink: "http://youtube.com",
+                trailerLinkUA: "http://youtube.com",
                 SEO: {
                     url: "/img/uploadPicture.jpg",
+                    urlUA: "/img/uploadPicture.jpg",
                     title: "/img/uploadPicture.jpg",
+                    titleUA: "/img/uploadPicture.jpg",
                     keywords: "key words here",
+                    keywordsUA: "key words here",
                     description: "/img/uploadPicture.jpg",
+                    descriptionUA: "/img/uploadPicture.jpg",
                 },
             });
             this.saveNewsToDatabase().then(() =>

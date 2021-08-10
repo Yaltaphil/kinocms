@@ -38,13 +38,15 @@
 </template>
 
 <script>
+import CONFIG from "@/config.js";
+
 export default {
     name: "PictureCard",
     props: {
         card: {
             type: Object,
             required: true,
-            default: null,
+            default: () => {},
         },
     },
 
@@ -56,8 +58,6 @@ export default {
 
     methods: {
         uploadImage: async function (event, path = "images/") {
-            event.stopPropagation();
-            event.preventDefault();
             const file = event.target.files[0];
             if (!file) return false;
             this.localCard.url = await this.$store.dispatch("uploadToStorage", {
@@ -68,8 +68,8 @@ export default {
         },
 
         removeImage: async function () {
-            if (this.localCard.url == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", this.localCard.url);
+            if (this.localCard.url == CONFIG.PICTURE_PLUG_URL) return;
+            this.$store.dispatch("removeFromStorage", this.localCard.url);
             this.$emit("remove-banner");
         },
     },
@@ -78,7 +78,7 @@ export default {
 
 <style scoped lang="scss">
 .card img {
-    max-width: 450px;
+    max-width: 486px;
     height: 300px;
 }
 </style>
