@@ -14,13 +14,13 @@ exports[`Testing BaseSwitcher Component Switcher matches snapshot: 1`] = `
   >
     <input
       class="custom-control-input"
-      id="1"
+      id="11"
       type="checkbox"
     />
      
     <label
       class="custom-control-label"
-      for="1"
+      for="11"
     >
       lorem10
     </label>

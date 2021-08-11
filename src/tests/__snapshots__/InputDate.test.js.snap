@@ -15,13 +15,13 @@ exports[`Testing InputDate Component InputDate matches snapshot: 1`] = `
   >
     <input
       class="custom-control-input"
-      id="1"
+      id="5"
       type="checkbox"
     />
      
     <label
       class="custom-control-label"
-      for="1"
+      for="5"
     />
   </div>
 </div>

@@ -1,15 +1,23 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
 
+let wrapper = null;
 const someText = "lorem10";
 
-describe("Testing BaseSwitcher Component", () => {
-    const wrapper = mount(BaseSwitcher, {
+beforeEach(() => {
+    wrapper = shallowMount(BaseSwitcher, {
         propsData: { checked: false },
         slots: {
             default: someText,
         },
     });
+});
+
+afterEach(() => {
+    wrapper.destroy();
+});
+
+describe("Testing BaseSwitcher Component", () => {
     test("This switsher exists and visible:", () => {
         expect(wrapper.exists()).toBeTruthy();
         expect(wrapper.isVisible()).toBeTruthy();
