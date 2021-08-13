@@ -68,7 +68,6 @@ export default {
 
     data() {
         return {
-            isNewsOn: true,
             news: [],
         };
     },
@@ -96,25 +95,28 @@ export default {
         },
 
         async removeItem(target) {
+            if (!window.confirm("Удалить новость?")) return;
             // удаление всех картинок по url
-            Promise.all([
-                this.removePictureFromStorage(target.mainPic),
-                this.removePictureFromStorage(target.mainPicUA),
+            this.removePictureFromStorage(target.mainPic);
+            this.removePictureFromStorage(target.mainPicUA);
+            if (target.pics) {
                 target.pics.forEach((item) =>
                     this.removePictureFromStorage(item)
-                ),
+                );
+            }
+            if (target.picsUA) {
                 target.picsUA.forEach((item) =>
                     this.removePictureFromStorage(item)
-                ),
-            ]).then(() => {
-                this.news = this.news.filter((item) => item != target);
-            });
+                );
+            }
+            this.news = this.news.filter((item) => item != target);
             this.saveNewsToDatabase().then(() =>
                 this.$successMessage("Новость удалена")
             );
         },
 
         async removePictureFromStorage(picture) {
+            if (picture.url == CONFIG.PICTURE_PLUG_URL) return;
             await this.$store.dispatch("removeFromStorage", picture.url);
         },
 
