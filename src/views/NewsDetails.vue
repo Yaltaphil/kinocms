@@ -433,7 +433,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.card -->
                 </div>
 
                 <div class="card-footer">
@@ -461,22 +460,15 @@ export default {
     components: { PictureCard, KinoCard, BaseSwitcher, InputDate },
 
     props: {
-        news: {
-            type: Object,
-            requred: true,
-            default: () => {},
-        },
-        newsId: {
-            type: String,
+        newsIndex: {
+            type: Number,
             required: true,
         },
     },
 
     data() {
         return {
-            currentNews: this.news,
-            dirty: false,
-            loading: true,
+            currentNews: { type: Object, default: {} },
         };
     },
 
@@ -497,17 +489,42 @@ export default {
         },
     },
 
+    beforeRouteEnter(to, from, next) {
+        next((vm) => vm.loadNewsElementFromDatabase());
+    },
+
     methods: {
         submitNewsDetails() {
-            this.$root.$emit("news-submitted", this.currentNews);
+            this.saveNewsElementToDatabase().then(() => {
+                this.$successMessage("Новость записана");
+            });
+
             this.$router.push({
                 name: "News",
             });
         },
 
+        async saveNewsElementToDatabase() {
+            const payload = this.currentNews;
+            const path = `/news/${this.newsIndex}`;
+
+            return await this.$store.dispatch("writeToDatabase", {
+                payload,
+                path,
+            });
+        },
+
+        async loadNewsElementFromDatabase() {
+            const path = `/news/${this.newsIndex}`;
+
+            const result = await this.$store.dispatch("readFromDatabase", path);
+            if (result) this.currentNews = result;
+        },
+
         mainPictureChanged(target) {
             this.currentNews.mainPic.url = target.url;
         },
+
         mainPictureChangedUA(target) {
             this.currentNews.mainPicUA.url = target.url;
         },
@@ -553,6 +570,7 @@ export default {
             if (target.url == CONFIG.PICTURE_PLUG_URL) return;
             await this.$store.dispatch("removeFromStorage", target.url);
         },
+
         removePictureUA: async function (target) {
             this.currentNews.pics = this.currentNews.pics.filter(
                 (element) => element != target

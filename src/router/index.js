@@ -52,7 +52,7 @@ const routes = [
     },
 
     {
-        path: "/news/:newsId",
+        path: "/news/:newsIndex",
         name: "NewsDetails",
         props: true,
         meta: { layout: "main" },

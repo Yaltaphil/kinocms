@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="story in news" :key="story.id">
+                            <tr v-for="(story, index) in news" :key="story.id">
                                 <td>{{ story.title }}</td>
                                 <td>
                                     {{
@@ -40,7 +40,7 @@
                                 <td>
                                     <button
                                         class="btn btn-info mx-3"
-                                        @click="editItem(story)"
+                                        @click="editItem(index)"
                                     >
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -59,6 +59,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import CONFIG from "@/config.js";
 
@@ -74,10 +75,6 @@ export default {
 
     beforeRouteEnter(to, from, next) {
         next((vm) => vm.loadNewsFromDatabase());
-    },
-
-    created() {
-        this.$root.$on("news-submitted", (data) => this.newsSubmitted(data));
     },
 
     methods: {
@@ -96,29 +93,21 @@ export default {
                 "/news"
             );
             if (result) this.news = result;
-            console.log("news loaded", result);
         },
 
         removeItem(target) {
             this.news = this.news.filter((item) => item != target);
+            // TODO добавить удаление всех картинок по url
             this.saveNewsToDatabase().then(() =>
                 this.$successMessage("Новость удалена")
             );
         },
 
-        editItem(target) {
+        editItem(index) {
             this.$router.push({
                 name: "NewsDetails",
-                params: { newsId: target.id, news: target },
+                params: { newsIndex: index },
             });
-        },
-
-        async newsSubmitted(story) {
-            const index = this.news.findIndex((item) => item.id === story.id);
-            this.news[index] = story;
-            this.saveNewsToDatabase().then(() =>
-                this.$successMessage("Новость успешно записана")
-            );
         },
 
         addItem() {
@@ -161,6 +150,7 @@ export default {
                     descriptionUA: "/img/uploadPicture.jpg",
                 },
             });
+
             this.saveNewsToDatabase().then(() =>
                 this.$successMessage("Новость добавлена")
             );

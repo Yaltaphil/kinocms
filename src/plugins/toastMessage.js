@@ -11,7 +11,7 @@ export default {
                 message,
                 type: "success",
                 position: "bottom-right",
-                duration: 7000,
+                duration: 5000,
             });
         };
         Vue.prototype.$errorMessage = function (message) {
