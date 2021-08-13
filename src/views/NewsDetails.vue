@@ -454,7 +454,7 @@ import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
 import { required } from "vuelidate/lib/validators";
 import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
-import InputDate from "@/components/base/InputDate.vue"; 
+import InputDate from "@/components/base/InputDate.vue";
 
 export default {
     components: { PictureCard, KinoCard, BaseSwitcher, InputDate },
@@ -468,7 +468,7 @@ export default {
 
     data() {
         return {
-            currentNews: { type: Object, default: {} },
+            currentNews: {},
         };
     },
 
@@ -492,7 +492,7 @@ export default {
     beforeRouteEnter(to, from, next) {
         next((vm) => vm.loadNewsElementFromDatabase());
     },
-
+  
     methods: {
         submitNewsDetails() {
             this.saveNewsElementToDatabase().then(() => {
@@ -537,6 +537,7 @@ export default {
             );
             this.currentNews.mainPic.url = CONFIG.PICTURE_PLUG_URL;
         },
+
         removeMainPicUA: async function () {
             if (this.currentNews.mainPicUA.url == CONFIG.PICTURE_PLUG_URL)
                 return;

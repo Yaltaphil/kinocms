@@ -95,12 +95,27 @@ export default {
             if (result) this.news = result;
         },
 
-        removeItem(target) {
-            this.news = this.news.filter((item) => item != target);
-            // TODO добавить удаление всех картинок по url
+        async removeItem(target) {
+            // удаление всех картинок по url
+            Promise.all([
+                this.removePictureFromStorage(target.mainPic),
+                this.removePictureFromStorage(target.mainPicUA),
+                target.pics.forEach((item) =>
+                    this.removePictureFromStorage(item)
+                ),
+                target.picsUA.forEach((item) =>
+                    this.removePictureFromStorage(item)
+                ),
+            ]).then(() => {
+                this.news = this.news.filter((item) => item != target);
+            });
             this.saveNewsToDatabase().then(() =>
                 this.$successMessage("Новость удалена")
             );
+        },
+
+        async removePictureFromStorage(picture) {
+            await this.$store.dispatch("removeFromStorage", picture.url);
         },
 
         editItem(index) {
@@ -140,14 +155,14 @@ export default {
                 trailerLink: "http://youtube.com",
                 trailerLinkUA: "http://youtube.com",
                 SEO: {
-                    url: "/img/uploadPicture.jpg",
-                    urlUA: "/img/uploadPicture.jpg",
-                    title: "/img/uploadPicture.jpg",
-                    titleUA: "/img/uploadPicture.jpg",
+                    url: "type url here",
+                    urlUA: "type url here",
+                    title: "title",
+                    titleUA: "title",
                     keywords: "key words here",
                     keywordsUA: "key words here",
-                    description: "/img/uploadPicture.jpg",
-                    descriptionUA: "/img/uploadPicture.jpg",
+                    description: "description",
+                    descriptionUA: "description",
                 },
             });
 
