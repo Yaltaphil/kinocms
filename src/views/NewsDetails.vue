@@ -454,7 +454,7 @@ import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
 import { required } from "vuelidate/lib/validators";
 import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
-import InputDate from "@/components/base/InputDate.vue";
+import InputDate from "@/components/base/InputDate.vue"; 
 
 export default {
     components: { PictureCard, KinoCard, BaseSwitcher, InputDate },
