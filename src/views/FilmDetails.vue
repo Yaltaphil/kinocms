@@ -528,7 +528,7 @@
                         class="btn btn-info col-4 offset-1"
                         @click="submitFilmDetails"
                     >
-                        Сохранить
+                        Сохранить и выйти
                     </button>
                     <button
                         type="button"
@@ -619,7 +619,8 @@ export default {
         },
 
         resetCurrentFilm() {
-            this.loadFilmsElementFromDatabase();
+            // maybe clear some garbage
+            this.$router.go();
             this.$successMessage("Базовая версия восстановлена");
         },
 
