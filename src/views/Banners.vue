@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- first block -->
         <div class="card mt-3">
             <div class="card-header text-center font-weight-bold">
                 На главной верх
@@ -8,7 +7,9 @@
             <div class="row p-3">
                 <small class="col-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-6 text-right">
-                    <BaseSwitcher v-model="bannersSwitch"></BaseSwitcher>
+                    <BaseSwitcher
+                        v-model="settings.bannersSwitch"
+                    ></BaseSwitcher>
                 </div>
             </div>
             <div class="row pl-3">
@@ -44,9 +45,9 @@
 
             <div class="row my-5 p-3">
                 <div class="col">
-                    <base-speed-select v-model="bannersRotationSpeed">
+                    <BaseSpeedSelect v-model="settings.bannersRotationSpeed">
                         Скорость вращения:
-                    </base-speed-select>
+                    </BaseSpeedSelect>
                 </div>
                 <div class="col-6">
                     <base-button @click="saveBanners"> Сохранить </base-button>
@@ -54,7 +55,6 @@
             </div>
         </div>
 
-        <!-- second block -->
         <div class="card mt-3">
             <div class="card-header text-center font-weight-bold">
                 Сквозной баннер на заднем фоне
@@ -111,7 +111,9 @@
             <div class="row p-3">
                 <small class="col-6 text-muted">Pазмер 1000x190</small>
                 <div class="col-6 text-right">
-                    <BaseSwitcher v-model="actionsSwitch"></BaseSwitcher>
+                    <BaseSwitcher
+                        v-model="settings.actionsSwitch"
+                    ></BaseSwitcher>
                 </div>
             </div>
 
@@ -147,7 +149,7 @@
 
             <div class="row p-3">
                 <div class="col">
-                    <base-speed-select v-model="actionsRotationSpeed">
+                    <base-speed-select v-model="settings.actionsRotationSpeed">
                         Скорость вращения:
                     </base-speed-select>
                 </div>
@@ -160,6 +162,7 @@
 </template>
 
 <script>
+import CONFIG from "@/config.js";
 import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
@@ -175,117 +178,149 @@ export default {
         PictureCard,
         BaseSwitcher,
     },
-    data: function () {
+
+    data() {
         return {
-            //banners
+            settings: {
+                // bannersSwitch: true,
+                // bannersRotationSpeed: "5",
+                // actionsSwitch: true,
+                // actionsRotationSpeed: "5",
+            },
             banners: [],
-            bannersSwitch: true,
-            bannersRotationSpeed: "5",
-            //bg
+
             bigBanner: {
-                URL: "/img/uploadPicture.jpg",
+                url: CONFIG.PICTURE_PLUG_URL,
                 bannerType: "Фото на фоне",
             },
-            //actions
             actions: [],
-            actionsSwitch: true,
-            actionsRotationSpeed: "5",
         };
     },
 
-    mounted() {
+    // beforeRouteEnter(to, from, next) {
+    //     next((vm) => {
+    //         vm.fetchBanners();
+    //         vm.fetchActions();
+    //         vm.fetchBigBanner();
+    //         vm.loadSettings();
+    //     });
+    // },
+
+    watch: {
+        settings: {
+            handler() {
+                this.saveSettings();
+            },
+            deep: true,
+        },
+    },
+
+    beforeMount() {
         this.fetchBanners();
         this.fetchActions();
         this.fetchBigBanner();
+        this.loadSettings();
     },
+
     methods: {
-        //banner methods
-        addBanner: function () {
+        async loadSettings() {
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/settings"
+            );
+            if (result) {
+                this.settings = result;
+            }
+        },
+
+        saveSettings() {
+            const payload = this.settings;
+            const path = "/settings";
+            this.$store.dispatch("writeToDatabase", { payload, path });
+        },
+
+        addBanner() {
             this.banners.push({
-                id: Math.round(10000000 * Math.random()),
-                URL: "/img/uploadPicture.jpg",
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
                 text: "описание",
             });
         },
 
-        removeBanner: async function (target) {
+        async removeBanner(target) {
             this.banners = this.banners.filter((element) => element != target);
-            if (target.URL == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", target.URL);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
         },
 
-        changeBanner: function (card) {
+        changeBanner(card) {
             const index = this.banners.findIndex((item) => item.id == card.id);
             if (index != -1) this.banners[index] = card;
         },
 
-        saveBanners: function () {
+        saveBanners() {
             const payload = this.banners;
             const path = "/banners";
             this.$store.dispatch("writeToDatabase", { payload, path });
             this.$successMessage("Данные сохранены");
         },
-        fetchBanners: async function () {
+
+        async fetchBanners() {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
                 "/banners"
             );
             if (result) this.banners = result;
-            console.log("banners loaded", result);
         },
 
-        //background banner methods
-        changeBigBanner: async function () {
+        async changeBigBanner() {
             const path = "/bigban";
             const payload = this.bigBanner;
             await this.$store.dispatch("writeToDatabase", { payload, path });
-            console.log("saved");
         },
-        removeBigBanner: async function () {
-            this.bigBanner.URL = "/img/uploadPicture.jpg";
+
+        async removeBigBanner() {
+            this.bigBanner.url = CONFIG.PICTURE_PLUG_URL;
             this.bigBanner.bannerType = "Просто фон";
         },
-        fetchBigBanner: async function () {
+
+        async fetchBigBanner() {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
                 "/bigban"
             );
             if (result) {
-                this.bigBanner.URL = result.URL;
+                this.bigBanner.url = result.url;
                 this.bigBanner.bannerType = result.bannerType;
             }
-            console.log("Big banner loaded", result);
         },
 
-        //actions methods
-        addAction: function () {
+        addAction() {
             const action = {
-                id: Math.round(10000000 * Math.random()),
-                URL: "/img/uploadPicture.jpg",
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
             };
             this.actions.push(action);
-            console.log(this.actions);
-        },
-        removeAction: async function (target) {
-            this.actions = this.actions.filter((element) => element != target);
-            if (target.URL == "/img/uploadPicture.jpg") return;
-            await this.$store.dispatch("removeFromStorage", target.URL);
         },
 
-        saveActions: function () {
-            const payload = this.actions;
-            const path = "/actions";
-            this.$store.dispatch("writeToDatabase", { payload, path });
-            console.log("saved");
+        async removeAction(target) {
+            this.actions = this.actions.filter((element) => element != target);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
         },
-        fetchActions: async function () {
+
+        saveActions() {
+            const payload = this.actions;
+            const path = "/bannersActions";
+            this.$store.dispatch("writeToDatabase", { payload, path });
+        },
+
+        async fetchActions() {
             const result = await this.$store.dispatch(
                 "readFromDatabase",
-                "/actions"
+                "/bannersActions"
             );
             if (result) this.actions = result;
-
-            console.log("actions loaded", result);
         },
     },
 };

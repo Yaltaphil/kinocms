@@ -1,5 +1,5 @@
 <template>
-    <div ref="form">
+    <div v-if="currentFilm" ref="form">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Карточка фильма</h3>
@@ -451,7 +451,7 @@
                                                 v-model="currentFilm.SEO.urlUA"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="url"
+                                                placeholder=""
                                             />
                                         </div>
                                         <div
@@ -555,12 +555,13 @@ export default {
         filmIndex: {
             type: Number,
             required: true,
+            default: 0,
         },
     },
 
     data() {
         return {
-            currentFilm: {},
+            currentFilm: null,
         };
     },
 
@@ -607,6 +608,7 @@ export default {
         mainPictureChanged(target) {
             this.currentFilm.mainPic.url = target.url;
         },
+
         mainPictureChangedUA(target) {
             this.currentFilm.mainPicUA.url = target.url;
         },
@@ -614,6 +616,7 @@ export default {
         removeMainPic: async function () {
             this.currentFilm.mainPic.url = CONFIG.PICTURE_PLUG_URL;
         },
+
         removeMainPicUA: async function () {
             this.currentFilm.mainPicUA.url = CONFIG.PICTURE_PLUG_URL;
         },
@@ -630,6 +633,7 @@ export default {
                 url: CONFIG.PICTURE_PLUG_URL,
             });
         },
+
         addFilmPictureUA() {
             this.currentFilm.picsUA.push({
                 id: `${Date.now()}${Math.random()}`,
@@ -644,6 +648,7 @@ export default {
             if (target.url == CONFIG.PICTURE_PLUG_URL) return;
             await this.$store.dispatch("removeFromStorage", target.url);
         },
+
         removeFilmPictureUA: async function (target) {
             this.currentFilm.picsUA = this.currentFilm.picsUA.filter(
                 (element) => element != target

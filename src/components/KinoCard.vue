@@ -67,6 +67,7 @@ export default {
         card: {
             type: Object,
             required: true,
+            dafault: {},
         },
         showText: { type: Boolean, default: true, required: false },
     },

@@ -1,5 +1,5 @@
 <template>
-    <div ref="form">
+    <div v-if="currentNews" ref="form">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Карточка новости</h3>
@@ -468,7 +468,7 @@ export default {
 
     data() {
         return {
-            currentNews: {},
+            currentNews: null,
         };
     },
 
@@ -492,7 +492,7 @@ export default {
     beforeRouteEnter(to, from, next) {
         next((vm) => vm.loadNewsElementFromDatabase());
     },
-  
+
     methods: {
         submitNewsDetails() {
             this.saveNewsElementToDatabase().then(() => {
