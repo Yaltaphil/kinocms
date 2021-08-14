@@ -60,7 +60,6 @@ export default {
     data() {
         return {
             films: [],
-            loading: true,
         };
     },
 
@@ -108,6 +107,7 @@ export default {
                 trailerLink: "http://youtube",
                 trailerLinkUA: "http://youtube",
                 filmType: ["2D"],
+                filmTypeUA: ["2D"],
                 SEO: {
                     url: "/img/uploadPicture.jpg",
                     urlUA: "/img/uploadPicture.jpg",

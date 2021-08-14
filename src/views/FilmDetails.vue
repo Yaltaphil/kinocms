@@ -76,7 +76,210 @@
                                         placeholder="описание"
                                     ></textarea>
                                 </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Главная картинка
+                                    </div>
+                                    <div class="card-body">
+                                        <PictureCard
+                                            :card="currentFilm.mainPic"
+                                            @change-card="mainPictureChanged"
+                                            @remove-banner="removeMainPic"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Галерея картинок
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-group">
+                                            <KinoCard
+                                                v-for="pic in currentFilm.pics"
+                                                :key="pic.id"
+                                                :card="pic"
+                                                @remove-card="removeFilmPicture"
+                                            />
+                                        </div>
+                                        <button
+                                            class="
+                                                btn btn-outline-info btn-block
+                                                my-2
+                                            "
+                                            @click.prevent="addFilmPicture"
+                                        >
+                                            Добавить картинку
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Ссылка на трейлер
+                                    </div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >URL</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentFilm.trailerLink
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="type url here"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">Тип кино</div>
+                                    <div class="card-body">
+                                        <div class="col-sm-6">
+                                            <!-- checkbox -->
+                                            <div class="form-group d-flex">
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="3D"
+                                                        v-model="
+                                                            currentFilm.filmType
+                                                        "
+                                                        value="3D"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >3D</label
+                                                    >
+                                                </div>
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="2D"
+                                                        v-model="
+                                                            currentFilm.filmType
+                                                        "
+                                                        value="2D"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                        checked
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >2D</label
+                                                    >
+                                                </div>
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="IMAX"
+                                                        v-model="
+                                                            currentFilm.filmType
+                                                        "
+                                                        value="IMAX"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >IMAX</label
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">SEO</div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >URL</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentFilm.SEO.url"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Title</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentFilm.SEO.title"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="title"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Keywords</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentFilm.SEO.keywords
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="keywords"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-3
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Description</span
+                                                >
+                                            </div>
+                                            <textarea
+                                                v-model="
+                                                    currentFilm.SEO.description
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="описание"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div
                                 id="custom-tabs-two-ua"
                                 class="tab-pane fade"
@@ -108,146 +311,213 @@
                                         placeholder="опис"
                                     ></textarea>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Главная картинка
+                                    </div>
+                                    <div class="card-body">
+                                        <PictureCard
+                                            :card="currentFilm.mainPicUA"
+                                            @change-card="mainPictureChangedUA"
+                                            @remove-banner="removeMainPicUA"
+                                        />
+                                    </div>
+                                </div>
 
-                <div class="card">
-                    <div class="card-header">Главная картинка</div>
-                    <div class="card-body">
-                        <PictureCard
-                            :card="currentFilm.mainPic"
-                            @change-card="mainPictureChanged"
-                            @remove-banner="removeMainPic"
-                        />
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">Галерея картинок</div>
-                    <div class="card-body">
-                        <div class="card-group">
-                            <KinoCard
-                                v-for="pic in currentFilm.pics"
-                                :key="pic.id"
-                                :card="pic"
-                                @remove-card="removeFilmPicture"
-                            />
-                        </div>
-                        <button
-                            class="btn btn-outline-info btn-block my-2"
-                            @click.prevent="addFilmPicture"
-                        >
-                            Добавить картинку
-                        </button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">Ссылка на трейлер</div>
-                    <div class="card-body">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">URL</span>
-                            </div>
-                            <input
-                                v-model="currentFilm.trailerLink"
-                                type="text"
-                                class="form-control"
-                                placeholder="type url here"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">Тип кино</div>
-                    <div class="card-body">
-                        <div class="col-sm-6">
-                            <!-- checkbox -->
-                            <div class="form-group d-flex">
-                                <div class="form-check mx-3">
-                                    <input
-                                        id="3D"
-                                        v-model="currentFilm.filmType"
-                                        value="3D"
-                                        class="form-check-input"
-                                        type="checkbox"
-                                    />
-                                    <label class="form-check-label">3D</label>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Галерея картинок
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-group">
+                                            <KinoCard
+                                                v-for="pic in currentFilm.picsUA"
+                                                :key="pic.id"
+                                                :card="pic"
+                                                @remove-card="
+                                                    removeFilmPictureUA
+                                                "
+                                            />
+                                        </div>
+                                        <button
+                                            class="
+                                                btn btn-outline-info btn-block
+                                                my-2
+                                            "
+                                            @click.prevent="addFilmPictureUA"
+                                        >
+                                            Добавить картинку
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="form-check mx-3">
-                                    <input
-                                        id="2D"
-                                        v-model="currentFilm.filmType"
-                                        value="2D"
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        checked
-                                    />
-                                    <label class="form-check-label">2D</label>
+                                <div class="card">
+                                    <div class="card-header">
+                                        Ссылка на трейлер
+                                    </div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >URL</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentFilm.trailerLinkUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="type url here"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-check mx-3">
-                                    <input
-                                        id="IMAX"
-                                        v-model="currentFilm.filmType"
-                                        value="IMAX"
-                                        class="form-check-input"
-                                        type="checkbox"
-                                    />
-                                    <label class="form-check-label">IMAX</label>
+                                <div class="card">
+                                    <div class="card-header">Тип кино</div>
+                                    <div class="card-body">
+                                        <div class="col-sm-6">
+                                            <!-- checkbox -->
+                                            <div class="form-group d-flex">
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="3D"
+                                                        v-model="
+                                                            currentFilm.filmTypeUA
+                                                        "
+                                                        value="3D"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >3D</label
+                                                    >
+                                                </div>
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="2D"
+                                                        v-model="
+                                                            currentFilm.filmTypeUA
+                                                        "
+                                                        value="2D"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                        checked
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >2D</label
+                                                    >
+                                                </div>
+                                                <div class="form-check mx-3">
+                                                    <input
+                                                        id="IMAX"
+                                                        v-model="
+                                                            currentFilm.filmTypeUA
+                                                        "
+                                                        value="IMAX"
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                    />
+                                                    <label
+                                                        class="form-check-label"
+                                                        >IMAX</label
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header">SEO</div>
+                                    <div class="card-body">
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >URL</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="currentFilm.SEO.urlUA"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="url"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Title</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentFilm.SEO.titleUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="title"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-1
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Keywords</span
+                                                >
+                                            </div>
+                                            <input
+                                                v-model="
+                                                    currentFilm.SEO.keywordsUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="keywords"
+                                            />
+                                        </div>
+                                        <div
+                                            class="
+                                                input-group input-group-sm
+                                                mb-3
+                                            "
+                                        >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    >Description</span
+                                                >
+                                            </div>
+                                            <textarea
+                                                v-model="
+                                                    currentFilm.SEO
+                                                        .descriptionUA
+                                                "
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="описание"
+                                            ></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">SEO</div>
-                    <div class="card-body">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">URL</span>
-                            </div>
-                            <input
-                                v-model="currentFilm.SEO.url"
-                                type="text"
-                                class="form-control"
-                                placeholder="url"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Title</span>
-                            </div>
-                            <input
-                                v-model="currentFilm.SEO.title"
-                                type="text"
-                                class="form-control"
-                                placeholder="title"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Keywords</span>
-                            </div>
-                            <input
-                                v-model="currentFilm.SEO.keywords"
-                                type="text"
-                                class="form-control"
-                                placeholder="keywords"
-                            />
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"
-                                    >Description</span
-                                >
-                            </div>
-                            <textarea
-                                v-model="currentFilm.SEO.description"
-                                type="text"
-                                class="form-control"
-                                placeholder="описание"
-                            ></textarea>
                         </div>
                     </div>
                 </div>
@@ -337,9 +607,15 @@ export default {
         mainPictureChanged(target) {
             this.currentFilm.mainPic.url = target.url;
         },
+        mainPictureChangedUA(target) {
+            this.currentFilm.mainPicUA.url = target.url;
+        },
 
         removeMainPic: async function () {
             this.currentFilm.mainPic.url = CONFIG.PICTURE_PLUG_URL;
+        },
+        removeMainPicUA: async function () {
+            this.currentFilm.mainPicUA.url = CONFIG.PICTURE_PLUG_URL;
         },
 
         resetCurrentFilm() {
@@ -353,6 +629,12 @@ export default {
                 url: CONFIG.PICTURE_PLUG_URL,
             });
         },
+        addFilmPictureUA() {
+            this.currentFilm.picsUA.push({
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
+            });
+        },
 
         removeFilmPicture: async function (target) {
             this.currentFilm.pics = this.currentFilm.pics.filter(
@@ -361,7 +643,13 @@ export default {
             if (target.url == CONFIG.PICTURE_PLUG_URL) return;
             await this.$store.dispatch("removeFromStorage", target.url);
         },
+        removeFilmPictureUA: async function (target) {
+            this.currentFilm.picsUA = this.currentFilm.picsUA.filter(
+                (element) => element != target
+            );
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
+        },
     },
 };
 </script>
-// TODO RU UA versions // TODO dirty state control on exit
