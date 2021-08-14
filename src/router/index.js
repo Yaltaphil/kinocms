@@ -28,7 +28,7 @@ const routes = [
             import(/*webpackChunkName: "films" */ "../views/Films.vue"),
     },
     {
-        path: "/films/:filmId",
+        path: "/films/:filmIndex",
         name: "FilmDetails",
         props: true,
         meta: { layout: "main" },

@@ -10,7 +10,7 @@
                     v-for="film in filmsNow"
                     :key="film.id"
                     :film="film"
-                    @film-clicked="editFilm"
+                    @film-clicked="editFilm(film)"
                     @remove-film="removeFilm"
                 />
             </div>
@@ -31,7 +31,7 @@
                     v-for="film in filmsAhead"
                     :key="film.id"
                     :film="film"
-                    @film-clicked="editFilm"
+                    @film-clicked="editFilm(film)"
                     @remove-film="removeFilm"
                 />
             </div>
@@ -49,7 +49,6 @@
 <script>
 import CONFIG from "@/config.js";
 import FilmCard from "@/components/FilmCard.vue";
-import { eventBus } from "../main.js";
 
 export default {
     name: "Films",
@@ -75,12 +74,6 @@ export default {
         },
     },
 
-    created() {
-        eventBus.$on("film-submitted", (data) => this.filmSubmitted(data));
-    },
-
-    mounted() {},
-
     beforeRouteEnter(to, from, next) {
         next((vm) => vm.loadFilmsFromDatabase());
     },
@@ -89,7 +82,6 @@ export default {
         addFilm(inShowcase) {
             const newFilm = {
                 id: `${Date.now()}${Math.random()}`,
-                url: CONFIG.PICTURE_PLUG_URL,
                 inShowcaseNow: inShowcase, //сейчас в показе
                 title: "новый фильм",
                 titleUA: "новый фильм",
@@ -128,30 +120,41 @@ export default {
                 },
             };
             this.films.push(newFilm);
+            this.saveFilmsToDatabase();
         },
 
-        editFilm(target) {
+        editFilm(film) {
+            const index = this.films.findIndex((item) => item == film);
             this.$router.push({
                 name: "FilmDetails",
-                params: { filmId: target.id, film: target },
+                params: { filmIndex: index },
             });
         },
 
-        async filmSubmitted(film) {
-            const index = this.films.findIndex((item) => item.id === film.id);
-            if (index != -1) {
-                this.films[index] = film;
-                this.saveFilmsToDatabase().then(() =>
-                    this.$successMessage("Фильм успешно записан")
+        async removeFilm(film) {
+            if (!window.confirm("Удалить фильм?")) return;
+            // удаление всех картинок по url
+            this.removePictureFromStorage(film.mainPic);
+            this.removePictureFromStorage(film.mainPicUA);
+            if (film.pics) {
+                film.pics.forEach((item) =>
+                    this.removePictureFromStorage(item)
                 );
             }
-        },
-
-        async removeFilm(film) {
+            if (film.picsUA) {
+                film.picsUA.forEach((item) =>
+                    this.removePictureFromStorage(item)
+                );
+            }
             this.films = this.films.filter((item) => item != film);
             this.saveFilmsToDatabase().then(() =>
-                this.$successMessage("Фильм успешно удален")
+                this.$successMessage("Фильм удален")
             );
+        },
+
+        async removePictureFromStorage(picture) {
+            if (picture.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", picture.url);
         },
 
         async saveFilmsToDatabase() {

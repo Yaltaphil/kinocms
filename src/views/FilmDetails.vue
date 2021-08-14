@@ -60,21 +60,8 @@
                                         v-model="currentFilm.title"
                                         type="text"
                                         class="form-control"
-                                        :class="{
-                                            'is-invalid':
-                                                this.$v.currentFilm.title
-                                                    .$invalid,
-                                        }"
                                         placeholder="название фильма"
                                     />
-                                    <small
-                                        v-if="
-                                            !this.$v.currentFilm.title.$required
-                                        "
-                                        class="invalid-feedback"
-                                        >Поле некорректно, исправьте,
-                                        пожалуйста.
-                                    </small>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
@@ -124,7 +111,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.card -->
                 </div>
 
                 <div class="card">
@@ -168,7 +154,7 @@
                                 v-model="currentFilm.trailerLink"
                                 type="text"
                                 class="form-control"
-                                placeholder="url"
+                                placeholder="type url here"
                             />
                         </div>
                     </div>
@@ -270,7 +256,6 @@
                     <button
                         type="button"
                         class="btn btn-info col-4 offset-1"
-                        :disabled="hasFormError"
                         @click="submitFilmDetails"
                     >
                         Сохранить
@@ -292,48 +277,21 @@
 import CONFIG from "@/config.js";
 import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
-import { eventBus } from "../main.js";
-import lodash from "lodash";
-import { required } from "vuelidate/lib/validators";
 
 export default {
     components: { PictureCard, KinoCard },
 
     props: {
-        film: {
-            type: Object,
-            requred: true,
-            default: () => {},
-        },
-        filmId: {
-            type: String,
+        filmIndex: {
+            type: Number,
             required: true,
         },
     },
 
     data() {
         return {
-            currentFilm: this.film,
-            filmDefaultState: this.film,
-            dirty: false,
-            loading: true,
+            currentFilm: {},
         };
-    },
-
-    computed: {
-        hasFormError() {
-            return this.$v.currentFilm.$invalid;
-        },
-    },
-
-    created() {
-        this.filmDefaultState = lodash.cloneDeep(this.film);
-    },
-
-    validations: {
-        currentFilm: {
-            title: { required },
-        },
     },
 
     // beforeRouteLeave(to, from, next) {
@@ -345,12 +303,34 @@ export default {
     //     }
     // },
 
+    beforeRouteEnter(to, from, next) {
+        next((vm) => vm.loadFilmsElementFromDatabase());
+    },
+
     methods: {
+        async loadFilmsElementFromDatabase() {
+            const path = `/films/${this.filmIndex}`;
+
+            const result = await this.$store.dispatch("readFromDatabase", path);
+            if (result) this.currentFilm = result;
+        },
+
         submitFilmDetails() {
-            if (this.hasFormError) return;
-            eventBus.$emit("film-submitted", this.currentFilm);
+            this.saveFilmsElementToDatabase().then(() => {
+                this.$successMessage("Фильм записан");
+            });
             this.$router.push({
                 name: "Films",
+            });
+        },
+
+        async saveFilmsElementToDatabase() {
+            const payload = this.currentFilm;
+            const path = `/films/${this.filmIndex}`;
+
+            return await this.$store.dispatch("writeToDatabase", {
+                payload,
+                path,
             });
         },
 
@@ -363,7 +343,7 @@ export default {
         },
 
         resetCurrentFilm() {
-            this.currentFilm = lodash.cloneDeep(this.filmDefaultState);
+            this.loadFilmsElementFromDatabase();
             this.$successMessage("Базовая версия восстановлена");
         },
 
