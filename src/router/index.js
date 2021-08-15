@@ -67,6 +67,16 @@ const routes = [
             import(/*webpackChunkName: "actions" */ "../views/Actions.vue"),
     },
     {
+        path: "/actions/:actionIndex",
+        name: "ActionDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "actions" */ "../views/ActionDetails.vue"
+            ),
+    },
+    {
         path: "/pages",
         name: "Pages",
         meta: { layout: "main" },
