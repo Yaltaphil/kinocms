@@ -15,7 +15,7 @@
             <div class="col">
                 <div class="row ml-3">
                     <div class="col">
-                        <label id="_uid" class="btn btn-info px-4">
+                        <label id="_uid" class="btn btn-outline-info px-4">
                             Добавить
                             <input
                                 id="_uid"

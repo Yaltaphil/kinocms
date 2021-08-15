@@ -12,6 +12,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "stats" */ "../views/Stats.vue"),
     },
+
     {
         path: "/banners",
         name: "Banners",
@@ -19,6 +20,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "banners" */ "../views/Banners.vue"),
     },
+
     {
         path: "/films",
         name: "Films",
@@ -27,6 +29,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/Films.vue"),
     },
+
     {
         path: "/films/:filmIndex",
         name: "FilmDetails",
@@ -43,6 +46,29 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "cinemas" */ "../views/Cinemas.vue"),
     },
+
+    {
+        path: "/cinemas/:cinemaIndex",
+        name: "CinemaDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "cinemas" */ "../views/CinemaDetails.vue"
+            ),
+    },
+
+    {
+        path: "/cinemas/:cinemaIndex/:hallIndex",
+        name: "CinemaHallDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "cinemas" */ "../views/CinemaHallDetails.vue"
+            ),
+    },
+
     {
         path: "/news",
         name: "News",
@@ -59,6 +85,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/NewsDetails.vue"),
     },
+
     {
         path: "/actions",
         name: "Actions",
@@ -66,6 +93,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "actions" */ "../views/Actions.vue"),
     },
+
     {
         path: "/actions/:actionIndex",
         name: "ActionDetails",
@@ -76,6 +104,7 @@ const routes = [
                 /*webpackChunkName: "actions" */ "../views/ActionDetails.vue"
             ),
     },
+
     {
         path: "/pages",
         name: "Pages",
@@ -83,6 +112,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "pages" */ "../views/Pages.vue"),
     },
+
     {
         path: "/users",
         name: "Users",
@@ -90,6 +120,7 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "users" */ "../views/Users.vue"),
     },
+
     {
         path: "/mailing",
         name: "Mailing",
@@ -97,12 +128,14 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "mailing" */ "../views/Mailing.vue"),
     },
+
     {
         path: "/",
         name: "Home",
         component: Home,
         meta: { layout: "main" },
     },
+
     {
         path: "/404",
         alias: "*",
