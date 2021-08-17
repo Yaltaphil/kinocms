@@ -1,5 +1,5 @@
 <template>
-    <div v-if="cinema" ref="form" >
+    <div v-if="cinema" ref="form">
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Карточка кинотеатра</h3>

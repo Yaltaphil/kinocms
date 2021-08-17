@@ -122,6 +122,15 @@ const routes = [
     },
 
     {
+        path: "/users/:userIndex",
+        name: "UserDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(/*webpackChunkName: "users" */ "../views/UserDetails.vue"),
+    },
+
+    {
         path: "/mailing",
         name: "Mailing",
         meta: { layout: "main" },

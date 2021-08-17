@@ -113,7 +113,7 @@ export default {
                 );
             }
             this.actions = this.actions.filter((item) => item != target);
-            this.saveNewsToDatabase().then(() =>
+            this.saveActionsToDatabase().then(() =>
                 this.$successMessage("Новость удалена")
             );
         },

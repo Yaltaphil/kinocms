@@ -1,7 +1,7 @@
 <template>
     <aside class="main-sidebar sidebar-dark-gray elevation-3">
         <router-link to="/" class="brand-link text-center text-xl">
-            <span class="brand-text justify-content-center">KinoCMS</span>
+            <span class="brand-text justify-content-center">KinoCMS </span>
         </router-link>
 
         <div class="sidebar">
@@ -57,7 +57,7 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/users" class="nav-link">
+                        <router-link :to="{ name: 'Users' }" class="nav-link">
                             <i class="nav-icon fas fa-user-friends mr-3"></i>
                             <p>Пользователи</p>
                         </router-link>
