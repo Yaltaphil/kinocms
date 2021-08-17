@@ -55,6 +55,11 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer mt-5">
+                    <button class="btn btn-info btn-lg btn-block" @click="back">
+                        Вернуться
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -77,6 +82,12 @@ export default {
     },
 
     methods: {
+        back() {
+            this.$router.push({
+                name: "Home",
+            });
+        },
+
         async saveNewsToDatabase() {
             const payload = this.news;
             const path = "/news";

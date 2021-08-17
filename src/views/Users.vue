@@ -29,7 +29,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(user, index) in users" :key="user._id">
+                            <tr
+                                v-for="user in usersToShowOnPage"
+                                :key="user._id"
+                            >
                                 <td>{{ user._id }}</td>
                                 <td>
                                     {{
@@ -63,7 +66,7 @@
                                 <td>
                                     <button
                                         class="btn btn-info mx-3"
-                                        @click="editItem(index)"
+                                        @click="editItem(user)"
                                     >
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -78,6 +81,35 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card-footer clearfix">
+                    <ul class="pagination pagination float-left">
+                        <li
+                            class="page-item"
+                            :class="page <= 1 ? 'disabled' : ''"
+                        >
+                            <a class="page-link" @click="page--">&laquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                                >{{ `${page} из ${quantityOfPages}` }}
+                            </a>
+                        </li>
+
+                        <li
+                            class="page-item"
+                            :class="page >= quantityOfPages ? 'disabled' : ''"
+                        >
+                            <a class="page-link" @click="page++">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-footer mt-5">
+                    <button class="btn btn-info btn-lg btn-block" @click="back">
+                        Вернуться
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -90,6 +122,8 @@ export default {
     data() {
         return {
             users: [],
+            page: 1,
+            perPage: 8,
         };
     },
 
@@ -98,8 +132,15 @@ export default {
     },
 
     computed: {
-        fullName(index) {
-            return `${this.users[index].name} ${this.users[index].surname}`;
+        quantityOfPages() {
+            return Math.ceil(this.users.length / this.perPage);
+        },
+
+        usersToShowOnPage() {
+            return this.users.slice(
+                (this.page - 1) * this.perPage,
+                this.page * this.perPage
+            );
         },
     },
 
@@ -129,7 +170,10 @@ export default {
             );
         },
 
-        editItem(index) {
+        editItem(target) {
+            const index = this.users.findIndex(
+                (item) => item._id == target._id
+            );
             this.$router.push({
                 name: "UserDetails",
                 params: { userIndex: index },
@@ -157,6 +201,12 @@ export default {
             this.saveToDatabase().then(() =>
                 this.$successMessage("Пользователь добавлен")
             );
+        },
+
+        back() {
+            this.$router.push({
+                name: "Home",
+            });
         },
     },
 };

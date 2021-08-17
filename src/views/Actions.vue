@@ -58,6 +58,12 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card-footer mt-5">
+                    <button class="btn btn-info btn-lg btn-block" @click="back">
+                        Вернуться
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -127,6 +133,12 @@ export default {
             this.$router.push({
                 name: "ActionDetails",
                 params: { actionIndex: index },
+            });
+        },
+
+        back() {
+            this.$router.push({
+                name: "Home",
             });
         },
 

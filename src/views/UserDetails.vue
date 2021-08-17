@@ -5,12 +5,12 @@
                 <h3 class="card-title">Карточка пользователя</h3>
             </div>
 
-            <div v-if="user" class="card-body">
+            <div v-if="user" class="card-body mt-5">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Имя</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Имя</span>
                             </div>
                             <input
                                 v-model="user.name"
@@ -20,8 +20,8 @@
                             />
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Фамилия</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Фамилия</span>
                             </div>
                             <input
                                 v-model="user.surname"
@@ -31,8 +31,8 @@
                             />
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Псевдоним</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Псевдоним</span>
                             </div>
                             <input
                                 v-model="user.nick"
@@ -42,8 +42,8 @@
                             />
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">email</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">email</span>
                             </div>
                             <input
                                 v-model="user.email"
@@ -53,8 +53,8 @@
                             />
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Адрес</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Адрес</span>
                             </div>
                             <input
                                 v-model="user.adress"
@@ -65,8 +65,8 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100"
                                     >Номер карты</span
                                 >
                             </div>
@@ -78,13 +78,13 @@
                             />
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Язык</span>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Язык</span>
                             </div>
-                            <div class="form-group">
-                                <div class="form-check m-3">
+                            <div class="row form-group">
+                                <div class="form-check mx-5">
                                     <label class="form-check-label"
                                         ><input
                                             v-model="user.language"
@@ -95,7 +95,7 @@
                                         />Русский</label
                                     >
                                 </div>
-                                <div class="form-check m-3">
+                                <div class="form-check mx-5">
                                     <label class="form-check-label"
                                         ><input
                                             v-model="user.language"
@@ -110,11 +110,11 @@
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">пол</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">пол</span>
                             </div>
-                            <div class="form-group">
-                                <div class="form-check m-3">
+                            <div class="row form-group">
+                                <div class="form-check mx-5">
                                     <label class="form-check-label"
                                         ><input
                                             v-model="user.sex"
@@ -125,7 +125,7 @@
                                         />Мужской</label
                                     >
                                 </div>
-                                <div class="form-check m-3">
+                                <div class="form-check mx-5">
                                     <label class="form-check-label"
                                         ><input
                                             v-model="user.sex"
@@ -141,8 +141,8 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Телефон</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Телефон</span>
                             </div>
                             <input
                                 v-model="user.phone"
@@ -153,8 +153,8 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100"
                                     >Дата рождения</span
                                 >
                             </div>
@@ -162,8 +162,8 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Город</span>
+                            <div class="input-group-prepend w-25">
+                                <span class="input-group-text w-100">Город</span>
                             </div>
                             <input
                                 v-model="user.town"
@@ -173,9 +173,10 @@
                             />
                         </div>
                     </div>
+
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Пароль</span>
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100">Пароль</span>
                         </div>
                         <input
                             v-model="user.password"
@@ -185,8 +186,8 @@
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100"
                                 >Повторите пароль</span
                             >
                         </div>
@@ -199,12 +200,12 @@
                     </div>
                 </div>
 
-                <div class="card-footer">
+                <div class="card-footer my-5">
                     <button
-                        class="btn btn-info btn-block"
+                        class="btn btn-info btn-lg btn-block"
                         @click="submitDetails()"
                     >
-                        Сохранить
+                        Сохранить и выйти
                     </button>
                 </div>
             </div>
@@ -278,3 +279,8 @@ export default {
     },
 };
 </script>
+<style scoped>
+.input-group-prepend {
+    min-width: 25%;
+}
+</style>
