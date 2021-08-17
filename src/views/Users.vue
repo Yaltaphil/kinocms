@@ -55,7 +55,9 @@
                                     {{ user.phone }}
                                 </td>
                                 <td>
-                                    {{ `${user.name} ${user.surname}` }}
+                                    <strong>
+                                        {{ `${user.name} ${user.surname}` }}
+                                    </strong>
                                 </td>
                                 <td>
                                     {{ user.nick }}
@@ -123,7 +125,7 @@ export default {
         return {
             users: [],
             page: 1,
-            perPage: 8,
+            perPage: 9,
         };
     },
 
