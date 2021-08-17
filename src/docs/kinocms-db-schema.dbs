@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="kinocms" id="Project_1173" database="MongoDb" >
+	<comment><![CDATA[Database for kinocms learning project]]></comment>
+	<schema name="kinocms" >
+		<table name="actions" prior="Collection" >
+			<comment><![CDATA[Actions data]]></comment>
+			<column name="id" type="string" jt="12" />
+			<column name="title" type="string" jt="12" />
+			<column name="titleUA" type="string" jt="12" />
+			<column name="pics" type="array[object]" jt="4999545" >
+				<column name="id" type="string" jt="12" />
+				<column name="url" type="string" jt="12" />
+			</column>
+			<column name="mainPic" type="array[object]" jt="4999545" >
+				<column name="id" type="string" jt="12" />
+				<column name="url" type="string" jt="12" />
+			</column>
+		</table>
+		<table name="actions_0" >
+			<comment><![CDATA[Actions data]]></comment>
+			<column name="id" type="string" jt="12" />
+			<column name="title" type="string" jt="12" />
+			<column name="titleUA" type="string" jt="12" />
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout_d1e" joined_routing="y" show_column_type="y" show_relation="columns" >
+		<entity schema="kinocms" name="actions" color="C1D8EE" x="48" y="240" />
+		<entity schema="kinocms" name="actions_0" color="3986C1" x="560" y="48" />
+		<entity schema="kinocms" name="actions" column="mainPic" color="3986C1" x="288" y="416" />
+		<entity schema="kinocms" name="actions" column="pics" color="3986C1" x="288" y="288" />
+	</layout>
+</project>

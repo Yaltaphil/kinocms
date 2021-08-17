@@ -1,5 +1,5 @@
 <template>
-    <div v-if="cinema" ref="form">
+    <div v-if="cinema" ref="form" >
         <div class="card card-info">
             <div class="card-header">
                 <h3 class="card-title">Карточка кинотеатра</h3>
@@ -590,15 +590,41 @@ export default {
             });
         },
 
+        async removeItem(target) {
+            if (!window.confirm("Удалить?")) return;
+            // удаление всех картинок по url
+            this.removePictureFromStorage(target.schema);
+            this.removePictureFromStorage(target.schemaUA);
+            this.removePictureFromStorage(target.topBanner);
+            this.removePictureFromStorage(target.topBannerUA);
+            if (target.pics) {
+                target.pics.forEach((item) =>
+                    this.removePictureFromStorage(item)
+                );
+            }
+            if (target.picsUA) {
+                target.picsUA.forEach((item) =>
+                    this.removePictureFromStorage(item)
+                );
+            }
+            this.cinema.halls = this.cinema.halls.filter(
+                (item) => item != target
+            );
+            this.saveCinema().then(() => this.$successMessage("Зал удален"));
+        },
+
+        async removePictureFromStorage(picture) {
+            if (picture.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", picture.url);
+        },
+
         addHall() {
             const newHall = {
                 id: `${Date.now()}${Math.random()}`,
-
-                hallNumber: "1",
+                hallNumber: "№",
                 date: Date.now(),
                 description: "",
                 descriptionUA: "",
-
                 schema: {
                     url: CONFIG.PICTURE_PLUG_URL,
                 },

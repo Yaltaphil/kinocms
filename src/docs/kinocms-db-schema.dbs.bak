@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="kinocms" id="Project_1173" database="MongoDb" >
+	<comment><![CDATA[Database for kinocms learning project]]></comment>
+	<schema name="kinocms" >
+		<table name="actions" prior="Collection" >
+			<comment><![CDATA[Actions data]]></comment>
+			<column name="id" type="string" jt="12" />
+			<column name="title" type="string" jt="12" />
+			<column name="titleUA" type="string" jt="12" />
+		</table>
+		<table name="actions_0" >
+			<comment><![CDATA[Actions data]]></comment>
+			<column name="id" type="string" jt="12" />
+			<column name="title" type="string" jt="12" />
+			<column name="titleUA" type="string" jt="12" />
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_d1e" joined_routing="y" show_relation="columns" >
+		<entity schema="kinocms" name="actions" color="C1D8EE" x="320" y="224" />
+		<entity schema="kinocms" name="actions_0" color="3986C1" x="656" y="192" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[DbSchema is disconnected from the database.
+New designed tables will be saved to project file and later can be create in any database.
+Right-click the layout to create new tables. Drop this callout from its context menu.]]></comment>
+		</callout>
+	</layout>
+</project>

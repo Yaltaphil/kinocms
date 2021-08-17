@@ -12,7 +12,7 @@
                         mt-5
                     "
                 >
-                    <div class="input-group my-5">
+                    <div class="input-group m-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Номер зала</span>
                         </div>
@@ -76,31 +76,16 @@
                                         placeholder="описание"
                                     ></textarea>
                                 </div>
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                            >Условия</span
-                                        >
-                                    </div>
-                                    <textarea
-                                        v-model="
-                                            cinema.halls[hallIndex].conditions
-                                        "
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="описание"
-                                    ></textarea>
-                                </div>
 
                                 <div class="card">
-                                    <div class="card-header">Логотип</div>
+                                    <div class="card-header">Схема зала</div>
                                     <div class="card-body">
                                         <PictureCard
                                             :card="
-                                                cinema.halls[hallIndex].mainPic
+                                                cinema.halls[hallIndex].schema
                                             "
-                                            @change-card="mainPictureChanged"
-                                            @remove-banner="removeMainPic"
+                                            @change-card="schemaChanged"
+                                            @remove-banner="removeSchema"
                                         />
                                     </div>
                                 </div>
@@ -261,34 +246,15 @@
                                     ></textarea>
                                 </div>
 
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                            >Условия</span
-                                        >
-                                    </div>
-                                    <textarea
-                                        v-model="
-                                            cinema.halls[hallIndex].conditionsUA
-                                        "
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="описание"
-                                    ></textarea>
-                                </div>
-
                                 <div class="card">
-                                    <div class="card-header">
-                                        Главная картинка
-                                    </div>
+                                    <div class="card-header">Схема зала</div>
                                     <div class="card-body">
                                         <PictureCard
                                             :card="
-                                                cinema.halls[hallIndex]
-                                                    .mainPicUA
+                                                cinema.halls[hallIndex].schemaUA
                                             "
-                                            @change-card="mainPictureChangedUA"
-                                            @remove-banner="removeMainPicUA"
+                                            @change-card="schemaChangedUA"
+                                            @remove-banner="removeSchemaUA"
                                         />
                                     </div>
                                 </div>
@@ -434,7 +400,7 @@
                     <button
                         type="button"
                         class="btn btn-info btn-block btn-lg"
-                        @click="submitHall"
+                        @click="submitCinema"
                     >
                         Сохранить и выйти
                     </button>
@@ -445,7 +411,7 @@
 </template>
 
 <script>
-// import CONFIG from "@/config.js";
+import CONFIG from "@/config.js";
 import PictureCard from "@/components/PictureCard.vue";
 import KinoCard from "@/components/KinoCard.vue";
 
@@ -503,69 +469,69 @@ export default {
             });
         },
 
-        //     mainPictureChanged(target) {
-        //         this.cinema.halls[this.hallIndex].mainPic.url = target.url;
-        //     },
+        schemaChanged(target) {
+            this.cinema.halls[this.hallIndex].schema.url = target.url;
+        },
 
-        //     mainPictureChangedUA(target) {
-        //         this.cinema.halls[this.hallIndex].mainPicUA.url = target.url;
-        //     },
-        //     topBannerChanged(target) {
-        //         this.cinema.halls[this.hallIndex].topBanner.url = target.url;
-        //     },
+        schemaChangedUA(target) {
+            this.cinema.halls[this.hallIndex].schemaUA.url = target.url;
+        },
+        topBannerChanged(target) {
+            this.cinema.halls[this.hallIndex].topBanner.url = target.url;
+        },
 
-        //     topBannerChangedUA(target) {
-        //         this.cinema.halls[this.hallIndex].topBannerUA.url = target.url;
-        //     },
+        topBannerChangedUA(target) {
+            this.cinema.halls[this.hallIndex].topBannerUA.url = target.url;
+        },
 
-        //     removeMainPic: async function () {
-        //         this.cinema.halls[this.hallIndex].mainPic.url =
-        //             CONFIG.PICTURE_PLUG_URL;
-        //     },
+        removeSchema: async function () {
+            this.cinema.halls[this.hallIndex].schema.url =
+                CONFIG.PICTURE_PLUG_URL;
+        },
 
-        //     removeMainPicUA: async function () {
-        //         this.cinema.halls[this.hallIndex].mainPicUA.url =
-        //             CONFIG.PICTURE_PLUG_URL;
-        //     },
-        //     removeTopBanner: async function () {
-        //         this.cinema.halls[this.hallIndex].topBanner.url =
-        //             CONFIG.PICTURE_PLUG_URL;
-        //     },
+        removeSchemaUA: async function () {
+            this.cinema.halls[this.hallIndex].schemaUA.url =
+                CONFIG.PICTURE_PLUG_URL;
+        },
+        removeTopBanner: async function () {
+            this.cinema.halls[this.hallIndex].topBanner.url =
+                CONFIG.PICTURE_PLUG_URL;
+        },
 
-        //     removeTopBannerUA: async function () {
-        //         this.cinema.halls[this.hallIndex].topBannerUA.url =
-        //             CONFIG.PICTURE_PLUG_URL;
-        //     },
+        removeTopBannerUA: async function () {
+            this.cinema.halls[this.hallIndex].topBannerUA.url =
+                CONFIG.PICTURE_PLUG_URL;
+        },
 
-        //     addPicture() {
-        //         this.cinema.halls[this.hallIndex].pics.push({
-        //             id: `${Date.now()}${Math.random()}`,
-        //             url: CONFIG.PICTURE_PLUG_URL,
-        //         });
-        //     },
+        addPicture() {
+            this.cinema.halls[this.hallIndex].pics.push({
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
+            });
+        },
 
-        //     addPictureUA() {
-        //         this.cinema.halls[this.hallIndex].picsUA.push({
-        //             id: `${Date.now()}${Math.random()}`,
-        //             url: CONFIG.PICTURE_PLUG_URL,
-        //         });
-        //     },
+        addPictureUA() {
+            this.cinema.halls[this.hallIndex].picsUA.push({
+                id: `${Date.now()}${Math.random()}`,
+                url: CONFIG.PICTURE_PLUG_URL,
+            });
+        },
 
-        //     removePicture: async function (target) {
-        //         this.cinema.halls[this.hallIndex].pics = this.cinema.halls[
-        //             this.hallIndex
-        //         ].pics.filter((element) => element != target);
-        //         if (target.url == CONFIG.PICTURE_PLUG_URL) return;
-        //         await this.$store.dispatch("removeFromStorage", target.url);
-        //     },
+        removePicture: async function (target) {
+            this.cinema.halls[this.hallIndex].pics = this.cinema.halls[
+                this.hallIndex
+            ].pics.filter((element) => element != target);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
+        },
 
-        //     removePictureUA: async function (target) {
-        //         this.cinema.halls[this.hallIndex].picsUA = this.cinema.halls[
-        //             this.hallIndex
-        //         ].picsUA.filter((element) => element != target);
-        //         if (target.url == CONFIG.PICTURE_PLUG_URL) return;
-        //         await this.$store.dispatch("removeFromStorage", target.url);
-        //     },
+        removePictureUA: async function (target) {
+            this.cinema.halls[this.hallIndex].picsUA = this.cinema.halls[
+                this.hallIndex
+            ].picsUA.filter((element) => element != target);
+            if (target.url == CONFIG.PICTURE_PLUG_URL) return;
+            await this.$store.dispatch("removeFromStorage", target.url);
+        },
     },
 };
 </script>

@@ -193,3 +193,5 @@ export default {
     },
 };
 </script>
+
+// TODO Full removal of nested pictures
