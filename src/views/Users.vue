@@ -6,6 +6,7 @@
                     <h2 class="card-title">
                         Всего пользователей: {{ users.length }}
                     </h2>
+
                     <div class="card-tools">
                         <button class="btn btn-lg btn-info" @click="addItem">
                             <i class="fas fa-plus"></i>
@@ -16,6 +17,22 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table text-nowrap">
                         <thead>
+
+                            <div class="input-group m-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Найти</span>
+                                </div>
+                                <input
+                                    v-model="searchPattern"
+                                    type="text"
+                                    class="form-control"
+                                />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"
+                                        >найдено {{ foundUsers.length }}</span
+                                    >
+                                </div>
+                            </div>
                             <tr>
                                 <th>ID</th>
                                 <th>Дата регистрации</th>
@@ -126,6 +143,8 @@ export default {
             users: [],
             page: 1,
             perPage: 9,
+            searchPattern: "",
+            towns: ["Одесса", "Ялта", "Сан-Франциско"]
         };
     },
 
@@ -135,11 +154,35 @@ export default {
 
     computed: {
         quantityOfPages() {
-            return Math.ceil(this.users.length / this.perPage);
+            return Math.ceil(this.foundUsers.length / this.perPage);
+        },
+
+        foundUsers() {
+            return this.users.filter(
+                (item) =>
+                    item.name
+                        .toString()
+                        .includes(this.searchPattern.toString()) ||
+                    item.surname
+                        .toString()
+                        .includes(this.searchPattern.toString()) ||
+                    item.nick
+                        .toString()
+                        .includes(this.searchPattern.toString()) ||
+                    item.phone
+                        .toString()
+                        .includes(this.searchPattern.toString()) ||
+                    item.town
+                        .toString()
+                        .includes(this.searchPattern.toString()) ||
+                    item.email
+                        .toString()
+                        .includes(this.searchPattern.toString())
+            );
         },
 
         usersToShowOnPage() {
-            return this.users.slice(
+            return this.foundUsers.slice(
                 (this.page - 1) * this.perPage,
                 this.page * this.perPage
             );
