@@ -21,7 +21,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">Фамилия</span>
+                                <span class="input-group-text w-100"
+                                    >Фамилия</span
+                                >
                             </div>
                             <input
                                 v-model="user.surname"
@@ -32,7 +34,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">Псевдоним</span>
+                                <span class="input-group-text w-100"
+                                    >Псевдоним</span
+                                >
                             </div>
                             <input
                                 v-model="user.nick"
@@ -43,7 +47,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">email</span>
+                                <span class="input-group-text w-100"
+                                    >email</span
+                                >
                             </div>
                             <input
                                 v-model="user.email"
@@ -54,7 +60,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">Адрес</span>
+                                <span class="input-group-text w-100"
+                                    >Адрес</span
+                                >
                             </div>
                             <input
                                 v-model="user.adress"
@@ -142,7 +150,9 @@
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">Телефон</span>
+                                <span class="input-group-text w-100"
+                                    >Телефон</span
+                                >
                             </div>
                             <input
                                 v-model="user.phone"
@@ -163,14 +173,22 @@
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend w-25">
-                                <span class="input-group-text w-100">Город</span>
+                                <span class="input-group-text w-100"
+                                    >Город</span
+                                >
                             </div>
-                            <input
+
+                            <select
                                 v-model="user.town"
-                                type="text"
                                 class="form-control"
-                                placeholder="город "
-                            />
+                            >
+                                <option
+                                    v-for="town in towns"
+                                    :key="town"
+                                    :value="town"
+                                    :label="town"
+                                ></option>
+                            </select>
                         </div>
                     </div>
 
@@ -231,6 +249,7 @@ export default {
     data() {
         return {
             user: null,
+            towns: ["Одесса", "Ялта", "Сан-Франциско", "другой"],
         };
     },
 

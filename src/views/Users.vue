@@ -17,10 +17,14 @@
                 <div class="card-body table-responsive p-0">
                     <table class="table text-nowrap">
                         <thead>
-
                             <div class="input-group m-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Найти</span>
+                                    <span class="input-group-text"
+                                        ><i
+                                            class="fa fa-search"
+                                            aria-hidden="true"
+                                        ></i
+                                    ></span>
                                 </div>
                                 <input
                                     v-model="searchPattern"
@@ -28,6 +32,12 @@
                                     class="form-control"
                                 />
                                 <div class="input-group-append">
+                                    <button
+                                        class="btn btn-default"
+                                        @click="searchPattern = ''"
+                                    >
+                                        Очистить поиск
+                                    </button>
                                     <span class="input-group-text"
                                         >найдено {{ foundUsers.length }}</span
                                     >
@@ -102,7 +112,7 @@
                 </div>
 
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination float-left">
+                    <ul class="pagination float-left">
                         <li
                             class="page-item"
                             :class="page <= 1 ? 'disabled' : ''"
@@ -144,7 +154,6 @@ export default {
             page: 1,
             perPage: 9,
             searchPattern: "",
-            towns: ["Одесса", "Ялта", "Сан-Франциско"]
         };
     },
 
@@ -186,6 +195,12 @@ export default {
                 (this.page - 1) * this.perPage,
                 this.page * this.perPage
             );
+        },
+    },
+
+    watch: {
+        foundUsers() {
+            this.page = 1;
         },
     },
 
@@ -246,6 +261,8 @@ export default {
             this.saveToDatabase().then(() =>
                 this.$successMessage("Пользователь добавлен")
             );
+
+            this.searchPattern = "";
         },
 
         back() {
