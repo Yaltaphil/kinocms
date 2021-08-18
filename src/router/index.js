@@ -139,6 +139,14 @@ const routes = [
     },
 
     {
+        path: "/mailing/choose",
+        name: "ChooseUsers",
+        meta: { layout: "main" },
+        component: () =>
+            import(/*webpackChunkName: "mailing" */ "../views/ChooseUsers.vue"),
+    },
+
+    {
         path: "/",
         name: "Home",
         component: Home,
