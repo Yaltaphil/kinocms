@@ -39,6 +39,9 @@
 			<column name="phone" type="string" jt="12" />
 			<column name="birthday" prior="birthDay" type="date" jt="91" />
 			<column name="town" type="string" jt="12" />
+			<column name="choosen" type="bool" jt="16" >
+				<defo><![CDATA[false]]></defo>
+			</column>
 		</table>
 		<view name="dbs_validate_view" >
 			<view_script><![CDATA[db.createView('viewName','viewOn',[])]]></view_script>
