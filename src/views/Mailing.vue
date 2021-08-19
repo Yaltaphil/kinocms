@@ -148,7 +148,9 @@
                                     Загружен файл:
                                 </span>
                             </div>
-                            <span class="mx-3">{{ mailing.emailTemplateName }}</span>
+                            <span class="mx-3">{{
+                                mailing.emailTemplateName
+                            }}</span>
                         </div>
                         <div class="input-group my-5">
                             <div class="input-group-prepend">
@@ -156,7 +158,9 @@
                                     Шаблон используемый в текущей рассылке:
                                 </span>
                             </div>
-                            <span class="mx-3">{{ mailing.emailTemplateName }}</span>
+                            <span class="mx-3">{{
+                                mailing.selectedTemplate
+                            }}</span>
                         </div>
                         <div class="col-md-6 my-5">
                             <p>
@@ -179,13 +183,14 @@
                             <table class="table table-striped">
                                 <tr
                                     v-for="item in templatesToShow"
-                                    :key="item.fileUrl"
+                                    :key="item._id"
                                 >
                                     <td>
                                         <input
                                             id="choosing"
-                                            v-model="item.choosen"
-                                            type="checkbox"
+                                            v-model="mailing.selectedTemplate"
+                                            type="radio"
+                                            :value="item._id"
                                         />
                                     </td>
                                     <td>
@@ -228,12 +233,13 @@ export default {
                 smsQuantity: 100,
                 smsSent: 10,
                 smsText: "",
-                emailToAll: true,
+                emailToAll: "все",
                 emailTemplate: "",
                 emailTemplateName: "",
                 emailsQuantity: 129,
                 emailsSent: 16,
-                emailTemplates: [],
+                emailTemplates: [{}],
+                selectedTemplate: "",
             },
             users: [],
             choosen: [],
@@ -267,9 +273,13 @@ export default {
         templatesToShow() {
             return this.mailing.emailTemplates.slice(-5);
         },
-    },
 
-    mounted() {},
+        // selectedTemplateName() {
+        //     return this.mailing.emailTemplates.filter(
+        //         (item) => item._id === this.mailing.selectedTemplate
+        //     )[0].title;
+        // },
+    },
 
     methods: {
         chooseUsers() {
@@ -338,8 +348,9 @@ export default {
                     path,
                 }
             );
+
             this.mailing.emailTemplates.push({
-                choosen: true,
+                _id: `${Date.now()}${Math.random()}`,
                 title: file.name,
                 fileUrl: this.mailing.emailTemplate,
             });
