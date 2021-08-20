@@ -178,10 +178,7 @@
                                 >
                             </div>
 
-                            <select
-                                v-model="user.town"
-                                class="form-control"
-                            >
+                            <select v-model="user.town" class="form-control">
                                 <option
                                     v-for="town in towns"
                                     :key="town"

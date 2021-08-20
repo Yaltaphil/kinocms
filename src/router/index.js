@@ -112,6 +112,36 @@ const routes = [
         component: () =>
             import(/*webpackChunkName: "pages" */ "../views/Pages.vue"),
     },
+    {
+        path: "/pages/:pageIndex",
+        name: "MainPageDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "pages" */ "../views/MainPageDetails.vue"
+            ),
+    },
+    {
+        path: "/pages/:pageIndex",
+        name: "ContactsPageDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "pages" */ "../views/ContactsPageDetails.vue"
+            ),
+    },
+    {
+        path: "/pages/:pageIndex",
+        name: "StandartPageDetails",
+        props: true,
+        meta: { layout: "main" },
+        component: () =>
+            import(
+                /*webpackChunkName: "pages" */ "../views/StandartPageDetails.vue"
+            ),
+    },
 
     {
         path: "/users",
