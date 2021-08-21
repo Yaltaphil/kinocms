@@ -16,6 +16,27 @@
 				<column name="url" type="string" jt="12" />
 			</column>
 		</table>
+		<table name="contactsPage" prior="contact" >
+			<column name="_id" type="oid" jt="-8" />
+		</table>
+		<table name="mainPage" prior="Collection" >
+			<column name="_id" type="oid" jt="-8" />
+		</table>
+		<table name="page" prior="Collection_0" >
+			<column name="_id" type="oid" jt="-8" mandatory="y" />
+			<column name="_date" type="date" jt="91" mandatory="y" />
+			<column name="removable" type="bool" jt="16" />
+			<column name="status" type="bool" jt="16" />
+			<column name="title" type="string" jt="12" />
+			<column name="titleUA" type="string" jt="12" />
+			<column name="description" type="string" jt="12" />
+			<column name="descriptionUA" type="string" jt="12" />
+			<column name="mainPic" type="object" jt="4999544" />
+			<column name="mainPicUA" type="object" jt="4999544" />
+			<column name="pics" type="array[object]" jt="4999545" />
+			<column name="picsUA" type="array[object]" jt="4999545" />
+			<column name="SEO" type="object" jt="4999544" />
+		</table>
 		<table name="user" prior="users" >
 			<comment><![CDATA[Users of admin panel]]></comment>
 			<column name="_id" prior="id" type="string" jt="12" mandatory="y" />
@@ -47,15 +68,24 @@
 			<view_script><![CDATA[db.createView('viewName','viewOn',[])]]></view_script>
 		</view>
 	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
 	<layout name="Default Layout" id="Layout_d1e" joined_routing="y" show_column_type="y" show_relation="columns" >
 		<entity schema="kinocms" name="action" color="C1D8EE" x="48" y="80" />
+		<entity schema="kinocms" name="contactsPage" color="C1D8EE" x="416" y="880" />
+		<entity schema="kinocms" name="mainPage" color="C1D8EE" x="400" y="720" />
 		<entity schema="kinocms" name="action" column="mainPic" color="3986C1" x="256" y="224" />
+		<entity schema="kinocms" name="page" color="C1D8EE" x="80" y="736" />
 		<entity schema="kinocms" name="action" column="pics" color="3986C1" x="256" y="112" />
-		<entity schema="kinocms" name="user" color="C1D8EE" x="608" y="336" />
+		<entity schema="kinocms" name="user" color="C1D8EE" x="576" y="224" />
 		<group name="Actions" color="99CC99" >
 			<entity schema="kinocms" name="action" />
 			<entity schema="kinocms" name="action" column="pics" />
 			<entity schema="kinocms" name="action" column="mainPic" />
+		</group>
+		<group name="Pages group" color="1A3399" >
+			<entity schema="kinocms" name="page" />
+			<entity schema="kinocms" name="mainPage" />
+			<entity schema="kinocms" name="contactsPage" />
 		</group>
 	</layout>
 </project>
