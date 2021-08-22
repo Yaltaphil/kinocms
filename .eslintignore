@@ -1,1 +1,2 @@
 src/tests/*.test.js
+src/tests/*.spec.js

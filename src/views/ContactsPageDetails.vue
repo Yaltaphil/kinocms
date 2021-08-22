@@ -331,7 +331,6 @@ export default {
 
     methods: {
         changeLogo(target, index) {
-
             this.page.cinemas[index].logo.url = target.url;
         },
         removeLogo(index) {

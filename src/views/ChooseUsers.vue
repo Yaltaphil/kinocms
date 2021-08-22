@@ -133,6 +133,8 @@
 </template>
 
 <script>
+import matchingUsers from "@/utils/matchingUsers.js";
+
 export default {
     name: "ChooseUsers",
 
@@ -155,27 +157,7 @@ export default {
         },
 
         foundUsers() {
-            return this.users.filter(
-                (item) =>
-                    item.name
-                        .toString()
-                        .includes(this.searchPattern.toString()) ||
-                    item.surname
-                        .toString()
-                        .includes(this.searchPattern.toString()) ||
-                    item.nick
-                        .toString()
-                        .includes(this.searchPattern.toString()) ||
-                    item.phone
-                        .toString()
-                        .includes(this.searchPattern.toString()) ||
-                    item.town
-                        .toString()
-                        .includes(this.searchPattern.toString()) ||
-                    item.email
-                        .toString()
-                        .includes(this.searchPattern.toString())
-            );
+            return matchingUsers(this.users, this.searchPattern);
         },
 
         usersToShowOnPage() {

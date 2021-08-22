@@ -7,7 +7,7 @@ export default {
     title: "Контакты",
     titleUA: "Контакты",
     cinemas: [],
-    
+
     SEO: {
         url: "type url here",
         urlUA: "type url here",

@@ -18,7 +18,7 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-        <BaseSwitcher v-model="sw1"> Переключатель  {{ sw1 }}</BaseSwitcher>
+        <BaseSwitcher v-model="sw1"> Переключатель {{ sw1 }}</BaseSwitcher>
 
         <BaseSwitcher v-model="sw2"> Переключатель </BaseSwitcher>
         {{ sw2 }}
