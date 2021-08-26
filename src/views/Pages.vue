@@ -123,7 +123,7 @@ export default {
             }
             this.pages = this.pages.filter((item) => item != target);
             this.saveToDatabase().then(() =>
-                this.$successMessage("Новость удалена")
+                this.$successMessage("Страница удалена")
             );
         },
 

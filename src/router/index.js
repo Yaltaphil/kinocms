@@ -1,22 +1,23 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import firebase from "firebase/app";
 import Home from "../views/Home.vue";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-    // {
-    //     path: "/stats",
-    //     name: "Stats",
-    //     meta: { layout: "main" },
-    //     component: () =>
-    //         import(/*webpackChunkName: "stats" */ "../views/Stats.vue"),
-    // },
+    {
+        path: "/login",
+        name: "Login",
+        meta: { layout: "main" },
+        component: Login,
+    },
 
     {
         path: "/banners",
         name: "Banners",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "banners" */ "../views/Banners.vue"),
     },
@@ -25,7 +26,7 @@ const routes = [
         path: "/films",
         name: "Films",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/Films.vue"),
     },
@@ -34,7 +35,7 @@ const routes = [
         path: "/films/:filmIndex",
         name: "FilmDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/FilmDetails.vue"),
     },
@@ -42,7 +43,7 @@ const routes = [
     {
         path: "/cinemas",
         name: "Cinemas",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "cinemas" */ "../views/Cinemas.vue"),
     },
@@ -51,7 +52,7 @@ const routes = [
         path: "/cinemas/:cinemaIndex",
         name: "CinemaDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "cinemas" */ "../views/CinemaDetails.vue"
@@ -62,7 +63,7 @@ const routes = [
         path: "/cinemas/:cinemaIndex/:hallIndex",
         name: "CinemaHallDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "cinemas" */ "../views/CinemaHallDetails.vue"
@@ -72,7 +73,7 @@ const routes = [
     {
         path: "/news",
         name: "News",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "news" */ "../views/News.vue"),
     },
@@ -81,7 +82,7 @@ const routes = [
         path: "/news/:newsIndex",
         name: "NewsDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "films" */ "../views/NewsDetails.vue"),
     },
@@ -89,7 +90,7 @@ const routes = [
     {
         path: "/actions",
         name: "Actions",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "actions" */ "../views/Actions.vue"),
     },
@@ -98,7 +99,7 @@ const routes = [
         path: "/actions/:actionIndex",
         name: "ActionDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "actions" */ "../views/ActionDetails.vue"
@@ -108,7 +109,7 @@ const routes = [
     {
         path: "/pages",
         name: "Pages",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "pages" */ "../views/Pages.vue"),
     },
@@ -116,7 +117,7 @@ const routes = [
         path: "/pages/:pageIndex",
         name: "MainPageDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "pages" */ "../views/MainPageDetails.vue"
@@ -126,7 +127,7 @@ const routes = [
         path: "/pages/:pageIndex",
         name: "ContactsPageDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "pages" */ "../views/ContactsPageDetails.vue"
@@ -136,7 +137,7 @@ const routes = [
         path: "/pages/:pageIndex",
         name: "StandartPageDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(
                 /*webpackChunkName: "pages" */ "../views/StandartPageDetails.vue"
@@ -146,7 +147,7 @@ const routes = [
     {
         path: "/users",
         name: "Users",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "users" */ "../views/Users.vue"),
     },
@@ -155,7 +156,7 @@ const routes = [
         path: "/users/:userIndex",
         name: "UserDetails",
         props: true,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "users" */ "../views/UserDetails.vue"),
     },
@@ -163,7 +164,7 @@ const routes = [
     {
         path: "/mailing",
         name: "Mailing",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "mailing" */ "../views/Mailing.vue"),
     },
@@ -171,7 +172,7 @@ const routes = [
     {
         path: "/mailing/choose",
         name: "ChooseUsers",
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
         component: () =>
             import(/*webpackChunkName: "mailing" */ "../views/ChooseUsers.vue"),
     },
@@ -180,7 +181,7 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
-        meta: { layout: "main" },
+        meta: { layout: "main", auth: true },
     },
 
     {
@@ -196,6 +197,17 @@ const router = new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    const currentUser = firebase.auth().currentUser;
+    const authRequired = to.matched.some((record) => record.meta.auth);
+
+    if (authRequired && !currentUser) {
+        next("/login");
+    } else {
+        next();
+    }
 });
 
 export default router;

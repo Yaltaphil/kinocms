@@ -17,13 +17,13 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" role="button">
+                <a class="nav-link" role="button" @click="login">
                     <i class="nav-icon fas fa-user"></i>
                     Мой кабинет
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-slide="true" href="#" role="button">
+                <a class="nav-link" role="button" @click="logout">
                     <i class="nav-icon fas fa-power-off"></i>
                 </a>
             </li>
@@ -35,5 +35,20 @@
 <script>
 export default {
     name: "KinoNavbar",
+
+    methods: {
+        async login() {
+            await this.$store
+                .dispatch("login", {})
+                .then(() => this.$successMessage("Вы вошли в систему"));
+        },
+
+        async logout() {
+            await this.$store
+                .dispatch("logout", {})
+                .then(() => this.$successMessage("Вы вышли из системы"));
+            this.$router.push({ name: "Login" });
+        },
+    },
 };
 </script>

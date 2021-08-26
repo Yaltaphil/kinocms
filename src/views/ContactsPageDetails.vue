@@ -333,6 +333,7 @@ export default {
         changeLogo(target, index) {
             this.page.cinemas[index].logo.url = target.url;
         },
+
         removeLogo(index) {
             this.page.cinemas[index].logo.url = CONFIG.PICTURE_PLUG_URL;
         },
@@ -353,6 +354,7 @@ export default {
         delCinemaInfo() {
             if (this.page.cinemas.length >= 2) {
                 this.page.cinemas.pop();
+                this.$successMessage("Кинотеатр удален из контактов");
             }
         },
 
