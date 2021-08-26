@@ -13,7 +13,7 @@
                     data-accordion="false"
                 >
                     <li class="nav-item mt-3">
-                        <router-link to="/stats" class="nav-link">
+                        <router-link :to="{ name: `Home` }" class="nav-link">
                             <i class="nav-icon fas fa-chart-bar mr-3"></i>
                             <p>Статистика</p>
                         </router-link>

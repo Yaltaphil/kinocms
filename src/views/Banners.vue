@@ -4,53 +4,60 @@
             <div class="card-header text-center font-weight-bold">
                 На главной верх
             </div>
-            <div class="row p-3">
-                <small class="col-6 text-muted">Pазмер 1000x190</small>
-                <div class="col-6 text-right">
-                    <BaseSwitcher
-                        v-model="settings.bannersSwitch"
-                    ></BaseSwitcher>
-                </div>
-            </div>
-            <div class="row pl-3">
-                <div class="col-10">
-                    <div class="card-group">
-                        <KinoCard
-                            v-for="banner in banners"
-                            :key="banner.id"
-                            :card="banner"
-                            @remove-card="removeBanner"
-                            @change-card="changeBanner"
-                        />
+            <div class="card-body">
+                <div class="row p-3">
+                    <small class="col-6 text-muted">Pазмер 1000x190</small>
+                    <div class="col-6 text-right">
+                        <BaseSwitcher
+                            v-model="settings.bannersSwitch"
+                        ></BaseSwitcher>
                     </div>
                 </div>
-                <div
-                    class="
-                        col-2
-                        d-flex
-                        align-items-center
-                        justify-content-center
-                        my-3
-                        p-1
-                    "
+                <div class="row pl-3">
+                    <div class="col-10">
+                        <div class="card-group">
+                            <KinoCard
+                                v-for="banner in banners"
+                                :key="banner.id"
+                                :card="banner"
+                                @remove-card="removeBanner"
+                                @change-card="changeBanner"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="btn-lg btn-outline-info btn-block my-5 shadow"
+                    @click="addBanner"
                 >
-                    <button
-                        class="btn-lg btn-outline-info h-100 shadow"
-                        @click="addBanner"
-                    >
-                        Добавить
-                    </button>
-                </div>
-            </div>
+                    Добавить
+                </button>
+                <div class="row my-5 p-3">
+                    <div class="input-group col">
+                        <div class="input-group-prepend col-3">
+                            Скорость вращения:
+                        </div>
+                        <select
+                            v-model="settings.bannersRotationSpeed"
+                            class="form-control shadow mx-3 col-3"
+                        >
+                            <option
+                                v-for="time in times"
+                                :key="time"
+                                :value="time"
+                                :label="`${time} сек`"
+                            ></option>
+                        </select>
+                    </div>
 
-            <div class="row my-5 p-3">
-                <div class="col">
-                    <BaseSpeedSelect v-model="settings.bannersRotationSpeed">
-                        Скорость вращения:
-                    </BaseSpeedSelect>
-                </div>
-                <div class="col-6">
-                    <base-button @click="saveBanners"> Сохранить </base-button>
+                    <div class="col">
+                        <base-button
+                            class="btn btn-lg w-50"
+                            @click="saveBanners"
+                        >
+                            Сохранить
+                        </base-button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,54 +114,59 @@
             <div class="card-header text-center font-weight-bold">
                 На главной новости и акции
             </div>
-
-            <div class="row p-3">
-                <small class="col-6 text-muted">Pазмер 1000x190</small>
-                <div class="col-6 text-right">
-                    <BaseSwitcher
-                        v-model="settings.actionsSwitch"
-                    ></BaseSwitcher>
-                </div>
-            </div>
-
-            <div class="row pl-3">
-                <div class="col-10">
-                    <div class="card-group p-3">
-                        <KinoCard
-                            v-for="action in actions"
-                            :key="action.id"
-                            :card="action"
-                            @remove-card="removeAction"
-                        />
+            <div class="card-body">
+                <div class="row p-3">
+                    <small class="col-6 text-muted">Pазмер 1000x190</small>
+                    <div class="col-6 text-right">
+                        <BaseSwitcher
+                            v-model="settings.actionsSwitch"
+                        ></BaseSwitcher>
                     </div>
                 </div>
-                <div
-                    class="
-                        col-2
-                        d-flex
-                        align-items-center
-                        justify-content-center
-                        my-3
-                        p-1
-                    "
+                <div class="row pl-3">
+                    <div class="col-10">
+                        <div class="card-group p-3">
+                            <KinoCard
+                                v-for="action in actions"
+                                :key="action.id"
+                                :card="action"
+                                @remove-card="removeAction"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="btn-lg btn-outline-info btn-block shadow m-3"
+                    @click="addAction"
                 >
-                    <button
-                        class="btn-lg btn-outline-info h-100 shadow"
-                        @click="addAction"
-                    >
-                        Добавить
-                    </button>
-                </div>
-            </div>
+                    Добавить
+                </button>
+                <div class="row p-3 mt-5 input-group">
+                    <div class="input-group col">
+                        <div class="input-group-prepend col-3">
+                            Скорость вращения:
+                        </div>
+                        <select
+                            v-model="settings.actionsRotationSpeed"
+                            class="form-control shadow mx-3 col-3"
+                        >
+                            <option
+                                v-for="time in times"
+                                :key="time"
+                                :value="time"
+                                :label="`${time} сек`"
+                            ></option>
+                        </select>
+                    </div>
 
-            <div class="row p-3">
-                <div class="col">
-                    <base-speed-select v-model="settings.actionsRotationSpeed">
-                        Скорость вращения:
-                    </base-speed-select>
-                </div>
-                <div class="col-6">
-                    <base-button @click="saveActions"> Сохранить </base-button>
+                    <div class="col">
+                        <base-button
+                            class="btn btn-lg w-50"
+                            @click="saveActions"
+                        >
+                            Сохранить
+                        </base-button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,16 +177,15 @@
 import CONFIG from "@/config.js";
 import KinoCard from "@/components/KinoCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
-import BaseSpeedSelect from "@/components/base/BaseSpeedSelect.vue";
 import PictureCard from "@/components/PictureCard.vue";
 import BaseSwitcher from "@/components/base/BaseSwitcher.vue";
 
 export default {
     name: "Banners",
+
     components: {
         KinoCard,
         BaseButton,
-        BaseSpeedSelect,
         PictureCard,
         BaseSwitcher,
     },
@@ -182,10 +193,10 @@ export default {
     data() {
         return {
             settings: {
-                // bannersSwitch: true,
-                // bannersRotationSpeed: "5",
-                // actionsSwitch: true,
-                // actionsRotationSpeed: "5",
+                bannersSwitch: true,
+                bannersRotationSpeed: "1",
+                actionsSwitch: true,
+                actionsRotationSpeed: "1",
             },
             banners: [],
 
@@ -194,17 +205,18 @@ export default {
                 bannerType: "Фото на фоне",
             },
             actions: [],
+            times: [" 5", "15", "30"],
         };
     },
 
-    // beforeRouteEnter(to, from, next) {
-    //     next((vm) => {
-    //         vm.fetchBanners();
-    //         vm.fetchActions();
-    //         vm.fetchBigBanner();
-    //         vm.loadSettings();
-    //     });
-    // },
+    beforeRouteEnter(to, from, next) {
+        next((vm) => {
+            vm.fetchBanners();
+            vm.fetchActions();
+            vm.fetchBigBanner();
+            vm.loadSettings();
+        });
+    },
 
     watch: {
         settings: {
@@ -213,13 +225,6 @@ export default {
             },
             deep: true,
         },
-    },
-
-    beforeMount() {
-        this.fetchBanners();
-        this.fetchActions();
-        this.fetchBigBanner();
-        this.loadSettings();
     },
 
     methods: {
@@ -258,10 +263,10 @@ export default {
             if (index != -1) this.banners[index] = card;
         },
 
-        saveBanners() {
+        async saveBanners() {
             const payload = this.banners;
             const path = "/banners";
-            this.$store.dispatch("writeToDatabase", { payload, path });
+            await this.$store.dispatch("writeToDatabase", { payload, path });
             this.$successMessage("Данные сохранены");
         },
 
@@ -309,10 +314,11 @@ export default {
             await this.$store.dispatch("removeFromStorage", target.url);
         },
 
-        saveActions() {
+        async saveActions() {
             const payload = this.actions;
             const path = "/bannersActions";
-            this.$store.dispatch("writeToDatabase", { payload, path });
+            await this.$store.dispatch("writeToDatabase", { payload, path });
+            this.$successMessage("Данные сохранены");
         },
 
         async fetchActions() {

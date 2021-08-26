@@ -5,13 +5,13 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 const routes = [
-    {
-        path: "/stats",
-        name: "Stats",
-        meta: { layout: "main" },
-        component: () =>
-            import(/*webpackChunkName: "stats" */ "../views/Stats.vue"),
-    },
+    // {
+    //     path: "/stats",
+    //     name: "Stats",
+    //     meta: { layout: "main" },
+    //     component: () =>
+    //         import(/*webpackChunkName: "stats" */ "../views/Stats.vue"),
+    // },
 
     {
         path: "/banners",

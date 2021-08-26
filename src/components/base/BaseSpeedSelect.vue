@@ -1,22 +1,19 @@
 <template>
-    <div class="form-group d-flex align-items-start px-3">
-        <div class="input-group">
-            <slot class="input-group-prepend" />
-            <div class="mx-3">
-                <select
-                    v-model="choice"
-                    class="form-control shadow"
-                    @change="$emit(`change`, $event.target.value)"
-                >
-                    <option value="1" label="1 сек"></option>
-                    <option value="3" label="3 сек"></option>
-                    <option value="5" label="5 сек"></option>
-                    <option value="10" label="10 сек"></option>
-                    <option value="15" label="15 сек"></option>
-                </select>
-            </div>
-        </div>
-    </div>
+    <!-- <div class="input-group">
+            <slot class="input-group-prepend" /> -->
+    <select
+        v-model="choice"
+        class="form-control shadow mx-3"
+        @change="$emit(`change`, $event.target.value)"
+    >
+        <option
+            v-for="time in times"
+            :key="time"
+            :value="time.toString()"
+            :label="`${time} сек`"
+        ></option>
+    </select>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -29,12 +26,13 @@ export default {
     },
 
     props: {
-        selected: { type: String, default: "5" },
+        value: { type: String, default: "5" },
     },
 
     data() {
         return {
-            choice: this.selected,
+            choice: this.value,
+            times: [1, 3, 5, 10, 15],
         };
     },
 };
