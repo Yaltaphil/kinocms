@@ -1,6 +1,6 @@
 <template>
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-light navbar-white">
+    <nav class="main-header navbar navbar-expand navbar-light navbar-white" >
         <div class="container flex-column">
             <div class="row">
                 <div class="col-4">

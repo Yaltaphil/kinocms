@@ -19,5 +19,9 @@ export default {
             this.$router.push({ name: "Home" });
         },
     },
+    mounted() {
+        document.querySelector("body").classList.remove("layout-top-nav");
+        document.querySelector("body").classList.add("layout-fixed");
+    },
 };
 </script>
