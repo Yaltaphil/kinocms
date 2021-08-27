@@ -1,13 +1,15 @@
 <template>
-    <div class="wrapper">
-        <KinoNavbar />
-        <KinoSidebar />
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid">
-                    <transition mode="out-in" name="fade">
-                        <router-view />
-                    </transition>
+    <div class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+            <KinoNavbar />
+            <KinoSidebar />
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <transition mode="out-in" name="fade">
+                            <router-view />
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,11 +37,11 @@ export default {
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.5s;
+    transition: opasity 1s;
 }
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
-    transform: translateX(-15%);
+    // transform: translateX(-15%);
 }
 </style>
