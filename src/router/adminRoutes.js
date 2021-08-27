@@ -3,10 +3,19 @@ const adminRoutes = [
         path: "/admin/404",
         alias: "*",
         name: "notFound",
+        meta: { layout: "admin", auth: false },
         component: () =>
             import(
                 /* webpackChunkName: "NotFound" */ "../views/admin/NotFound.vue"
             ),
+    },
+
+    {
+        path: "/admin",
+        name: "Login",
+        meta: { layout: "admin", auth: false },
+        component: () =>
+            import(/* webpackChunkName: "login" */ "../views/admin/Login.vue"),
     },
 
     {

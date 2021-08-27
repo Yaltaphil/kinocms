@@ -1,26 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import firebase from "firebase/app";
-import Login from "../views/admin/Login.vue";
+import Main from "../views/Main.vue";
 
-import adminRoutes from "./adminRoutes";
 import siteRoutes from "./siteRoutes";
+import adminRoutes from "./adminRoutes";
 
 Vue.use(VueRouter);
 
 const mainRoutes = [
     {
-        path: "/admin",
-        name: "Login",
-        meta: { layout: "admin" },
-        component: Login,
-    },
-
-    {
         path: "/",
-        name: "Login",
-        meta: { layout: "admin" },
-        component: Login,
+        name: "main",
+        meta: { layout: "site" },
+        component: Main,
     },
 ];
 
@@ -37,7 +30,7 @@ router.beforeEach((to, from, next) => {
     const authRequired = to.matched.some((record) => record.meta.auth);
 
     if (authRequired && !currentUser) {
-        next("/admin/login");
+        next({ name: `Login` });
     } else {
         next();
     }

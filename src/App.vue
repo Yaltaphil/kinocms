@@ -1,48 +1,25 @@
 <template>
     <div id="app">
-        <div class="wrapper">
-            <KinoNavbar />
-            <KinoSidebar />
-
-            <div class="content-wrapper">
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <transition mode="out-in" name="fade">
-                            <router-view />
-                        </transition>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <component :is="layout">
+            <router-view />
+        </component>
     </div>
 </template>
 
 <script>
-// import Preloader from "@/components/Preloader.vue";
-import KinoSidebar from "@/components/KinoSidebar.vue";
-import KinoNavbar from "@/components/KinoNavbar.vue";
+import siteLayout from "@/layouts/siteLayout.vue";
+import adminLayout from "@/layouts/adminLayout.vue";
 
 export default {
     components: {
-        // Preloader,
-        KinoSidebar,
-        KinoNavbar,
+        siteLayout,
+        adminLayout,
     },
-    mounted: async function () {
-        await this.$store.dispatch("login", {});
+
+    computed: {
+        layout() {
+            return `${this.$route.meta.layout}-layout`;
+        },
     },
-    methods: {},
 };
 </script>
-
-<style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-    transition: all 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-    transform: translateX(-15%);
-}
-</style>
