@@ -41,6 +41,7 @@ export default {
             await this.$store
                 .dispatch("login", {})
                 .then(() => this.$successMessage("Вы вошли в систему"));
+            this.$router.push({ name: "Home" });
         },
 
         async logout() {
