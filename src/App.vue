@@ -22,17 +22,17 @@ export default {
         },
     },
 
-    // watch: {
-    //     layout(newValue) {
-    //         const body = document.querySelector("body");
-    //         if (newValue === "site-layout") {
-    //             body.classList.add("layout-top-nav");
-    //             body.classList.remove("layout-fixed");
-    //         } else if (newValue === "admin-layout") {
-    //             body.classList.add("layout-fixed ");
-    //             body.classList.remove("layout-topnav ");
-    //         }
-    //     },
-    // },
+    watch: {
+        layout(newValue) {
+            const body = document.querySelector("body");
+            if (newValue === "site-layout") {
+                body.classList.add("layout-top-nav");
+                body.classList.remove("layout-fixed");
+            } else if (newValue === "admin-layout") {
+                body.classList.add("layout-fixed");
+                body.classList.remove("layout-topnav");
+            }
+        },
+    },
 };
 </script>

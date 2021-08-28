@@ -77,7 +77,13 @@ export default {
 
     components: { SiteHeader, SiteFooter },
 
-    mounted() {
+    provide: {
+        changeLanguage(language) {
+            this.$store.commit("changeSiteLanguage", language);
+        },
+    },
+
+    created() {
         document.querySelector("body").classList.remove("layout-fixed");
         document.querySelector("body").classList.add("layout-top-nav");
     },

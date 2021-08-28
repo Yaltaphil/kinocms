@@ -1,6 +1,6 @@
 <template>
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-light navbar-white" >
+    <nav class="main-header navbar navbar-expand navbar-light navbar-white">
         <div class="container flex-column">
             <div class="row">
                 <div class="col-4">
@@ -152,7 +152,7 @@
                         </li>
                     </ul>
 
-                    <select id="language" name="language">
+                    <select id="language" v-model="language" name="language">
                         <option value="ru">рус</option>
                         <option value="ua">укр</option>
                     </select>
@@ -167,19 +167,17 @@
 export default {
     name: "SiteHeader",
 
-    methods: {
-        async login() {
-            await this.$store
-                .dispatch("login", {})
-                .then(() => this.$successMessage("Вы вошли в систему"));
-            this.$router.push({ name: "Home" });
-        },
+    inject: ["changeLanguage"],
 
-        async logout() {
-            await this.$store
-                .dispatch("logout", {})
-                .then(() => this.$successMessage("Вы вышли из системы"));
-            this.$router.push({ name: "Login" });
+    data() {
+        return {
+            language: "ru",
+        };
+    },
+
+    watch: {
+        language(newValue) {
+            this.changeLanguage(newValue);
         },
     },
 };
