@@ -11,6 +11,10 @@ export default {
     data() {
         return {};
     },
+    mounted() {
+        document.querySelector("body").classList.remove("layout-top-nav");
+        document.querySelector("body").classList.add("layout-fixed");
+    },
     methods: {
         async login() {
             await this.$store
@@ -18,10 +22,6 @@ export default {
                 .then(() => this.$successMessage("Вы вошли в систему"));
             this.$router.push({ name: "Home" });
         },
-    },
-    mounted() {
-        document.querySelector("body").classList.remove("layout-top-nav");
-        document.querySelector("body").classList.add("layout-fixed");
     },
 };
 </script>

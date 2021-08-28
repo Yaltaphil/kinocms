@@ -1,6 +1,16 @@
 <template>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-light navbar-white">
+        <button
+            class="btn btn-info"
+            @click="
+                {
+                    $router.push({ name: 'Login' });
+                }
+            "
+        >
+            to admin
+        </button>
         <div class="container flex-column">
             <div class="row">
                 <div class="col-4">
@@ -84,7 +94,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteAffiche' }"
                             >
-                                {{ $t("message.affiche") }}
+                                {{ $t("header.affiche") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -92,7 +102,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSchedule' }"
                             >
-                                {{ $t("message.schedule") }}
+                                {{ $t("header.schedule") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -100,7 +110,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSoon' }"
                             >
-                                {{ $t("message.soon") }}
+                                {{ $t("header.soon") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -108,7 +118,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteCinemas' }"
                             >
-                                {{ $t("message.cinemas") }}
+                                {{ $t("header.cinemas") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -116,7 +126,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteActions' }"
                             >
-                                {{ $t("message.actions") }}
+                                {{ $t("header.actions") }}
                             </router-link>
                         </li>
 
@@ -129,7 +139,7 @@
                                 aria-expanded="false"
                                 class="nav-link dropdown-toggle"
                             >
-                                {{ $t("message.about") }}</a
+                                {{ $t("header.about") }}</a
                             >
                             <ul
                                 aria-labelledby="dropdownSubMenu1"
@@ -140,7 +150,7 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("message.news") }}
+                                        {{ $t("header.news") }}
                                     </router-link>
                                 </li>
                                 <li>
@@ -148,7 +158,31 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("message.rekl") }}
+                                        {{ $t("header.rekl") }}
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link
+                                        :to="{ name: 'SiteCinemas' }"
+                                        class="dropdown-item"
+                                    >
+                                        {{ $t("header.cafe") }}
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link
+                                        :to="{ name: 'SiteCinemas' }"
+                                        class="dropdown-item"
+                                    >
+                                        {{ $t("header.mobile") }}
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link
+                                        :to="{ name: 'SiteCinemas' }"
+                                        class="dropdown-item"
+                                    >
+                                        {{ $t("header.contacts") }}
                                     </router-link>
                                 </li>
                             </ul>
@@ -169,35 +203,6 @@
 <script>
 export default {
     name: "SiteHeader",
-
-    i18n: {
-        messages: {
-            ru: {
-                message: {
-                    affiche: "Афиша",
-                    schedule: "Расписание",
-                    soon: "Скоро",
-                    cinemas: "Кинотеатры",
-                    actions: "Акции",
-                    about: "О кинотеатре",
-                    news: "Новости",
-                    rekl: "Реклама",
-                },
-            },
-            ua: {
-                message: {
-                    affiche: "Афiша",
-                    schedule: "Розклад",
-                    soon: "Скоро",
-                    cinemas: "Кінотеатри",
-                    actions: "Акції",
-                    about: "Про кінотеатр",
-                    news: "Новини",
-                    rekl: "Реклама",
-                },
-            },
-        },
-    },
 
     inject: ["changeLanguage"],
 

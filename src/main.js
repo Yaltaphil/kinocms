@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import Vuelidate from "vuelidate";
 import VueI18n from "vue-i18n";
+import languageMessages from "@/locales/ru-ua.js";
 import "./registerServiceWorker";
 
 //admin-lte
@@ -29,6 +30,7 @@ Vue.use(VueI18n);
 
 const i18n = new VueI18n({
     locale: "ru",
+    messages: languageMessages,
 });
 
 const firebaseConfig = {
