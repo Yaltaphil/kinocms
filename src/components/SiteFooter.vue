@@ -3,22 +3,22 @@
         <div class="row">
             <div class="col-md-3">
                 <h3>
-                    {{ $t("footer.mobiles") }}
+                    {{ $t("mobiles") }}
                 </h3>
             </div>
             <div class="col-md-3">
-                <h3>{{ $t("footer.affiche") }}</h3>
-                <p>{{ $t("footer.schedule") }}</p>
-                <p>{{ $t("footer.soon") }}</p>
-                <p>{{ $t("footer.cinemas") }}</p>
-                <p>{{ $t("footer.actions") }}</p>
+                <h3>{{ $t("affiche") }}</h3>
+                <p>{{ $t("schedule") }}</p>
+                <p>{{ $t("soon") }}</p>
+                <p>{{ $t("cinemas") }}</p>
+                <p>{{ $t("actions") }}</p>
             </div>
             <div class="col-md-3">
-                <h3>{{ $t("footer.about") }}</h3>
-                <p>{{ $t("footer.news") }}</p>
-                <p>{{ $t("footer.rekl") }}</p>
-                <p>{{ $t("footer.cafe") }}</p>
-                <p>{{ $t("footer.contacts") }}</p>
+                <h3>{{ $t("aboutCinema") }}</h3>
+                <p>{{ $t("news") }}</p>
+                <p>{{ $t("rekl") }}</p>
+                <p>{{ $t("cafe") }}</p>
+                <p>{{ $t("contacts") }}</p>
             </div>
             <div class="col-md-3">
                 <div class="col-6">

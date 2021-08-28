@@ -1,5 +1,4 @@
 <template>
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-light navbar-white">
         <button
             class="btn btn-info"
@@ -14,14 +13,12 @@
         <div class="container flex-column">
             <div class="row">
                 <div class="col-4">
-                    <!-- SEARCH FORM -->
                     <form class="form-inline ml-0 ml-md-3">
                         <div class="input-group input-group-sm">
                             <input
                                 class="form-control form-control-navbar"
                                 type="search"
-                                placeholder="Search"
-                                aria-label="Search"
+                                placeholder="..."
                             />
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
@@ -87,14 +84,13 @@
                     id="navbarCollapse"
                     class="collapse navbar-collapse order-3"
                 >
-                    <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <router-link
                                 class="nav-link"
                                 :to="{ name: 'SiteAffiche' }"
                             >
-                                {{ $t("header.affiche") }}
+                                {{ $t("affiche") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -102,7 +98,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSchedule' }"
                             >
-                                {{ $t("header.schedule") }}
+                                {{ $t("schedule") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -110,7 +106,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSoon' }"
                             >
-                                {{ $t("header.soon") }}
+                                {{ $t("soon") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -118,7 +114,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteCinemas' }"
                             >
-                                {{ $t("header.cinemas") }}
+                                {{ $t("cinemas") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -126,7 +122,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteActions' }"
                             >
-                                {{ $t("header.actions") }}
+                                {{ $t("actions") }}
                             </router-link>
                         </li>
 
@@ -139,7 +135,7 @@
                                 aria-expanded="false"
                                 class="nav-link dropdown-toggle"
                             >
-                                {{ $t("header.about") }}</a
+                                {{ $t("aboutCinema") }}</a
                             >
                             <ul
                                 aria-labelledby="dropdownSubMenu1"
@@ -150,7 +146,7 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("header.news") }}
+                                        {{ $t("news") }}
                                     </router-link>
                                 </li>
                                 <li>
@@ -158,7 +154,7 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("header.rekl") }}
+                                        {{ $t("rekl") }}
                                     </router-link>
                                 </li>
                                 <li>
@@ -166,7 +162,7 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("header.cafe") }}
+                                        {{ $t("cafe") }}
                                     </router-link>
                                 </li>
                                 <li>
@@ -174,7 +170,7 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("header.mobile") }}
+                                        {{ $t("mobile") }}
                                     </router-link>
                                 </li>
                                 <li>
@@ -182,14 +178,18 @@
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
                                     >
-                                        {{ $t("header.contacts") }}
+                                        {{ $t("contacts") }}
                                     </router-link>
                                 </li>
                             </ul>
                         </li>
                     </ul>
 
-                    <select id="language" v-model="language" name="language">
+                    <select
+                        id="language"
+                        v-model="$i18n.locale"
+                        name="language"
+                    >
                         <option value="ru">рус</option>
                         <option value="ua">укр</option>
                     </select>
@@ -197,26 +197,10 @@
             </div>
         </div>
     </nav>
-    <!-- /.navbar -->
 </template>
 
 <script>
 export default {
     name: "SiteHeader",
-
-    inject: ["changeLanguage"],
-
-    data() {
-        return {
-            language: "ru",
-        };
-    },
-
-    watch: {
-        language(newValue) {
-            this.changeLanguage(newValue);
-            this.$i18n.locale = newValue;
-        },
-    },
 };
 </script>

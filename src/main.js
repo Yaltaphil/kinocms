@@ -3,8 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuelidate from "vuelidate";
-import VueI18n from "vue-i18n";
-import languageMessages from "@/locales/ru-ua.js";
 import "./registerServiceWorker";
 
 //admin-lte
@@ -26,11 +24,16 @@ export const eventBus = new Vue();
 
 Vue.use(toastMessage);
 Vue.use(Vuelidate);
-Vue.use(VueI18n);
 
+//localization
+import VueI18n from "vue-i18n";
+Vue.use(VueI18n);
+import { languages, defaultLocale } from "@/locales/index.js";
+const messages = Object.assign(languages);
 const i18n = new VueI18n({
-    locale: "ru",
-    messages: languageMessages,
+    locale: defaultLocale,
+    fallbackLocale: "ru",
+    messages,
 });
 
 const firebaseConfig = {

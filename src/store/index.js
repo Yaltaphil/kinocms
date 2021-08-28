@@ -6,15 +6,9 @@ import dbOperations from "./dbOperations";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        siteLanguage: "ru",
-    },
+    state: {},
 
-    mutations: {
-        changeSiteLanguage(state, language) {
-            state.siteLanguage = language;
-        },
-    },
+    mutations: {},
 
     actions: {},
 
