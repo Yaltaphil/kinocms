@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Vuelidate from "vuelidate";
+import VueI18n from "vue-i18n";
 import "./registerServiceWorker";
 
 //admin-lte
@@ -24,6 +25,11 @@ export const eventBus = new Vue();
 
 Vue.use(toastMessage);
 Vue.use(Vuelidate);
+Vue.use(VueI18n);
+
+const i18n = new VueI18n({
+    locale: "ru",
+});
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu-sDXoABOEFYqz7BEX9eEYf111IP3zVg",
@@ -44,6 +50,7 @@ firebase.auth().onAuthStateChanged(() => {
         app = new Vue({
             router,
             store,
+            i18n,
             render: (h) => h(App),
         }).$mount("#app");
     }

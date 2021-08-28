@@ -84,7 +84,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteAffiche' }"
                             >
-                                Афиша
+                                {{ $t("message.affiche") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -92,7 +92,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSchedule' }"
                             >
-                                Расписание
+                                {{ $t("message.schedule") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -100,7 +100,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteSoon' }"
                             >
-                                Скоро
+                                {{ $t("message.soon") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -108,7 +108,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteCinemas' }"
                             >
-                                Кинотеатры
+                                {{ $t("message.cinemas") }}
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -116,7 +116,7 @@
                                 class="nav-link"
                                 :to="{ name: 'SiteActions' }"
                             >
-                                Акции
+                                {{ $t("message.actions") }}
                             </router-link>
                         </li>
 
@@ -128,7 +128,8 @@
                                 aria-haspopup="true"
                                 aria-expanded="false"
                                 class="nav-link dropdown-toggle"
-                                >О Кинотеатре</a
+                            >
+                                {{ $t("message.about") }}</a
                             >
                             <ul
                                 aria-labelledby="dropdownSubMenu1"
@@ -138,14 +139,16 @@
                                     <router-link
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
-                                        >Новости
+                                    >
+                                        {{ $t("message.news") }}
                                     </router-link>
                                 </li>
                                 <li>
                                     <router-link
                                         :to="{ name: 'SiteCinemas' }"
                                         class="dropdown-item"
-                                        >Реклама
+                                    >
+                                        {{ $t("message.rekl") }}
                                     </router-link>
                                 </li>
                             </ul>
@@ -167,6 +170,35 @@
 export default {
     name: "SiteHeader",
 
+    i18n: {
+        messages: {
+            ru: {
+                message: {
+                    affiche: "Афиша",
+                    schedule: "Расписание",
+                    soon: "Скоро",
+                    cinemas: "Кинотеатры",
+                    actions: "Акции",
+                    about: "О кинотеатре",
+                    news: "Новости",
+                    rekl: "Реклама",
+                },
+            },
+            ua: {
+                message: {
+                    affiche: "Афiша",
+                    schedule: "Розклад",
+                    soon: "Скоро",
+                    cinemas: "Кінотеатри",
+                    actions: "Акції",
+                    about: "Про кінотеатр",
+                    news: "Новини",
+                    rekl: "Реклама",
+                },
+            },
+        },
+    },
+
     inject: ["changeLanguage"],
 
     data() {
@@ -178,6 +210,7 @@ export default {
     watch: {
         language(newValue) {
             this.changeLanguage(newValue);
+            this.$i18n.locale = newValue;
         },
     },
 };
