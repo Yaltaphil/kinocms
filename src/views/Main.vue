@@ -1,44 +1,31 @@
 <template>
-    <div class="view" :style="bgStyle">
+    <div class="view container" :style="bgStyle">
+        <button
+            class="btn btn-outline-info btn-block btn-sm mb-5"
+            @click="
+                {
+                    $router.push({ name: 'Login' });
+                }
+            "
+        >
+            to admin
+        </button>
         <SiteHeader style="background-color: rgba(0, 0, 0, 0)" />
 
-        <div class="row">
-            <div class="small-box">
-                <div class="card card-image" style="background-image: url()">
-                    <div class="align-items-center rgba-black-strong">
-                        <div>
-                            <h3 class="card-title pt-2">
-                                <strong>This is the card title</strong>
-                            </h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Repellat fugiat, laboriosam,
-                                voluptatem, optio vero odio nam sit officia
-                                accusamus minus error nisi architecto nulla
-                                ipsum dignissimos. Odit sed qui, dolorum!.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <div class="d-flex flex-column">
+            <div class="box">
+              slider
             </div>
-            <div class="small-box">
-                <div class="card card-image" style="background-image: url()">
-                    <div class="align-items-center rgba-black-strong">
-                        <div>
-                            <h3 class="card-title pt-2">
-                                <strong>This is the card title</strong>
-                            </h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Repellat fugiat, laboriosam,
-                                voluptatem, optio vero odio nam sit officia
-                                accusamus minus error nisi architecto nulla
-                                ipsum dignissimos. Odit sed qui, dolorum!.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="box">
+            films
             </div>
+            <div class="box">
+              Soon
+            </div>
+            <div class="box">
+              actions
+            </div>
+
         </div>
 
         <SiteFooter style="background-color: rgba(0, 0, 0, 0)" />
