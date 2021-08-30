@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <footer class="main-footer">
+        <footer
+            class="main-footer"
+            style="background-color: rgba(255, 255, 255, 0.05)"
+        >
             <div class="row d-flex">
                 <div class="col-md-3 text-center">
                     <h3 class="my-5 d-flex flex-column">

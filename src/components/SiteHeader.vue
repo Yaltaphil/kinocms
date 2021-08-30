@@ -20,46 +20,43 @@
                 </form>
             </div>
             <div class="col-md-6">
-                    <a href="">
-                        <i
-                            class="fab fa-facebook-f fa-2x px-2"
-                            style="color: #3b5998"
-                        ></i>
-                    </a>
-                    <a
-                        href="
+                <a href="">
+                    <i
+                        class="fab fa-facebook-f fa-2x px-2"
+                        style="color: #3b5998"
+                    ></i>
+                </a>
+                <a
+                    href="
 "
-                        ><i
-                            class="fab fa-twitter fa-2x px-2"
-                            style="color: #55acee"
-                        ></i
-                    ></a>
-                    <a
-                        href="
+                    ><i
+                        class="fab fa-twitter fa-2x px-2"
+                        style="color: #55acee"
+                    ></i
+                ></a>
+                <a
+                    href="
 "
-                    >
-                        <i
-                            class="fab fa-vk fa-2x px-2"
-                            style="color: #4c75a3"
-                        ></i
-                    ></a>
-                    <a
-                        href="
+                >
+                    <i class="fab fa-vk fa-2x px-2" style="color: #4c75a3"></i
+                ></a>
+                <a
+                    href="
     "
-                        ><i
-                            class="fab fa-google fa-2x px-2"
-                            style="color: #dd4b39"
-                        ></i
-                    ></a>
-                    <a
-                        href="
+                    ><i
+                        class="fab fa-google fa-2x px-2"
+                        style="color: #dd4b39"
+                    ></i
+                ></a>
+                <a
+                    href="
                     "
-                    >
-                        <i
-                            class="fab fa-instagram fa-2x px-2"
-                            style="color: #4c75a3"
-                        ></i
-                    ></a>
+                >
+                    <i
+                        class="fab fa-instagram fa-2x px-2"
+                        style="color: #4c75a3"
+                    ></i
+                ></a>
             </div>
 
             <div class="col-md-2">
@@ -78,6 +75,7 @@
                 justify-content-between
                 align-items-center
             "
+            style="background-color: rgba(255, 255, 255, 0.05)"
         >
             <a class="navbar-brand" href="#">
                 <img
