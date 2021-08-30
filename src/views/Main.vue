@@ -39,27 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div class="small-box">
-                <div class="card card-image" style="background-image: url()">
-                    <div class="align-items-center rgba-black-strong">
-                        <div>
-                            <h3 class="card-title pt-2">
-                                <strong>This is the card title</strong>
-                            </h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Repellat fugiat, laboriosam,
-                                voluptatem, optio vero odio nam sit officia
-                                accusamus minus error nisi architecto nulla
-                                ipsum dignissimos. Odit sed qui, dolorum!.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <SiteFooter />
+        <SiteFooter style="background-color: rgba(0, 0, 0, 0)" />
     </div>
 </template>
 
