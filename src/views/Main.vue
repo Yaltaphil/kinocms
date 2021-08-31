@@ -14,21 +14,20 @@
 
         <div class="container">
             <div class="d-flex flex-column">
-                <div class="card mb-5">
+                <div v-if="settings.bannersSwitch" class="card mb-5">
                     <div
                         id="bannersCarousel"
-                        ref="bannersCarousel"
                         class="carousel slide"
-                        data-ride="carousel"
+                        data-ride="bannersCarousel"
                         :data-interval="`${bannersRotationSpeed}`"
-                        data-wrap="false"
+                        data-wrap="true"
                     >
                         <ol class="carousel-indicators">
                             <li
                                 v-for="(banner, index) in banners"
                                 :key="banner.id"
-                                :class="{ active: index === activeBanner }"
-                                data-target="#carousel1"
+                                :class="{ active: index == activeBanner }"
+                                data-target="#bannersCarousel"
                                 :data-slide-to="index"
                                 @click="activeBanner = index"
                             ></li>
@@ -38,7 +37,8 @@
                                 v-for="(banner, index) in banners"
                                 :key="banner.id"
                                 class="carousel-item"
-                                :class="{ active: activeBanner === index }"
+                                :class="{ active: activeBanner == index }"
+                                @click="activeBanner = index"
                             >
                                 <img
                                     class="d-block w-100"
@@ -46,6 +46,30 @@
                                     alt="slide"
                                 />
                             </div>
+                            <a
+                                class="carousel-control-prev"
+                                href="#bannersCarousel"
+                                role="button"
+                                data-slide="prev"
+                            >
+                                <span
+                                    class="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a
+                                class="carousel-control-next"
+                                href="#bannersCarousel"
+                                role="button"
+                                data-slide="next"
+                            >
+                                <span
+                                    class="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,20 +122,20 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div v-if="settings.actionsSwitch" class="card">
                     <div
                         id="actionsCarousel"
                         class="carousel slide"
-                        data-ride="carousel"
+                        data-ride="actionsCarousel"
                         :data-interval="`${actionsRotationSpeed}`"
-                        data-wrap="false"
+                        data-wrap="true"
                     >
                         <ol class="carousel-indicators">
                             <li
                                 v-for="(action, index) in bannersActions"
                                 :key="action.id"
-                                :class="{ active: index === activeAction }"
-                                data-target="#carousel1"
+                                :class="{ active: index == activeAction }"
+                                data-target="#actionsCarousel"
                                 :data-slide-to="index"
                                 @click="activeAction = index"
                             ></li>
@@ -121,7 +145,8 @@
                                 v-for="(action, index) in bannersActions"
                                 :key="action.id"
                                 class="carousel-item"
-                                :class="{ active: activeAction === index }"
+                                :class="{ active: activeAction == index }"
+                                @click="activeAction = index"
                             >
                                 <img
                                     class="d-block w-100"
@@ -129,6 +154,30 @@
                                     alt="slide"
                                 />
                             </div>
+                            <a
+                                class="carousel-control-prev"
+                                href="#actionsCarousel"
+                                role="button"
+                                data-slide="prev"
+                            >
+                                <span
+                                    class="carousel-control-prev-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a
+                                class="carousel-control-next"
+                                href="#actionsCarousel"
+                                role="button"
+                                data-slide="next"
+                            >
+                                <span
+                                    class="carousel-control-next-icon"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -147,7 +196,14 @@
                             border="0"
                     /></a>
                 </div>
-                <div class="card">seo</div>
+                <div
+                    class="card"
+                    style="background-color: rgba(255, 255, 255, 0.05)"
+                >
+                    лучшие фильмы найкраши кинотеатры best films интересные
+                    спектакли лучшие фильмы найкраши кинотеатры best films
+                    интересные спектакли
+                </div>
             </div>
         </div>
 
