@@ -1,8 +1,8 @@
 <template>
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column py-5">
         <div class="row headBanner"></div>
 
-        <div class="row mt-3">
+        <div class="row">
             <div class="col-4">
                 <form class="form-inline ml-0 ml-md-3">
                     <div class="input-group input-group-sm">
@@ -69,7 +69,7 @@
 
         <nav
             class="
-                navbar navbar-expand navbar-light
+                navbar navbar-expand navbar-dark
                 d-flex
                 flex-row
                 justify-content-between

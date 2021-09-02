@@ -2,7 +2,7 @@
     <div class="container bg-dark">
         <SiteHeader style="background-color: rgba(0, 0, 0, 0)" />
 
-        <div>
+        <div v-if="film">
             <div class="d-flex flex-column">
                 <div
                     class="card mb-5"
@@ -51,9 +51,9 @@
                                 {{ $t("buy") }}
                             </button>
 
-                            <p class="p-3">
+                            <h3 class="p-3">
                                 {{ title }}
-                            </p>
+                            </h3>
 
                             <p class="p-3">
                                 {{ description }}
@@ -71,13 +71,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-7">credits</div>
+                        <div class="col-md-7">
+                            <h3>film credits ...</h3>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Ducimus magni praesentium
+                                voluptatibus amet! Sint tenetur eligendi id
+                                suscipit, commodi tempora blanditiis odio,
+                                impedit quaerat animi at aliquid ipsum nobis
+                                quisquam consequuntur ipsam, in libero eius
+                                natus! Asperiores hic delectus perferendis
+                                impedit porro, commodi tempora, voluptatem qui
+                                temporibus quaerat, debitis aliquam.
+                            </p>
+                        </div>
                         <div class="col-md-5">
                             <div
                                 id="postersCarousel"
                                 class="carousel slide"
                                 data-ride="postersCarousel"
-                                data-interval="1500"
+                                data-interval="3000"
                                 data-wrap="true"
                             >
                                 <ol class="carousel-indicators">
@@ -181,7 +195,7 @@ export default {
 
     data() {
         return {
-            film: {},
+            film: null,
             activePoster: 0,
         };
     },
