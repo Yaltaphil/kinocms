@@ -25,7 +25,7 @@ const siteRoutes = [
     },
 
     {
-        path: "/affiche/:id",
+        path: "/affiche/:filmIndex",
         name: "SiteFilmDetails",
         props: true,
         meta: { layout: "site", auth: false },

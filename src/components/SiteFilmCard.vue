@@ -1,12 +1,16 @@
 <template>
     <div class="card shadow m-3 border border-success rounded">
+        <div class="card-header text-center">
+            <small>
+                <slot name="header"></slot>
+            </small>
+        </div>
         <img
             class="card-img-top img-responsive"
             :src="url"
             alt=""
             @click="$emit('film-clicked', film)"
         />
-
         <small
             class="card-footer text-center"
             @click="$emit('film-clicked', film)"
@@ -14,9 +18,14 @@
             {{ title | cut }}
         </small>
 
-        <button class="btn btn-success btn-sm" @click="$emit('buy-film', film)">
-            {{ $t("buy") }}
-        </button>
+        <div class="card-footer text-center">
+            <button
+                class="btn btn-success btn-sm"
+                @click="$emit('buy-film', film)"
+            >
+                {{ $t("buy") }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -67,7 +76,10 @@ export default {
     height: 300px;
     cursor: pointer;
     & img {
-        height: 75%;
+        height: 55%;
+    }
+    & .card-header {
+        height: 15%;
     }
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="container d-flex flex-column">
         <div class="row headBanner"></div>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-4">
                 <form class="form-inline ml-0 ml-md-3">
                     <div class="input-group input-group-sm">
@@ -77,7 +77,7 @@
             "
             style="background-color: rgba(255, 255, 255, 0.05)"
         >
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img
                     src="@/assets/logo.png"
                     width="30"

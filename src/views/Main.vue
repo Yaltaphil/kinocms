@@ -94,6 +94,7 @@
                             v-for="film in filmsNow"
                             :key="film.id"
                             :film="film"
+                            @film-clicked="filmClicked(film)"
                         />
                     </div>
                 </div>
@@ -118,6 +119,7 @@
                             v-for="film in filmsAhead"
                             :key="film.id"
                             :film="film"
+                            @film-clicked="filmClicked(film)"
                         />
                     </div>
                 </div>
@@ -308,6 +310,14 @@ export default {
                 "readFromDatabase",
                 "/bannersActions"
             );
+        },
+
+        filmClicked(target) {
+            const index = this.films.findIndex((item) => item.id == target.id);
+            this.$router.push({
+                name: "SiteFilmDetails",
+                params: { filmIndex: index },
+            });
         },
     },
 };
