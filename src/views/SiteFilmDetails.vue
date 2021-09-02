@@ -35,16 +35,109 @@
                     style="background-color: rgba(0, 0, 0, 0)"
                 >
                     <div class="card-header text-center">
-                        <h3>описание</h3>
+                        <h3></h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img
+                                :src="mainPicture"
+                                class="rounded img-fluid p-5"
+                                alt="..."
+                            />
+                        </div>
+                        <div class="col-md-7 text-center">
+                            <button class="btn btn-success px-5 my-5">
+                                {{ $t("buy") }}
+                            </button>
+
+                            <p class="p-3">
+                                {{ title }}
+                            </p>
+
+                            <p class="p-3">
+                                {{ description }}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <div
-                    class="card mb-5"
+                    class="card mb-5 p-5"
                     style="background-color: rgba(0, 0, 0, 0)"
                 >
                     <div class="card-header text-center">
-                        <h3>постеры</h3>
+                        <h3></h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7">credits</div>
+                        <div class="col-md-5">
+                            <div
+                                id="postersCarousel"
+                                class="carousel slide"
+                                data-ride="postersCarousel"
+                                data-interval="1500"
+                                data-wrap="true"
+                            >
+                                <ol class="carousel-indicators">
+                                    <li
+                                        v-for="(poster, index) in posters"
+                                        :key="poster.id"
+                                        :class="{
+                                            active: index == activePoster,
+                                        }"
+                                        data-target="#postersCarousel"
+                                        :data-slide-to="index"
+                                        @click="activePoster = index"
+                                    ></li>
+                                </ol>
+                                <div
+                                    class="carousel-inner"
+                                    style="height: 400px"
+                                >
+                                    <div
+                                        v-for="(poster, index) in posters"
+                                        :key="poster.id"
+                                        class="carousel-item"
+                                        :class="{
+                                            active: activePoster == index,
+                                        }"
+                                        @click="activePoster = index"
+                                    >
+                                        <img
+                                            class="d-block w-100"
+                                            :src="poster.url"
+                                            alt="slide"
+                                        />
+                                    </div>
+                                    <a
+                                        class="carousel-control-prev"
+                                        href="#postersCarousel"
+                                        role="button"
+                                        data-slide="prev"
+                                    >
+                                        <span
+                                            class="carousel-control-prev-icon"
+                                            aria-hidden="true"
+                                        ></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a
+                                        class="carousel-control-next"
+                                        href="#postersCarousel"
+                                        role="button"
+                                        data-slide="next"
+                                    >
+                                        <span
+                                            class="carousel-control-next-icon"
+                                            aria-hidden="true"
+                                        ></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -89,6 +182,7 @@ export default {
     data() {
         return {
             film: {},
+            activePoster: 0,
         };
     },
 
@@ -103,6 +197,22 @@ export default {
                 this.film[`trailerLink${this.langAddon}`] + params
             ).toString();
         },
+
+        mainPicture() {
+            return this.film[`mainPic${this.langAddon}`].url;
+        },
+
+        description() {
+            return this.film[`description${this.langAddon}`];
+        },
+
+        title() {
+            return this.film[`title${this.langAddon}`];
+        },
+
+        posters() {
+            return this.film[`pics${this.langAddon}`];
+        },
     },
 
     async mounted() {
@@ -112,7 +222,6 @@ export default {
     methods: {
         async loadFilm() {
             const path = `/films/${this.filmIndex}`;
-
             const result = await this.$store.dispatch("readFromDatabase", path);
             if (result) this.film = result;
         },
