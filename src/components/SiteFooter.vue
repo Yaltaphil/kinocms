@@ -2,7 +2,7 @@
     <div class="container">
         <footer
             class="main-footer"
-            style="background-color: rgba(255, 255, 255, 0.05)"
+            style="background-color: rgba(0, 0, 0, 0.33)"
         >
             <div class="row d-flex">
                 <div class="col-md-3 text-center">
@@ -117,7 +117,7 @@
                         >
                             <i
                                 class="fab fa-instagram fa-2x px-1"
-                                style="color: #4c75a3"
+                                style="color: #bc2a8d"
                             ></i
                         ></a>
                     </div>

@@ -2,8 +2,8 @@
     <div class="container d-flex flex-column py-5">
         <div class="row headBanner"></div>
 
-        <div class="row">
-            <div class="col-4">
+        <div class="row" style="background-color: rgba(0, 0, 0, 0)">
+            <div class="col-md-4">
                 <form class="form-inline ml-0 ml-md-3">
                     <div class="input-group input-group-sm">
                         <input
@@ -54,15 +54,14 @@
                 >
                     <i
                         class="fab fa-instagram fa-2x px-2"
-                        style="color: #4c75a3"
+                        style="color: #bc2a8d"
                     ></i
                 ></a>
             </div>
-
-            <div class="col-md-2">
+            <div class="col-md-2 text-light">
                 <strong>
                     <p>(999) 787-45-87</p>
-                    <p>(999) 787-45-87</p>
+                    <p>(999) 787-45-88</p>
                 </strong>
             </div>
         </div>
@@ -75,7 +74,7 @@
                 justify-content-between
                 align-items-center
             "
-            style="background-color: rgba(255, 255, 255, 0.05)"
+            style="background-color: rgba(0, 0, 0, 0.33)"
         >
             <a class="navbar-brand" href="/">
                 <img
