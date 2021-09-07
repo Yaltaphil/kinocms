@@ -52,12 +52,25 @@ const siteRoutes = [
     },
 
     {
-        path: "/cinemaDetails/:cinemaIndex",
+        path: "/cinemas/:cinemaIndex",
         name: "SiteCinemaDetails",
         meta: { layout: "site", auth: false },
         props: true,
         component: () =>
-            import(/*webpackChunkName: "cinemas" */ "../views/SiteCinemaDetails.vue"),
+            import(
+                /*webpackChunkName: "cinemas" */ "../views/SiteCinemaDetails.vue"
+            ),
+    },
+
+    {
+        path: "/cinemas/:cinemaIndex/:hallIndex",
+        name: "SiteCinemaHallDetails",
+        meta: { layout: "site", auth: false },
+        props: true,
+        component: () =>
+            import(
+                /*webpackChunkName: "cinemas" */ "../views/SiteCinemaHallDetails.vue"
+            ),
     },
 
     {

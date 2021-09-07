@@ -21,29 +21,26 @@
                             src="https://link-host.net/billing/_rootimages/banners/125.gif"
                             border="0"
                     /></a>
-                    <p class="pt-5">
-                        {{ $t("hallQuantity") }}: {{ cinema.halls.length }}
-                    </p>
+
+                    <p class="py-5">{{ $t("watchToday") }}:</p>
+
                     <button
-                        v-for="hall in cinema.halls"
-                        :key="hall.id"
+                        v-for="item in cinema.halls"
+                        :key="item.id"
                         class="btn btn-block btn-secondary"
-                        @click="hallSelected(hall)"
                     >
-                        Зал: {{ hall.hallNumber }}
+                        Сеанс {{ item.hallNumber }}
                     </button>
 
-                    <p class="pt-5">{{ $t("watchToday") }}:</p>
+                    <button class="btn btn-block btn-success">
+                        {{ $t("allSessionSchedule") }}
+                    </button>
                 </div>
                 <div class="col-md-10 p-3">
                     <div class="card-header text-center">
-                        <h3>
-                            {{ $t("schedule") }}
-                        </h3>
+                        <h3>Зал: {{ cinema.halls[hallIndex].hallNumber }}</h3>
                     </div>
-                    <button class="btn btn-info">{{ $t("schedule") }}</button>
-                    <p>tag tag tag</p>
-                    <h6>lorem</h6>
+
                     <p>
                         Lorem ipsum dolor sit, amet consectetur adipisicing
                         elit. Exercitationem dolores, tempora iure quidem sint
@@ -54,8 +51,33 @@
                         quisquam voluptatibus dolor? Cupiditate aspernatur
                         mollitia architecto!
                     </p>
-                    <h6>{{ $t("conditions") }}Условия</h6>
-                    <p>{{ conditions }}</p>
+
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Exercitationem dolores, tempora iure quidem sint
+                        illo odio veritatis! Saepe cum odio sapiente iusto
+                        nobis, fugiat, voluptatem a dignissimos ut aspernatur
+                        sint amet accusamus ad natus similique corrupti vitae
+                        consequatur aliquid est expedita dolore quibusdam
+                        quisquam voluptatibus dolor? Cupiditate aspernatur
+                        mollitia architecto!
+                    </p>
+
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Exercitationem dolores, tempora iure quidem sint
+                        illo odio veritatis! Saepe cum odio sapiente iusto
+                        nobis, fugiat, voluptatem a dignissimos ut aspernatur
+                        sint amet accusamus ad natus similique corrupti vitae
+                        consequatur aliquid est expedita dolore quibusdam
+                        quisquam voluptatibus dolor? Cupiditate aspernatur
+                        mollitia architecto!
+                    </p>
+
+                    <div class="card p-5 bg-dark">
+                        <h6 class="card-header text-center">{{$t("hallMap")}}</h6>
+                        <img :src="schema" style="height: 400px" alt="" />
+                    </div>
 
                     <div class="card-body">
                         <div class="card mb-5 bg-dark">
@@ -63,9 +85,9 @@
                                 {{ $t("photogallery") }}
                             </div>
                             <div
-                                id="cinemaPhotoCarousel"
+                                id="hallCarousel"
                                 class="carousel slide"
-                                data-ride="cinemaPhotoCarousel"
+                                data-ride="hallCarousel"
                                 :data-interval="5000"
                                 data-wrap="true"
                             >
@@ -76,7 +98,7 @@
                                         :class="{
                                             active: index == activePhoto,
                                         }"
-                                        data-target="#cinemaPhotoCarousel"
+                                        data-target="#hallCarousel"
                                         :data-slide-to="index"
                                         @click="activePhoto = index"
                                     ></li>
@@ -102,7 +124,7 @@
                                     </div>
                                     <a
                                         class="carousel-control-prev"
-                                        href="#cinemaPhotoCarousel"
+                                        href="#hallCarousel"
                                         role="button"
                                         data-slide="prev"
                                     >
@@ -114,7 +136,7 @@
                                     </a>
                                     <a
                                         class="carousel-control-next"
-                                        href="#cinemaPhotoCarousel"
+                                        href="#hallCarousel"
                                         role="button"
                                         data-slide="next"
                                     >
@@ -141,11 +163,16 @@ import SiteHeader from "@/components/SiteHeader.vue";
 import SiteFooter from "@/components/SiteFooter.vue";
 
 export default {
-    name: "SiteCinemaDetails",
+    name: "SiteCinemaHallDetails",
 
     components: { SiteHeader, SiteFooter },
 
     props: {
+        hallIndex: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
         cinemaIndex: {
             type: Number,
             required: true,
@@ -165,28 +192,35 @@ export default {
             return this.$i18n.locale === "ru" ? "" : "UA";
         },
 
-        mainPicture() {
-            return this.cinema[`mainPic${this.langAddon}`].url;
+        topBanner() {
+            return this.cinema.halls[this.hallIndex][
+                `topBanner${this.langAddon}`
+            ].url;
         },
 
-        topBanner() {
-            return this.cinema[`topBanner${this.langAddon}`].url;
+        schema() {
+            return this.cinema.halls[this.hallIndex][`schema${this.langAddon}`]
+                .url;
         },
 
         description() {
-            return this.cinema[`description${this.langAddon}`];
+            return this.cinema.halls[this.hallIndex][
+                `description${this.langAddon}`
+            ];
         },
 
         conditions() {
-            return this.cinema[`conditions${this.langAddon}`];
+            return this.cinema.halls[this.hallIndex][
+                `conditions${this.langAddon}`
+            ];
         },
 
         title() {
-            return this.cinema[`title${this.langAddon}`];
+            return this.cinema.halls[this.hallIndex][`title${this.langAddon}`];
         },
 
         pictures() {
-            return this.cinema[`pics${this.langAddon}`];
+            return this.cinema.halls[this.hallIndex][`pics${this.langAddon}`];
         },
     },
 
@@ -199,17 +233,6 @@ export default {
             const path = `/cinemas/${this.cinemaIndex}`;
             const result = await this.$store.dispatch("readFromDatabase", path);
             if (result) this.cinema = result;
-        },
-
-        hallSelected(target) {
-            const index = this.cinema.halls.findIndex(
-                (item) => item.id == target.id
-            );
-
-            this.$router.push({
-                name: "SiteCinemaHallDetails",
-                params: { cinemaIndex: this.cinemaIndex, hallIndex: index },
-            });
         },
     },
 };

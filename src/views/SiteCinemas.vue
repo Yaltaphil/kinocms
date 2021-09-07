@@ -3,6 +3,56 @@
         <SiteHeader />
 
         <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
+            <div
+                id="slider"
+                class="carousel slide"
+                data-ride="slider"
+                :data-interval="5000"
+                data-wrap="true"
+            >
+                <div class="carousel-inner" style="height: 420px">
+                    <div
+                        v-for="(item, index) in cinemas"
+                        :key="item.id"
+                        class="carousel-item"
+                        :class="{
+                            active: index == activePhoto,
+                        }"
+
+                    >
+                        <img
+                            class="d-block w-100"
+                            :src="item[`topBanner${langAddon}`].url"
+                            alt="slide"
+                        />
+                    </div>
+                    <a
+                        class="carousel-control-prev"
+                        href="#slider"
+                        role="button"
+                        data-slide="prev"
+                    >
+                        <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a
+                        class="carousel-control-next"
+                        href="#slider"
+                        role="button"
+                        data-slide="next"
+                    >
+                        <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
             <div class="card-header text-center">
                 <h3>{{ $t("cinemas") }}</h3>
             </div>
@@ -53,16 +103,13 @@ export default {
     data() {
         return {
             cinemas: [],
+            activePhoto: 0,
         };
     },
 
     computed: {
-        filmsNow() {
-            return this.cinemas.filter((item) => item.inShowcaseNow);
-        },
-
-        filmsAhead() {
-            return this.cinemas.filter((item) => !item.inShowcaseNow);
+        langAddon() {
+            return this.$i18n.locale === "ru" ? "" : "UA";
         },
     },
 
