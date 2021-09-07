@@ -52,6 +52,15 @@ const siteRoutes = [
     },
 
     {
+        path: "/cinemaDetails/:cinemaIndex",
+        name: "SiteCinemaDetails",
+        meta: { layout: "site", auth: false },
+        props: true,
+        component: () =>
+            import(/*webpackChunkName: "cinemas" */ "../views/SiteCinemaDetails.vue"),
+    },
+
+    {
         path: "/schedule",
         name: "SiteSchedule",
         meta: { layout: "site", auth: false },
