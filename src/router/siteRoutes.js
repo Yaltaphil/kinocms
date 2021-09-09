@@ -44,6 +44,17 @@ const siteRoutes = [
     },
 
     {
+        path: "/actions/:actionIndex",
+        name: "SiteActionDetails",
+        meta: { layout: "site", auth: false },
+        props: true,
+        component: () =>
+            import(
+                /*webpackChunkName: "actions" */ "../views/SiteActionDetails.vue"
+            ),
+    },
+
+    {
         path: "/cinemas",
         name: "SiteCinemas",
         meta: { layout: "site", auth: false },

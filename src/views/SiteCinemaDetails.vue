@@ -41,9 +41,12 @@
                             {{ $t("schedule") }}
                         </h3>
                     </div>
-                    <button class="btn btn-info">{{ $t("schedule") }}</button>
-                    <p>tag tag tag</p>
-                    <h6>lorem</h6>
+                    <button class="btn btn-outline-info btn-block px-5 my-5">{{ $t("schedule") }}</button>
+                    <p class="p-1">
+                        <span class="badge badge-primary mx-2 p-2">now</span>
+                        <span class="badge badge-success mx-2 p-2">new</span>
+                    </p>
+
                     <p>
                         Lorem ipsum dolor sit, amet consectetur adipisicing
                         elit. Exercitationem dolores, tempora iure quidem sint
@@ -54,7 +57,7 @@
                         quisquam voluptatibus dolor? Cupiditate aspernatur
                         mollitia architecto!
                     </p>
-                    <h6>{{ $t("conditions") }}Условия</h6>
+                    <h6>{{ $t("conditions") }}</h6>
                     <p>{{ conditions }}</p>
 
                     <div class="card-body">

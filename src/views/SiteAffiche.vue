@@ -1,6 +1,6 @@
 <template>
     <div class="container bg-dark">
-        <SiteHeader style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteHeader />
 
         <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
             <div class="card-header text-center">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <SiteFooter style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteFooter />
     </div>
 </template>
 

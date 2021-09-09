@@ -75,7 +75,9 @@
                     </p>
 
                     <div class="card p-5 bg-dark">
-                        <h6 class="card-header text-center">{{$t("hallMap")}}</h6>
+                        <h6 class="card-header text-center">
+                            {{ $t("hallMap") }}
+                        </h6>
                         <img :src="schema" style="height: 400px" alt="" />
                     </div>
 

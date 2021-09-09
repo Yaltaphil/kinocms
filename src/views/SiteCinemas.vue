@@ -18,7 +18,6 @@
                         :class="{
                             active: index == activePhoto,
                         }"
-
                     >
                         <img
                             class="d-block w-100"
