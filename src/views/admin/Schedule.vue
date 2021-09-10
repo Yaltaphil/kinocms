@@ -18,10 +18,10 @@
                     <table class="table text-nowrap">
                         <thead>
                             <tr>
-                                <th class="col-2">Дата сеанса</th>
-                                <th class="col-2">Время сеанса</th>
+                                <th class="col-1">Дата сеанса</th>
+                                <th class="col-1">Время сеанса</th>
                                 <th class="col-3">Фильм</th>
-                                <th class="col-2">Кинотеатр</th>
+                                <th class="col-3">Кинотеатр</th>
                                 <th class="col-1">Зал</th>
                                 <th class="col-1">цена</th>
                                 <th class="col-1">цена VIP</th>
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in schedule" :key="item.date">
+                            <tr v-for="item in schedule" :key="item._id">
                                 <td>
                                     <div class="form-group">
                                         <input
@@ -130,7 +130,7 @@
 
                 <div class="card-footer mt-5">
                     <button class="btn btn-info btn-lg btn-block" @click="back">
-                        Сохранить и выйти
+                        Сохранить
                     </button>
                 </div>
             </div>
@@ -219,9 +219,9 @@ export default {
             this.saveToDatabase().then(() =>
                 this.$successMessage("Расписание сохранено")
             );
-            this.$router.push({
-                name: "Home",
-            });
+            // this.$router.push({
+            //     name: "Home",
+            // });
         },
 
         selectCinema(id) {
