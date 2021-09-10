@@ -10,7 +10,7 @@
         >
             to admin
         </button>
-        <SiteHeader style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteHeader />
 
         <div class="container">
             <div class="d-flex flex-column">
@@ -211,7 +211,7 @@
             </div>
         </div>
 
-        <SiteFooter style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteFooter />
     </div>
 </template>
 

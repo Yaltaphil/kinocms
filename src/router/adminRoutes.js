@@ -198,6 +198,16 @@ const adminRoutes = [
     },
 
     {
+        path: "/admin/schedule",
+        name: "Schedule",
+        meta: { layout: "admin", auth: true },
+        component: () =>
+            import(
+                /*webpackChunkName: "schedule" */ "../views/admin/Schedule.vue"
+            ),
+    },
+
+    {
         path: "/admin/home",
         name: "Home",
         meta: { layout: "admin", auth: true },

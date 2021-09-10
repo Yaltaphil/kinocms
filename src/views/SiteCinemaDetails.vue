@@ -41,7 +41,9 @@
                             {{ $t("schedule") }}
                         </h3>
                     </div>
-                    <button class="btn btn-outline-info btn-block px-5 my-5">{{ $t("schedule") }}</button>
+                    <button class="btn btn-outline-info btn-block px-5 my-5">
+                        {{ $t("schedule") }}
+                    </button>
                     <p class="p-1">
                         <span class="badge badge-primary mx-2 p-2">now</span>
                         <span class="badge badge-success mx-2 p-2">new</span>

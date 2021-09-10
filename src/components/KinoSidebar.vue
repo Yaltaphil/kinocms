@@ -42,6 +42,15 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link
+                            :to="{ name: `Schedule` }"
+                            class="nav-link"
+                        >
+                            <i class="nav-icon fas fa-video mr-3"></i>
+                            <p>Расписание сеансов</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link :to="{ name: `News` }" class="nav-link">
                             <i class="nav-icon fas fa-exclamation mr-3"></i>
                             <p>Новости</p>
