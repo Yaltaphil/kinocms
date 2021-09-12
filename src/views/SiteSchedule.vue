@@ -39,7 +39,7 @@
                     <div class="col">
                         <select
                             id="cinemaSelector"
-                            v-model="filter.cinema"
+                            v-model="filter.cinemaId"
                             class="form-control col"
                             name="cinemaSelector"
                         >
@@ -79,7 +79,7 @@
                     <div class="col">
                         <select
                             id="hallSelector"
-                            v-model="filter.filmId"
+                            v-model="filter.hallId"
                             class="form-control"
                             name="hallSelector"
                         >
@@ -91,6 +91,15 @@
                                 :label="hall.hallNumber"
                             ></option>
                         </select>
+                    </div>
+                    <div class="col">
+                        <button
+                            class="btn btn-outline-warning"
+                            @click="clearFilters"
+                        >
+                            <i class="fa fa-filter" aria-hidden="true"></i>
+                            убрать
+                        </button>
                     </div>
                 </div>
 
@@ -106,7 +115,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in schedule" :key="item._id">
+                            <tr
+                                v-for="item in filteredSchedule"
+                                :key="item._id"
+                            >
                                 <td>
                                     {{ item.time }}
                                 </td>
@@ -162,26 +174,65 @@ export default {
 
             filter: {
                 show2D: true,
-                show3D: true,
-                showIMAX: true,
+                show3D: false,
+                showIMAX: false,
                 date: null,
-                cinema: "Все",
-                film: "Все",
-                hall: "Все",
+                cinemaId: "Все",
+                filmId: "Все",
+                hallId: "Все",
             },
         };
-    },
-
-    async mounted() {
-        this.load();
     },
 
     computed: {
         halls() {
             let arr = [];
-            this.cinemas.forEach((item) => (arr = [arr, ...item.halls]));
+            this.cinemas.forEach((item) => (arr = [...arr, ...item.halls]));
             return arr;
         },
+
+        filteredSchedule() {
+            let result = this.schedule;
+            if (this.filter.date) {
+                result = result.filter((item) => item.date == this.filter.date);
+            }
+            if (this.filter.cinemaId != "Все") {
+                result = result.filter(
+                    (item) => item.cinemaId == this.filter.cinemaId
+                );
+            }
+            if (this.filter.filmId != "Все") {
+                result = result.filter(
+                    (item) => item.filmId == this.filter.filmId
+                );
+            }
+            if (this.filter.hallId != "Все") {
+                result = result.filter(
+                    (item) => item.hallId == this.filter.hallId
+                );
+            }
+            if (this.filter.showIMAX) {
+                result = result.filter((item) =>
+                    this.getFilmById(item.filmId).filmType.includes("IMAX")
+                );
+            }
+            if (this.filter.show3D) {
+                result = result.filter((item) =>
+                    this.getFilmById(item.filmId).filmType.includes("3D")
+                );
+            }
+            if (this.filter.show2D) {
+                result = result.filter((item) =>
+                    this.getFilmById(item.filmId).filmType.includes("2D")
+                );
+            }
+
+            return result;
+        },
+    },
+
+    async mounted() {
+        this.load();
     },
 
     methods: {
@@ -229,6 +280,18 @@ export default {
                 name: "SiteCinemaDetails",
                 params: { cinemaIndex: index },
             });
+        },
+
+        clearFilters() {
+            this.filter = {
+                show2D: true,
+                show3D: false,
+                showIMAX: false,
+                date: null,
+                cinemaId: "Все",
+                filmId: "Все",
+                hallId: "Все",
+            };
         },
     },
 };
