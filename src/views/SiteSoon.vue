@@ -1,6 +1,6 @@
 <template>
     <div class="container bg-dark">
-        <SiteHeader style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteHeader />
 
         <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
             <div class="card-header text-center">
@@ -19,6 +19,7 @@
                     v-for="film in filmsAhead"
                     :key="film.id"
                     :film="film"
+                    @film-clicked="filmClicked(film)"
                 >
                     <template v-slot:header>
                         {{ $t("soon") }}
@@ -27,7 +28,7 @@
             </div>
         </div>
 
-        <SiteFooter style="background-color: rgba(0, 0, 0, 0)" />
+        <SiteFooter />
     </div>
 </template>
 
@@ -67,6 +68,14 @@ export default {
                 "readFromDatabase",
                 "/films"
             );
+        },
+
+        filmClicked(target) {
+            const index = this.films.findIndex((item) => item.id == target.id);
+            this.$router.push({
+                name: "SiteFilmDetails",
+                params: { filmIndex: index },
+            });
         },
     },
 };

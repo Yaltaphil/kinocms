@@ -17,7 +17,12 @@
     "watchSoon": "Дивіться скоро",
     "photogallery": "Фотогалерея",
     "hallQuantity": "Кiлькiсть залiв",
-    "conditions": "Умови\n",
+    "conditions": "Умови",
     "allSessionSchedule": "Розклад всіх сеансів",
-    "hallMap": "Карта залу"
+    "hallMap": "Карта залу",
+    "film": "Фільм",
+    "sessionTime": "Час сеансу",
+    "hall": "Зал",
+    "price": "Ціна",
+    "reserve": "Бронювати"
 }

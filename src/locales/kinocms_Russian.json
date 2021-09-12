@@ -14,10 +14,15 @@
     "avadaDev": "Разработка сайтов",
     "buy": "Купить билет",
     "watchToday": "Смотрите сегодня",
-    "watchSoon": "Смотрите скоро\n",
+    "watchSoon": "Смотрите скоро",
     "photogallery": "Фотогалерея",
     "hallQuantity": "Количество залов",
     "conditions": "Условия",
     "allSessionSchedule": "Расписание всех сеансов",
-    "hallMap": "Карта зала"
+    "hallMap": "Карта зала",
+    "film": "Фильм",
+    "sessionTime": "Время сеанса",
+    "hall": "Зал",
+    "price": "Цена",
+    "reserve": "Бронировать"
 }

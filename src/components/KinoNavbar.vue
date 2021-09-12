@@ -17,6 +17,12 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" role="button" href="/">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    На сайт
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" role="button" @click="login">
                     <i class="nav-icon fas fa-user"></i>
                     Мой кабинет

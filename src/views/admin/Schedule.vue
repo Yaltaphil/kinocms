@@ -157,17 +157,6 @@ export default {
         next((vm) => vm.loadFromDatabase());
     },
 
-    computed: {
-        thisDate: {
-            get: function () {
-                return new Date(this.item.date);
-            },
-            set: function (d) {
-                this.item.date = Date.parse(d);
-            },
-        },
-    },
-
     methods: {
         async loadFromDatabase() {
             let result;
@@ -219,9 +208,6 @@ export default {
             this.saveToDatabase().then(() =>
                 this.$successMessage("Расписание сохранено")
             );
-            // this.$router.push({
-            //     name: "Home",
-            // });
         },
 
         selectCinema(id) {
