@@ -103,7 +103,7 @@
                     </div>
                 </div>
 
-                <div class="card-body table-responsive" v-if="schedule">
+                <div v-if="schedule" class="card-body table-responsive">
                     <table class="table text-nowrap">
                         <thead>
                             <tr>
@@ -124,7 +124,10 @@
                                 </td>
 
                                 <td>
-                                    <router-link to="/">
+                                    <router-link
+                                        to="/schedule"
+                                        @click.native="clicked(item.filmId)"
+                                    >
                                         {{ getFilmById(item.filmId).title }}
                                     </router-link>
                                 </td>
@@ -171,16 +174,7 @@ export default {
             cinemas: [],
             films: [],
             schedule: [],
-
-            filter: {
-                show2D: true,
-                show3D: false,
-                showIMAX: false,
-                date: null,
-                cinemaId: "Все",
-                filmId: "Все",
-                hallId: "Все",
-            },
+            filter: null,
         };
     },
 
@@ -231,6 +225,10 @@ export default {
         },
     },
 
+    created() {
+        this.clearFilters();
+    },
+
     async mounted() {
         this.load();
     },
@@ -272,13 +270,11 @@ export default {
             ];
         },
 
-        clicked(target) {
-            const index = this.cinemas.findIndex(
-                (item) => item.id == target.id
-            );
+        clicked(id) {
+            const index = this.films.findIndex((item) => item.id == id);
             this.$router.push({
-                name: "SiteCinemaDetails",
-                params: { cinemaIndex: index },
+                name: "SiteFilmDetails",
+                params: { filmIndex: index },
             });
         },
 
@@ -293,6 +289,8 @@ export default {
                 hallId: "Все",
             };
         },
+
+        reserve() {},
     },
 };
 </script>
