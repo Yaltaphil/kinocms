@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-dark">
+    <div class="card" style="background-color: rgba(0, 0, 0, 0); color: white">
         <div class="card-header text-center">
             <h3>{{ $t("schedule") }}</h3>
             <div class="row">
