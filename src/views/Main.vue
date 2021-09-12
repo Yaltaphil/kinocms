@@ -10,7 +10,6 @@
         >
             to admin
         </button>
-        <SiteHeader />
 
         <div class="container">
             <div class="d-flex flex-column">
@@ -210,20 +209,16 @@
                 </div>
             </div>
         </div>
-
-        <SiteFooter />
     </div>
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader.vue";
-import SiteFooter from "@/components/SiteFooter.vue";
 import SiteFilmCard from "@/components/SiteFilmCard.vue";
 
 export default {
     name: "Main",
 
-    components: { SiteHeader, SiteFooter, SiteFilmCard },
+    components: { SiteFilmCard },
 
     data() {
         return {

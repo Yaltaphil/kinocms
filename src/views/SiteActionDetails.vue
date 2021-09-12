@@ -1,61 +1,50 @@
 <template>
-    <div class="container bg-dark">
-        <SiteHeader />
-
-        <div v-if="action" class="row my-5">
-            <div class="col-md-10 p-3">
-                <div class="card-header text-center">
-                    <h3>
-                        {{ title }}
-                    </h3>
-                </div>
-
-                <p class="p-1">
-                    <span class="badge badge-primary mx-2 p-2">now</span>
-                    <span class="badge badge-success mx-2 p-2">new</span>
-                </p>
-
-                <div class="row">
-                    <div class="col">
-                        <img
-                            :src="mainPicture"
-                            class="w-100 mb-5"
-                            style="height: 400px"
-                            alt=""
-                        />
-                    </div>
-                    <div class="col">
-                        <p>
-                            {{ description }}
-                        </p>
-                    </div>
-                </div>
+    <div v-if="action" class="row my-5">
+        <div class="col-md-10 p-3">
+            <div class="card-header text-center">
+                <h3>
+                    {{ title }}
+                </h3>
             </div>
 
-            <div class="col-md-2">
-                <a
-                    href="https://link-host.net/billing/pl.php?17382"
-                    alt="Link-Host.net"
-                    target="_blank"
-                    ><img
-                        src="https://link-host.net/billing/_rootimages/banners/160x600.gif"
-                        border="0"
-                /></a>
+            <p class="p-1">
+                <span class="badge badge-primary mx-2 p-2">now</span>
+                <span class="badge badge-success mx-2 p-2">new</span>
+            </p>
+
+            <div class="row">
+                <div class="col">
+                    <img
+                        :src="mainPicture"
+                        class="w-100 mb-5"
+                        style="height: 400px"
+                        alt=""
+                    />
+                </div>
+                <div class="col">
+                    <p>
+                        {{ description }}
+                    </p>
+                </div>
             </div>
         </div>
 
-        <SiteFooter />
+        <div class="col-md-2">
+            <a
+                href="https://link-host.net/billing/pl.php?17382"
+                alt="Link-Host.net"
+                target="_blank"
+                ><img
+                    src="https://link-host.net/billing/_rootimages/banners/160x600.gif"
+                    border="0"
+            /></a>
+        </div>
     </div>
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader.vue";
-import SiteFooter from "@/components/SiteFooter.vue";
-
 export default {
     name: "SiteCinemaDetails",
-
-    components: { SiteHeader, SiteFooter },
 
     props: {
         actionIndex: {

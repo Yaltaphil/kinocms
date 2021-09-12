@@ -1,46 +1,31 @@
 <template>
-    <div class="container bg-dark">
-        <SiteHeader />
-
-        <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
-            <div class="card-header text-center">
-                <h3>{{ $t("affiche") }}</h3>
-            </div>
-
-            <div
-                class="
-                    card-body
-                    d-flex
-                    flex-row flex-wrap
-                    justify-content-center
-                "
-            >
-                <SiteFilmCard
-                    v-for="film in filmsNow"
-                    :key="film.id"
-                    :film="film"
-                    @film-clicked="filmClicked(film)"
-                >
-                    <template v-slot:header>
-                        {{ $t("watchToday") }}
-                    </template>
-                </SiteFilmCard>
-            </div>
+    <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
+        <div class="card-header text-center">
+            <h3>{{ $t("affiche") }}</h3>
         </div>
 
-        <SiteFooter />
+        <div class="card-body d-flex flex-row flex-wrap justify-content-center">
+            <SiteFilmCard
+                v-for="film in filmsNow"
+                :key="film.id"
+                :film="film"
+                @film-clicked="filmClicked(film)"
+            >
+                <template v-slot:header>
+                    {{ $t("watchToday") }}
+                </template>
+            </SiteFilmCard>
+        </div>
     </div>
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader.vue";
-import SiteFooter from "@/components/SiteFooter.vue";
 import SiteFilmCard from "@/components/SiteFilmCard.vue";
 
 export default {
     name: "SiteAffiche",
 
-    components: { SiteHeader, SiteFooter, SiteFilmCard },
+    components: { SiteFilmCard },
 
     data() {
         return {

@@ -95,6 +95,17 @@ const siteRoutes = [
     },
 
     {
+        path: "/schedule/booking",
+        name: "SiteScheduleBooking",
+        meta: { layout: "site", auth: false },
+        prop: true,
+        component: () =>
+            import(
+                /*webpackChunkName: "schedule" */ "../views/SiteScheduleBooking.vue"
+            ),
+    },
+
+    {
         path: "/cabinet",
         name: "SiteCabinet",
         meta: { layout: "site", auth: true },

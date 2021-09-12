@@ -1,173 +1,161 @@
 <template>
-    <div class="container bg-dark">
-        <SiteHeader />
-        <div class="card bg-dark">
-            <div class="card-header text-center">
-                <h3>{{ $t("schedule") }}</h3>
-                <div class="row">
-                    <div class="form-group d-flex col">
-                        Показывать:
-                        <div class="form-check mx-3">
-                            <input
-                                id="3D"
-                                v-model="filter.show3D"
-                                class="form-check-input"
-                                type="checkbox"
-                            />
-                            <label class="form-check-label">3D</label>
-                        </div>
-                        <div class="form-check mx-3">
-                            <input
-                                id="2D"
-                                v-model="filter.show2D"
-                                class="form-check-input"
-                                type="checkbox"
-                                checked
-                            />
-                            <label class="form-check-label">2D</label>
-                        </div>
-                        <div class="form-check mx-3">
-                            <input
-                                id="IMAX"
-                                v-model="filter.showIMAX"
-                                class="form-check-input"
-                                type="checkbox"
-                            />
-                            <label class="form-check-label">IMAX</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <select
-                            id="cinemaSelector"
-                            v-model="filter.cinemaId"
-                            class="form-control col"
-                            name="cinemaSelector"
-                        >
-                            <option value="Все">Все кинотеатры</option>
-                            <option
-                                v-for="cinema in cinemas"
-                                :key="cinema.id"
-                                :value="cinema.id"
-                                :label="cinema.title"
-                            ></option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col">
+    <div class="card bg-dark">
+        <div class="card-header text-center">
+            <h3>{{ $t("schedule") }}</h3>
+            <div class="row">
+                <div class="form-group d-flex col">
+                    Показывать:
+                    <div class="form-check mx-3">
                         <input
-                            v-model="filter.date"
-                            class="form-control"
-                            type="date"
+                            id="3D"
+                            v-model="filter.show3D"
+                            class="form-check-input"
+                            type="checkbox"
                         />
+                        <label class="form-check-label">3D</label>
                     </div>
-                    <div class="col">
-                        <select
-                            id="filmSelector"
-                            v-model="filter.filmId"
-                            class="form-control"
-                            name="filmSelector"
-                        >
-                            <option value="Все">Все фильмы</option>
-                            <option
-                                v-for="film in films"
-                                :key="film.id"
-                                :value="film.id"
-                                :label="film.title"
-                            ></option>
-                        </select>
+                    <div class="form-check mx-3">
+                        <input
+                            id="2D"
+                            v-model="filter.show2D"
+                            class="form-check-input"
+                            type="checkbox"
+                            checked
+                        />
+                        <label class="form-check-label">2D</label>
                     </div>
-                    <div class="col">
-                        <select
-                            id="hallSelector"
-                            v-model="filter.hallId"
-                            class="form-control"
-                            name="hallSelector"
-                        >
-                            <option value="Все">Все залы</option>
-                            <option
-                                v-for="hall in halls"
-                                :key="hall.id"
-                                :value="hall.id"
-                                :label="hall.hallNumber"
-                            ></option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <button
-                            class="btn btn-outline-warning"
-                            @click="clearFilters"
-                        >
-                            <i class="fa fa-filter" aria-hidden="true"></i>
-                            убрать
-                        </button>
+                    <div class="form-check mx-3">
+                        <input
+                            id="IMAX"
+                            v-model="filter.showIMAX"
+                            class="form-check-input"
+                            type="checkbox"
+                        />
+                        <label class="form-check-label">IMAX</label>
                     </div>
                 </div>
+                <div class="col">
+                    <select
+                        id="cinemaSelector"
+                        v-model="filter.cinemaId"
+                        class="form-control col"
+                        name="cinemaSelector"
+                    >
+                        <option value="Все">Все кинотеатры</option>
+                        <option
+                            v-for="cinema in cinemas"
+                            :key="cinema.id"
+                            :value="cinema.id"
+                            :label="cinema.title"
+                        ></option>
+                    </select>
+                </div>
 
-                <div v-if="schedule" class="card-body table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                <th class="col-1">{{ $t("sessionTime") }}</th>
-                                <th class="col-3">{{ $t("film") }}</th>
-                                <th class="col-1">{{ $t("hall") }}</th>
-                                <th class="col-1">{{ $t("price") }}</th>
-                                <th class="col-1">{{ $t("reserve") }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="item in filteredSchedule"
-                                :key="item._id"
-                            >
-                                <td>
-                                    {{ item.time }}
-                                </td>
-
-                                <td>
-                                    <router-link
-                                        to="/schedule"
-                                        @click.native="clicked(item.filmId)"
-                                    >
-                                        {{ getFilmById(item.filmId).title }}
-                                    </router-link>
-                                </td>
-                                <td>
-                                    {{
-                                        getHallById(item.cinemaId, item.hallId)
-                                            .hallNumber
-                                    }}
-                                </td>
-
-                                <td>
-                                    {{ item.price }}
-                                </td>
-
-                                <td>
-                                    <button
-                                        class="btn btn-outline-danger mx-3"
-                                        @click="reserve(item)"
-                                    >
-                                        {{ $t("reserve") }}
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="form-group col">
+                    <input
+                        v-model="filter.date"
+                        class="form-control"
+                        type="date"
+                    />
+                </div>
+                <div class="col">
+                    <select
+                        id="filmSelector"
+                        v-model="filter.filmId"
+                        class="form-control"
+                        name="filmSelector"
+                    >
+                        <option value="Все">Все фильмы</option>
+                        <option
+                            v-for="film in films"
+                            :key="film.id"
+                            :value="film.id"
+                            :label="film.title"
+                        ></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select
+                        id="hallSelector"
+                        v-model="filter.hallId"
+                        class="form-control"
+                        name="hallSelector"
+                    >
+                        <option value="Все">Все залы</option>
+                        <option
+                            v-for="hall in halls"
+                            :key="hall.id"
+                            :value="hall.id"
+                            :label="hall.hallNumber"
+                        ></option>
+                    </select>
+                </div>
+                <div class="col">
+                    <button
+                        class="btn btn-outline-warning"
+                        @click="clearFilters"
+                    >
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                        убрать
+                    </button>
                 </div>
             </div>
+
+            <div v-if="schedule" class="card-body table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="col-1">{{ $t("sessionTime") }}</th>
+                            <th class="col-3">{{ $t("film") }}</th>
+                            <th class="col-1">{{ $t("hall") }}</th>
+                            <th class="col-1">{{ $t("price") }}</th>
+                            <th class="col-1">{{ $t("reserve") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in filteredSchedule" :key="item._id">
+                            <td>
+                                {{ item.time }}
+                            </td>
+
+                            <td>
+                                <router-link
+                                    to="/schedule"
+                                    @click.native="clicked(item.filmId)"
+                                >
+                                    {{ getFilmById(item.filmId).title }}
+                                </router-link>
+                            </td>
+                            <td>
+                                {{
+                                    getHallById(item.cinemaId, item.hallId)
+                                        .hallNumber
+                                }}
+                            </td>
+
+                            <td>
+                                {{ item.price }}
+                            </td>
+
+                            <td>
+                                <button
+                                    class="btn btn-outline-danger mx-3"
+                                    @click="booking(item)"
+                                >
+                                    {{ $t("reserve") }}
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <SiteFooter />
     </div>
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader.vue";
-import SiteFooter from "@/components/SiteFooter.vue";
-
 export default {
     name: "SiteSchedule",
-
-    components: { SiteHeader, SiteFooter },
 
     data() {
         return {
@@ -290,7 +278,12 @@ export default {
             };
         },
 
-        reserve() {},
+        booking(item) {
+            this.$router.push({
+                name: "SiteScheduleBooking",
+                params: { scheduleItem: item },
+            });
+        },
     },
 };
 </script>
