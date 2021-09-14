@@ -22,6 +22,7 @@
                         <ContactCard
                             v-for="cinema in pages[1].cinemas"
                             :key="cinema._id"
+                            :page="pages"
                         >
                             <template v-slot:title>
                                 <div class="row">
@@ -54,7 +55,7 @@
                                 <img
                                     class="card-img img-responsive p-1"
                                     style="height: 298px"
-                                    src="../assets/pexels-cottonbro-3945313.jpg"
+                                    src="../assets/map.png"
                                     alt=""
                                 />
                             </template>
@@ -111,3 +112,4 @@ export default {
     },
 };
 </script>
+// TODO Maybe insert real google maps!?
