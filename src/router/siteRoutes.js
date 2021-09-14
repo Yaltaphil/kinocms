@@ -106,6 +106,80 @@ const siteRoutes = [
     },
 
     {
+        path: "/about",
+        name: "SiteAboutCinema",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(
+                /*webpackChunkName: "about" */ "../views/SiteAboutCinema.vue"
+            ),
+    },
+
+    {
+        path: "/about/news",
+        name: "SiteAboutNews",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(/*webpackChunkName: "about" */ "../views/SiteAboutNews.vue"),
+    },
+
+    {
+        path: "/about/cafe",
+        name: "SiteAboutCafe",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(/*webpackChunkName: "about" */ "../views/SiteAboutCafe.vue"),
+    },
+
+    {
+        path: "/about/vip",
+        name: "SiteAboutVip",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(/*webpackChunkName: "about" */ "../views/SiteAboutVip.vue"),
+    },
+
+    {
+        path: "/about/children",
+        name: "SiteAboutChildren",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(
+                /*webpackChunkName: "about" */ "../views/SiteAboutChildren.vue"
+            ),
+    },
+
+    {
+        path: "/about/advertisement",
+        name: "SiteAboutAdvertisement",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(
+                /*webpackChunkName: "about" */ "../views/SiteAboutAdvertisement.vue"
+            ),
+    },
+
+    {
+        path: "/about/mobile",
+        name: "SiteAboutMobile",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(
+                /*webpackChunkName: "about" */ "../views/SiteAboutMobile.vue"
+            ),
+    },
+
+    {
+        path: "/about/contacts",
+        name: "SiteAboutContacts",
+        meta: { layout: "site", auth: false },
+        component: () =>
+            import(
+                /*webpackChunkName: "about" */ "../views/SiteAboutContacts.vue"
+            ),
+    },
+
+    {
         path: "/cabinet",
         name: "SiteCabinet",
         meta: { layout: "site", auth: true },

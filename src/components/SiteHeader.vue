@@ -144,7 +144,15 @@
                         >
                             <li>
                                 <router-link
-                                    :to="{ name: 'SiteCinemas' }"
+                                    :to="{ name: 'SiteAboutCinema' }"
+                                    class="dropdown-item"
+                                >
+                                    {{ $t("aboutCinema") }}
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'SiteAboutNews' }"
                                     class="dropdown-item"
                                 >
                                     {{ $t("news") }}
@@ -152,15 +160,7 @@
                             </li>
                             <li>
                                 <router-link
-                                    :to="{ name: 'SiteCinemas' }"
-                                    class="dropdown-item"
-                                >
-                                    {{ $t("rekl") }}
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link
-                                    :to="{ name: 'SiteCinemas' }"
+                                    :to="{ name: 'SiteAboutCafe' }"
                                     class="dropdown-item"
                                 >
                                     {{ $t("cafe") }}
@@ -168,7 +168,31 @@
                             </li>
                             <li>
                                 <router-link
-                                    :to="{ name: 'SiteCinemas' }"
+                                    :to="{ name: 'SiteAboutAdvertisement' }"
+                                    class="dropdown-item"
+                                >
+                                    {{ $t("rekl") }}
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'SiteAboutVip' }"
+                                    class="dropdown-item"
+                                >
+                                    {{ $t("vip") }}
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'SiteAboutChildren' }"
+                                    class="dropdown-item"
+                                >
+                                    {{ $t("children") }}
+                                </router-link>
+                            </li>
+                            <li>
+                                <router-link
+                                    :to="{ name: 'SiteAboutMobile' }"
                                     class="dropdown-item"
                                 >
                                     {{ $t("mobile") }}
@@ -176,7 +200,7 @@
                             </li>
                             <li>
                                 <router-link
-                                    :to="{ name: 'SiteCinemas' }"
+                                    :to="{ name: 'SiteAboutContacts' }"
                                     class="dropdown-item"
                                 >
                                     {{ $t("contacts") }}

@@ -12,8 +12,8 @@
         </button>
 
         <div
-            class="container rounded"
-            style="background: rgba(46, 49, 49, 0.5)"
+            class="container rounded h-100"
+            style="background: rgba(49, 49, 49, 0.77)"
         >
             <SiteHeader />
             <router-view />
