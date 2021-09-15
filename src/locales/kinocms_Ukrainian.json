@@ -24,5 +24,7 @@
     "sessionTime": "Час сеансу",
     "hall": "Зал",
     "price": "Ціна",
-    "reserve": "Бронювати"
+    "reserve": "Бронювати",
+    "vip": "VIP-зал",
+    "children": "Дитяча кімната"
 }

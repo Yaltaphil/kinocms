@@ -1,11 +1,10 @@
 <template>
-    <div v-if="pages.length" class="container" style="color: white">
+    <div v-if="pages" class="container" style="color: white">
         <div class="row">
             <img
                 :src="picture"
                 class="img-responsive w-100 m-3"
                 style="height: 400px"
-                alt=""
             />
         </div>
         <div class="row mb-5">
@@ -77,7 +76,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-md-2">
                 <a
                     href="https://link-host.net/billing/pl.php?17382"

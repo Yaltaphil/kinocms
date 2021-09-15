@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="color: white">
+    <div v-if="pages" class="container" style="color: white">
         <div class="row">
             <img
                 src="../assets/pexels-clem-onojeghuo-375885.jpg"

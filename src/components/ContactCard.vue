@@ -3,7 +3,6 @@
         class="card border"
         style="background-color: rgba(0, 0, 0, 0); height: 400px"
     >
-        {{ page }}
         <div class="row w-100">
             <div class="col">
                 <slot name="title"></slot>
