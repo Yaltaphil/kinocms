@@ -1,18 +1,19 @@
-
 <template>
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <span><b>Kino</b>CMS</span>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Войдите в аккаунт</p>
 
-                <form action="../../index3.html" method="post">
+                <form @submit.prevent="submitHandler">
                     <div class="input-group mb-3">
                         <input
+                            v-model="email"
                             type="email"
                             class="form-control"
+                            :class="{ 'is-invalid': $v.email.$error }"
                             placeholder="Email"
                         />
                         <div class="input-group-append">
@@ -20,11 +21,22 @@
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите корректный
+                                    e-mail</small
+                                ></span
+                            >
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input
+                            v-model.trim="password"
                             type="password"
                             class="form-control"
+                            :class="{ 'is-invalid': $v.password.$error }"
                             placeholder="Password"
                         />
                         <div class="input-group-append">
@@ -32,14 +44,16 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember" />
-                                <label for="remember"> Запомнить меня </label>
-                            </div>
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите свой пароль</small
+                                ></span
+                            >
                         </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-8"></div>
                         <div class="col-4">
                             <button
                                 type="submit"
@@ -51,10 +65,6 @@
                     </div>
                 </form>
 
-
-                <p class="mb-1">
-                    <a href="#">Я забыл свой пароль</a>
-                </p>
                 <p class="mb-0">
                     <router-link :to="{ name: 'Register' }" class="text-center"
                         >Зарегистрироваться</router-link
@@ -66,5 +76,46 @@
 </template>
 
 <script>
-export default {};
+import { email, required, minLength } from "vuelidate/lib/validators";
+
+export default {
+    name: "Login",
+
+    data() {
+        return {
+            email: "",
+            password: "",
+        };
+    },
+
+    validations: {
+        email: {
+            email,
+            required,
+        },
+        password: {
+            required,
+            minLength: minLength(6),
+        },
+    },
+
+    methods: {
+        submitHandler() {
+            this.$v.$touch();
+            if (this.$v.$invalid) {
+                return;
+            }
+
+            const formData = {
+                email: this.email,
+                password: this.password,
+            };
+
+            this.$store
+                .dispatch("login", formData)
+                .then(() => this.$router.push({ name: "Home" }))
+                .catch(() => this.$errorMessage(" авторизации"));
+        },
+    },
+};
 </script>

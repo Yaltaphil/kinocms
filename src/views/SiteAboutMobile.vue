@@ -95,7 +95,6 @@
                                 class="rounded mx-auto d-block w-50 mb-1"
                                 alt=""
                         /></a>
-
                     </div>
                 </div>
             </div>

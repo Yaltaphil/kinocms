@@ -1,18 +1,22 @@
 <template>
     <div class="register-box">
         <div class="register-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <span><b>Kino</b>CMS</span>
         </div>
 
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Новая регистрация</p>
 
-                <form action="../../index.html" method="post">
+                <form @submit.prevent="submitHandler">
                     <div class="input-group mb-3">
                         <input
+                            v-model.trim="name"
                             type="text"
                             class="form-control"
+                            :class="{
+                                'is-invalid': $v.name.$error,
+                            }"
                             placeholder="Full name"
                         />
                         <div class="input-group-append">
@@ -20,11 +24,20 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите свое имя</small
+                                ></span
+                            >
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input
+                            v-model.trim="email"
                             type="email"
                             class="form-control"
+                            :class="{ 'is-invalid': $v.email.$error }"
                             placeholder="Email"
                         />
                         <div class="input-group-append">
@@ -32,11 +45,21 @@
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите корректный
+                                    e-mail</small
+                                ></span
+                            >
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input
+                            v-model.trim="password1"
                             type="password"
                             class="form-control"
+                            :class="{ 'is-invalid': $v.password1.$error }"
                             placeholder="Password"
                         />
                         <div class="input-group-append">
@@ -44,11 +67,20 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите свой пароль</small
+                                ></span
+                            >
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input
+                            v-model.trim="password2"
                             type="password"
                             class="form-control"
+                            :class="{ 'is-invalid': $v.password2.$error }"
                             placeholder="Retype password"
                         />
                         <div class="input-group-append">
@@ -56,21 +88,17 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="icheck-primary">
-                                <input
-                                    type="checkbox"
-                                    id="agreeTerms"
-                                    name="terms"
-                                    value="agree"
-                                />
-                                <label for="agreeTerms">
-                                    Согласен с <a href="#">условиями</a>
-                                </label>
-                            </div>
+                        <div class="invalid-feedback">
+                            <span
+                                ><small
+                                    >Пожалуйста, введите свой пароль еще
+                                    раз</small
+                                ></span
+                            >
                         </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-6"></div>
                         <div class="col-6">
                             <button
                                 type="submit"
@@ -91,5 +119,55 @@
 </template>
 
 <script>
-export default {};
+import { email, required, minLength, sameAs } from "vuelidate/lib/validators";
+export default {
+    name: "Register",
+
+    data() {
+        return {
+            name: "",
+            email: "",
+            password1: "",
+            password2: "",
+        };
+    },
+
+    validations: {
+        name: {
+            required,
+        },
+        email: {
+            email,
+            required,
+        },
+        password1: {
+            required,
+            minLength: minLength(6),
+        },
+        password2: {
+            required,
+            sameAs: sameAs("password1"),
+        },
+    },
+
+    methods: {
+        submitHandler() {
+            this.$v.$touch();
+            if (this.$v.$invalid) {
+                return;
+            }
+
+            const formData = {
+                name: this.name,
+                email: this.email,
+                password: this.password1,
+            };
+
+            this.$store
+                .dispatch("register", formData)
+                .then(() => this.$router.push({ name: "Login" }))
+                .catch(() => this.$errorMessage(" регистрации"));
+        },
+    },
+};
 </script>

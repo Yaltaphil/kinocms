@@ -2,12 +2,14 @@ import firebase from "firebase/app";
 
 export default {
     actions: {
-        async login() {
+        async login({ dispatch }, { email, password }) {
             try {
                 await firebase
                     .auth()
-                    .signInWithEmailAndPassword("admin@admin.admin", "123456");
-                console.log("Logged to firebase...");
+                    .signInWithEmailAndPassword(email, password);
+                const uid = await dispatch("getUid");
+                console.log("Logged to firebase as...", uid);
+                this.$successMessage("Вы вошли в систему");
             } catch (e) {
                 console.log(e);
             }
@@ -18,8 +20,9 @@ export default {
                 await firebase
                     .auth()
                     .createUserWithEmailAndPassword(email, password);
-                const uid = dispatch("getUid");
-                await firebase.database().ref(`/users/arrayIdx/${uid}`).set({});
+                const uid = await dispatch("getUid");
+                // await firebase.database().ref(`/users/arrayIdx/${uid}`).set({});
+                console.log(uid);
             } catch (e) {
                 console.log(e);
             }
