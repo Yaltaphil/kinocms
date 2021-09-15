@@ -9,7 +9,6 @@ export default {
                     .signInWithEmailAndPassword(email, password);
                 const uid = await dispatch("getUid");
                 console.log("Logged to firebase as...", uid);
-                this.$successMessage("Вы вошли в систему");
             } catch (e) {
                 console.log(e);
             }

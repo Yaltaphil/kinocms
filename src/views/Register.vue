@@ -1,5 +1,5 @@
 <template>
-    <div class="register-box">
+    <div class="register-box" style="background-color: rgba(49, 49, 49, 0.5)">
         <div class="register-logo">
             <span><b>Kino</b>CMS</span>
         </div>
@@ -17,7 +17,7 @@
                             :class="{
                                 'is-invalid': $v.name.$error,
                             }"
-                            placeholder="Full name"
+                            placeholder="Имя"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -38,7 +38,7 @@
                             type="email"
                             class="form-control"
                             :class="{ 'is-invalid': $v.email.$error }"
-                            placeholder="Email"
+                            placeholder="e-mail"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -60,7 +60,7 @@
                             type="password"
                             class="form-control"
                             :class="{ 'is-invalid': $v.password1.$error }"
-                            placeholder="Password"
+                            placeholder="пароль"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -81,7 +81,7 @@
                             type="password"
                             class="form-control"
                             :class="{ 'is-invalid': $v.password2.$error }"
-                            placeholder="Retype password"
+                            placeholder="повторите пароль"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -91,8 +91,7 @@
                         <div class="invalid-feedback">
                             <span
                                 ><small
-                                    >Пожалуйста, введите свой пароль еще
-                                    раз</small
+                                    >Пожалуйста, повторите свой пароль</small
                                 ></span
                             >
                         </div>
@@ -111,8 +110,8 @@
                 </form>
 
                 <router-link :to="{ name: 'Login' }" class="text-center"
-                    >У меня уже есть аккаунт</router-link
-                >
+                    ><small> У меня уже есть аккаунт </small>
+                </router-link>
             </div>
         </div>
     </div>
@@ -129,6 +128,9 @@ export default {
             email: "",
             password1: "",
             password2: "",
+            users: null,
+            user: null,
+            userIndex: null,
         };
     },
 
@@ -150,6 +152,10 @@ export default {
         },
     },
 
+    created() {
+        this.load();
+    },
+
     methods: {
         submitHandler() {
             this.$v.$touch();
@@ -163,10 +169,69 @@ export default {
                 password: this.password1,
             };
 
+            this.userIndex = this.getUserIndex(this.email);
+
+            if (this.userIndex != -1) {
+                this.$errorMessage(" Такой пользователь уже существует");
+                return;
+            }
+
+            this.user = {
+                _id: `${Date.now()}${Math.random()}`,
+                _date: Date.now(),
+                name: this.name,
+                surname: "",
+                nick: "",
+                email: this.email,
+                adress: "",
+                password: this.password1,
+                cardNumber: "",
+                language: "ru",
+                sex: "male",
+                phone: "777-77-77",
+                birthday: Date.now(),
+                town: "",
+                choosen: false,
+                isAdmin: false,
+            };
+
+            this.users.push(this.user);
+
+            this.save();
+
             this.$store
                 .dispatch("register", formData)
-                .then(() => this.$router.push({ name: "Login" }))
                 .catch(() => this.$errorMessage(" регистрации"));
+
+            if (this.user.isAdmin) {
+                this.$store
+                    .dispatch("login", formData)
+                    .then(() => this.$router.push({ name: "Home" }));
+            } else {
+                this.$router.push({ name: "Main" });
+            }
+        },
+
+        getUserIndex(email) {
+            const index = this.users.findIndex((item) => item.email == email);
+            return index;
+        },
+
+        async load() {
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/users"
+            );
+            if (result) this.users = result;
+        },
+
+        async save() {
+            const payload = this.users;
+            const path = "/users";
+            return await this.$store.dispatch("writeToDatabase", {
+                payload,
+                path,
+            });
         },
     },
 };

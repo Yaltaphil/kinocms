@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 const mainRoutes = [
     {
         path: "/",
-        name: "main",
+        name: "Main",
         meta: { layout: "site" },
         component: Main,
     },

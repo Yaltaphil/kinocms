@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box">
+    <div class="login-box" style="background-color: rgba(49, 49, 49, 0.5)">
         <div class="login-logo">
             <span><b>Kino</b>CMS</span>
         </div>
@@ -14,7 +14,7 @@
                             type="email"
                             class="form-control"
                             :class="{ 'is-invalid': $v.email.$error }"
-                            placeholder="Email"
+                            placeholder="e-mail"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -37,7 +37,7 @@
                             type="password"
                             class="form-control"
                             :class="{ 'is-invalid': $v.password.$error }"
-                            placeholder="Password"
+                            placeholder="пароль"
                         />
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -65,11 +65,15 @@
                     </div>
                 </form>
 
-                <p class="mb-0">
-                    <router-link :to="{ name: 'Register' }" class="text-center"
-                        >Зарегистрироваться</router-link
-                    >
+                <p>
+                    <router-link :to="{ name: 'Register' }" class="text-center">
+                        <small> Зарегистрироваться </small>
+                    </router-link>
                 </p>
+                <small class="my-5">
+                    <p>admin@admin.admin -> 123456</p>
+                    <p>user@user.user -> 123456 or register</p>
+                </small>
             </div>
         </div>
     </div>
@@ -85,6 +89,9 @@ export default {
         return {
             email: "",
             password: "",
+            users: null,
+            user: null,
+            userIndex: null,
         };
     },
 
@@ -99,6 +106,10 @@ export default {
         },
     },
 
+    created() {
+        this.load();
+    },
+
     methods: {
         submitHandler() {
             this.$v.$touch();
@@ -111,10 +122,35 @@ export default {
                 password: this.password,
             };
 
-            this.$store
-                .dispatch("login", formData)
-                .then(() => this.$router.push({ name: "Home" }))
-                .catch(() => this.$errorMessage(" авторизации"));
+            this.userIndex = this.getUserIndex(this.email);
+
+            if (this.userIndex == -1) {
+                this.$errorMessage(" Нет такого пользователя");
+                return;
+            }
+
+            this.user = this.users[this.userIndex];
+
+            if (this.user.isAdmin) {
+                this.$store
+                    .dispatch("login", formData)
+                    .then(() => this.$router.push({ name: "Home" }));
+            } else {
+                this.$router.push({ name: "Main" });
+            }
+        },
+
+        getUserIndex(email) {
+            const index = this.users.findIndex((item) => item.email == email);
+            return index;
+        },
+
+        async load() {
+            const result = await this.$store.dispatch(
+                "readFromDatabase",
+                "/users"
+            );
+            if (result) this.users = result;
         },
     },
 };

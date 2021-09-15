@@ -239,6 +239,7 @@ export default {
                 birthday: Date.now(),
                 town: "",
                 choosen: false,
+                isAdmin: false,
             });
 
             this.saveToDatabase().then(() =>
