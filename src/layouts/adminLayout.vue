@@ -17,13 +17,11 @@
 </template>
 
 <script>
-// import Preloader from "@/components/Preloader.vue";
 import KinoSidebar from "@/components/KinoSidebar.vue";
 import KinoNavbar from "@/components/KinoNavbar.vue";
 
 export default {
     components: {
-        // Preloader,
         KinoSidebar,
         KinoNavbar,
     },
@@ -42,6 +40,6 @@ export default {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
-    // transform: translateX(-15%);
+    transform: translateX(-15%);
 }
 </style>

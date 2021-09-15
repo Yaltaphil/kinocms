@@ -9,11 +9,13 @@
 <script>
 import siteLayout from "@/layouts/siteLayout.vue";
 import adminLayout from "@/layouts/adminLayout.vue";
+import emptyLayout from "@/layouts/emptyLayout.vue";
 
 export default {
     components: {
         siteLayout,
         adminLayout,
+        emptyLayout,
     },
 
     computed: {
@@ -25,12 +27,12 @@ export default {
     watch: {
         layout(newValue) {
             const body = document.querySelector("body");
-            if (newValue === "site-layout") {
+            if (newValue === "admin-layout") {
+                body.classList.add("layout-fixed");
+                body.classList.remove("layout-top-nav");
+            } else {
                 body.classList.add("layout-top-nav");
                 body.classList.remove("layout-fixed");
-            } else if (newValue === "admin-layout") {
-                body.classList.add("layout-fixed");
-                body.classList.remove("layout-topnav");
             }
         },
     },

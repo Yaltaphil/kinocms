@@ -3,9 +3,25 @@ const siteRoutes = [
         path: "/404",
         alias: "*",
         name: "notFound",
-        meta: { layout: "site", auth: false },
+        meta: { layout: "empty", auth: false },
         component: () =>
             import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue"),
+    },
+
+    {
+        path: "/login",
+        name: "Login",
+        meta: { layout: "empty", auth: false },
+        component: () =>
+            import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+    },
+
+    {
+        path: "/register",
+        name: "Register",
+        meta: { layout: "empty", auth: false },
+        component: () =>
+            import(/* webpackChunkName: "register" */ "../views/Register.vue"),
     },
 
     {
