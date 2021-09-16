@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="card card-info">
+        <div
+            v-if="user"
+            class="card card-secondary"
+
+        >
             <div class="card-header">
                 <h3 class="card-title">Карточка пользователя</h3>
             </div>
@@ -221,7 +225,7 @@
 
                 <div class="card-footer my-5">
                     <button
-                        class="btn btn-info btn-lg btn-block"
+                        class="btn btn-secondary btn-lg btn-block"
                         @click="submitDetails()"
                     >
                         Сохранить и выйти
@@ -256,12 +260,12 @@ export default {
 
     methods: {
         submitDetails() {
-            this.saveToDatabase().then(() => {
+            this.save().then(() => {
                 this.$successMessage("Записано");
             });
 
             this.$router.push({
-                name: "Users",
+                name: "Main",
             });
         },
 
@@ -277,15 +281,9 @@ export default {
 
         async load() {
             const path = `/users/${this.userIndex}`;
-
             const result = await this.$store.dispatch("readFromDatabase", path);
             if (result) this.user = result;
         },
     },
 };
 </script>
-<style scoped>
-.input-group-prepend {
-    min-width: 25%;
-}
-</style>

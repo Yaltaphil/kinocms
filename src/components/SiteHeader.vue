@@ -19,7 +19,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <a href="">
                     <i
                         class="fab fa-facebook-f fa-2x px-2"
@@ -63,6 +63,18 @@
                     <p>(999) 787-45-87</p>
                     <p>(999) 787-45-88</p>
                 </strong>
+            </div>
+            <div class="col-md-2 text-light">
+                <button
+                    class="btn btn-outline btn-sm"
+                    @click="
+                        {
+                            $router.push({ name: 'Login' });
+                        }
+                    "
+                >
+                    <small class="text-light">Войти / Регистрация</small>
+                </button>
             </div>
         </div>
 

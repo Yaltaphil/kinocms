@@ -1,16 +1,5 @@
 <template>
     <div class="view" :style="bgStyle">
-        <button
-            class="btn btn-outline btn-block btn-sm"
-            @click="
-                {
-                    $router.push({ name: 'Login' });
-                }
-            "
-        >
-            to admin
-        </button>
-
         <div
             class="container rounded h-100"
             style="background: rgba(49, 49, 49, 0.77)"
