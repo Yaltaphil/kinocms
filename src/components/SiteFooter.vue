@@ -9,24 +9,18 @@
                     <h3 class="my-5 d-flex flex-column">
                         {{ $t("mobiles") }}
                     </h3>
-                    <a
-                        href="
-"
-                    >
+                    <router-link :to="{ name: 'SiteAboutMobile' }">
                         <img
                             src="@/assets/app-store-badge-android-get-it-on-google-play.png"
                             class="rounded mx-auto d-block w-50 mb-1"
                             alt=""
-                    /></a>
-                    <a
-                        href="
-"
-                    >
+                    /></router-link>
+                    <router-link :to="{ name: 'SiteAboutMobile' }">
                         <img
                             src="@/assets/app-store-badge-ios-download-on-the-app-store.png"
                             class="rounded mx-auto d-block w-50 mb-1"
                             alt=""
-                    /></a>
+                    /></router-link>
                     <a class="mx-auto d-block" href="https://avada-media.ua/">
                         <small>{{ $t("avadaDev") }}: AVADA-MEDIA</small>
                     </a>
@@ -34,22 +28,22 @@
                 <div class="col-md-3 my-5 text-center d-flex flex-column">
                     <h3 class="">{{ $t("affiche") }}</h3>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteAffiche' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("schedule") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteSoon' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("soon") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteCinemas' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("cinemas") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteActions' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("actions") }}
                     </router-link>
@@ -57,22 +51,22 @@
                 <div class="col-md-3 my-5 text-center d-flex flex-column">
                     <h3>{{ $t("aboutCinema") }}</h3>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteAboutNews' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("news") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteAboutAdvertisement' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("rekl") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteAboutCafe' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("cafe") }}
                     </router-link>
                     <router-link
-                        to=""
+                        :to="{ name: 'SiteAboutContacts' }"
                         class="btn btn-outline-secondary border-0"
                         >{{ $t("contacts") }}
                     </router-link>
