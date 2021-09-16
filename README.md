@@ -1,3 +1,3 @@
-# Kino Content Management System
+# Kino Site and Content Management System
 
 _Learning project with [Avada Media](https://avada-media.ua/)_
