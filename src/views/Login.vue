@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box" style="background-color: rgba(49, 49, 49, 0.5)">
+    <div class="login-box">
         <div class="login-logo">
             <span><b>Kino</b>CMS</span>
         </div>
@@ -136,7 +136,12 @@ export default {
                     .dispatch("login", formData)
                     .then(() => this.$router.push({ name: "Home" }));
             } else {
-                this.$router.push({ name: "Main" });
+                this.$store.dispatch("login", formData).then(() =>
+                    this.$router.push({
+                        name: "UserCabinet",
+                        params: { userIndex: this.userIndex },
+                    })
+                );
             }
         },
 

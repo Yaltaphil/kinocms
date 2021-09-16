@@ -197,8 +197,9 @@ const siteRoutes = [
 
     {
         path: "/cabinet",
-        name: "SiteCabinet",
+        name: "UserCabinet",
         meta: { layout: "site", auth: true },
+        props: true,
         component: () =>
             import(/*webpackChunkName: "cabinet" */ "../views/UserCabinet.vue"),
     },
