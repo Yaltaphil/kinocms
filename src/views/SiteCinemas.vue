@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="card-header text-center">
+        <div class="card-header text-center text-light">
             <h3>{{ $t("cinemas") }}</h3>
         </div>
 

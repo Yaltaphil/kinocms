@@ -1,7 +1,5 @@
 <template>
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
-        <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a
@@ -14,7 +12,6 @@
             </li>
         </ul>
 
-        <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" role="button" href="/">
@@ -22,12 +19,7 @@
                     На сайт
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" role="button" @click="login">
-                    <i class="nav-icon fas fa-user"></i>
-                    Мой кабинет
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" role="button" @click="logout">
                     <i class="nav-icon fas fa-power-off"></i>
@@ -35,7 +27,6 @@
             </li>
         </ul>
     </nav>
-    <!-- /.navbar -->
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
     <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
-        <div class="card-header text-center">
+        <div class="card-header text-center text-light">
             <h3>{{ $t("soon") }}</h3>
         </div>
 

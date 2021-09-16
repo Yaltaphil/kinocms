@@ -10,7 +10,10 @@
             @click="$emit('clicked', cinema)"
         />
 
-        <h5 class="card-footer text-center" @click="$emit('clicked', cinema)">
+        <h5
+            class="card-footer text-center text-light"
+            @click="$emit('clicked', cinema)"
+        >
             {{ title | cut }}
         </h5>
     </div>

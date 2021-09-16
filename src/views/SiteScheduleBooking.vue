@@ -1,6 +1,6 @@
 <template>
-    <div class="card bg-dark">
-        <div class="card-header text-center">
+    <div class="card" style="background-color: rgba(0, 0, 0, 0)">
+        <div class="card-header text-center text-light">
             <h3>{{ $t("reserve") }}</h3>
             <div class="card-body">
                 <img src="../assets/unnamed.jpg" alt="" />

@@ -1,6 +1,6 @@
 <template>
     <div class="card" style="background-color: rgba(0, 0, 0, 0); color: white">
-        <div class="card-header text-center">
+        <div class="card-header text-center text-light">
             <h3>{{ $t("schedule") }}</h3>
             <div class="row">
                 <div class="form-group d-flex col">

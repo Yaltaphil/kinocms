@@ -2,7 +2,7 @@
     <div class="row mb-5">
         <div class="col-md-10 p-3">
             <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
-                <div class="card-header text-center">
+                <div class="card-header text-center text-light">
                     <h3>{{ $t("actions") }}</h3>
                 </div>
 

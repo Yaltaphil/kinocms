@@ -29,12 +29,15 @@
                     Сеанс {{ item.hallNumber }}
                 </button>
 
-                <button class="btn btn-block btn-success">
+                <button
+                    class="btn btn-block btn-success"
+                    @click="$router.push({ name: 'SiteSchedule' })"
+                >
                     {{ $t("allSessionSchedule") }}
                 </button>
             </div>
             <div class="col-md-10 p-3">
-                <div class="card-header text-center">
+                <div class="card-header text-center text-light">
                     <h3>Зал: {{ cinema.halls[hallIndex].hallNumber }}</h3>
                 </div>
 

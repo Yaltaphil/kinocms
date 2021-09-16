@@ -62,7 +62,7 @@
             </div>
 
             <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
-                <div class="card-header text-center">
+                <div class="card-header text-center text-light">
                     <h3>{{ $t("watchToday") }}</h3>
                 </div>
 
@@ -84,7 +84,7 @@
             </div>
 
             <div class="card mb-5" style="background-color: rgba(0, 0, 0, 0)">
-                <div class="card-header text-center">
+                <div class="card-header text-center text-light">
                     <h3>{{ $t("watchSoon") }}</h3>
                 </div>
 

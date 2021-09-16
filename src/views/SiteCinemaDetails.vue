@@ -30,22 +30,34 @@
                     Зал: {{ hall.hallNumber }}
                 </button>
 
-                <p class="pt-5">{{ $t("watchToday") }}:</p>
+                <!-- <p class="pt-5">{{ $t("watchToday") }}:</p> -->
             </div>
             <div class="col-md-10 p-3">
-                <div class="card-header text-center">
+                <div class="card-header text-center text-light">
                     <h3>
-                        {{ $t("schedule") }}
+                        <button
+                            class="btn btn-outline-info btn-block px-5 my-5"
+                            @click="$router.push({ name: 'SiteSchedule' })"
+                        >
+                            {{ $t("schedule") }}
+                        </button>
                     </h3>
                 </div>
-                <button class="btn btn-outline-info btn-block px-5 my-5">
-                    {{ $t("schedule") }}
-                </button>
+
                 <p class="p-1">
                     <span class="badge badge-primary mx-2 p-2">now</span>
                     <span class="badge badge-success mx-2 p-2">new</span>
                 </p>
 
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Exercitationem dolores, tempora iure quidem sint illo odio
+                    veritatis! Saepe cum odio sapiente iusto nobis, fugiat,
+                    voluptatem a dignissimos ut aspernatur sint amet accusamus
+                    ad natus similique corrupti vitae consequatur aliquid est
+                    expedita dolore quibusdam quisquam voluptatibus dolor?
+                    Cupiditate aspernatur mollitia architecto!
+                </p>
                 <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Exercitationem dolores, tempora iure quidem sint illo odio
