@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div
-            v-if="user"
-            class="card card-secondary"
-
-        >
+        <div v-if="user" class="card card-secondary">
             <div class="card-header">
                 <h3 class="card-title">Карточка пользователя</h3>
             </div>
